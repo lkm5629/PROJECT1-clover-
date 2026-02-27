@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>댓글 수정 UI</title>
+    <style>
+        /* 커뮤니티 댓글 전체 래퍼 */
+        .cmt-wrap {
+            max-width: 600px;
+            margin: 20px auto;
+            font-family: sans-serif;
+        }
+
+        /* 개별 댓글 박스 */
+        .cmt-box {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        /* 작성자 정보 영역 */
+        .cmt-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .cmt-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cmt-date {
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* -----------------------------------
+           [1] 보기 모드 (기본 상태)
+        ----------------------------------- */
+        .cmt-view {
+            display: block;
+        }
+
+        .cmt-text {
+            margin: 0 0 10px 0;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* -----------------------------------
+           [2] 수정 모드 (기본 숨김)
+        ----------------------------------- */
+        .cmt-edit {
+            display: none;
+        }
+
+        .cmt-input {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            /* 크기 조절 방지 */
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .cmt-input:focus {
+            border-color: #ff4757;
+            /* 포커스 시 브랜드 컬러 */
+        }
+
+        /* -----------------------------------
+           공통 버튼 스타일
+        ----------------------------------- */
+        .btn-grp {
+            text-align: right;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            font-size: 13px;
+            color: #888;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #f1f2f6;
+            color: #333;
+        }
+
+        /* 저장 버튼 등 포인트 버튼 */
+        .btn.point {
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        /* -----------------------------------
+           💡 핵심: JS로 '.is-edit' 클래스가 붙었을 때의 변화
+        ----------------------------------- */
+        .cmt-box.is-edit .cmt-view {
+            display: none;
+        }
+
+        .cmt-box.is-edit .cmt-edit {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cmt-wrap">
+        <div class="cmt-box" data-id="501">
+            <div class="cmt-info">
+                <span class="cmt-author">사용자1</span>
+                <span class="cmt-date">2026.02.26 14:30</span>
+            </div>
+
+            <div class="cmt-view">
+                <p class="cmt-text">여기 펜션 뷰가 정말 좋네요! 다음에 또 오고 싶어요.</p>
+                <div class="btn-grp">
+                    <button type="button" class="btn edit-btn">수정</button>
+                    <button type="button" class="btn del-btn">삭제</button>
+                </div>
+            </div>
+
+            <div class="cmt-edit">
+                <textarea class="cmt-input">여기 펜션 뷰가 정말 좋네요! 다음에 또 오고 싶어요.</textarea>
+                <div class="btn-grp">
+                    <button type="button" class="btn cancel-btn">취소</button>
+                    <button type="button" class="btn point save-btn">저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const cmtBox = document.querySelectorAll(".cmt-box");
+            
+            cmtBox.forEach(box => {
+                 
+                const editBtn = box.querySelector(".edit-btn");
+                const cancelBtn = box.querySelector(".cancel-btn");
+                const saveBtn = box.querySelector(".save-btn");
+                const delBtn = box.querySelector(".del-btn");
+
+                editBtn.addEventListener('click', () => {
+                    box.classList.add("is-edit");
+                })
+
+                cancelBtn.addEventListener('click', () => {
+                    let input = box.querySelector(".cmt-input");
+                    let text = box.querySelector(".cmt-text");
+                    input.value = text.innerText;
+                    box.classList.remove("is-edit");
+                })
+
+                saveBtn.addEventListener('click', () => {
+                    let input = box.querySelector(".cmt-input");
+                    let text = box.querySelector(".cmt-text");
+
+                    text.innerText = input.value;
+                    box.classList.remove("is-edit");
+                })
+
+                delBtn.addEventListener('click', () => {
+                    const isDelete = confirm("해당 댓글을 삭제하시겠습니까?");
+                    if (isDelete) {
+                        box.remove();
+                        alert("삭제되었습니다.");
+                    }
+                })
+            });
+
+        })
+    </script>
+</body>
+
+</html>

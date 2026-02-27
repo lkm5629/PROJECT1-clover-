@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+ .menu{       
+  width:80px;
+  height:80px;
+  position:absolute;
+  left:calc(50% - 40px);
+  top:calc(50% - 40px);
+  cursor:pointer;
+}
+.menu input{
+  visibility:hidden;
+}
+label{
+  pointer-events: none;
+  width:80px;
+  height:3px;
+  position:relative;
+  background-color:#000;
+  display:block;
+  top:calc(50% - 20px);
+  transition:all 0.3s ease-out;
+}
+label:before{
+  pointer-events: none;
+  content: "";
+  width:80px;
+  height:3px;
+  position:absolute;
+  background-color:#000;
+  display:block;
+  transform:translateY(-20px);
+  transition:all 0.3s ease-out;
+}
+label:after{
+  pointer-events: none;
+  content: "";
+  width:80px;
+  height:3px;
+  position:absolute;
+  background-color:#000;
+  display:block;
+  transform:translateY(20px);
+  transition:all 0.3s ease-out;
+}
+input:checked + label{
+  width:0;
+  transform:rotatex(180deg);
+}
+input:checked + label:before{
+  height:3px;
+  border:none;
+  -webkit-transform:rotate(45deg) translate(0px);
+  transform:rotate(45deg) translate(0px);
+}
+input:checked + label:after{
+  height:3px;
+  border:none;
+  -webkit-transform:rotate(-45deg) translate(0px);
+  transform:rotate(-45deg) translate(0px);
+}
+.label.hover:before{
+  height:3px;
+  border:none;
+  -webkit-transform:scale(.6) translateY(-20px);
+  transform:scalex(.6) translateY(-20px);
+}
+.label.hover:after{
+  height:3px;
+  border:none;
+  -webkit-transform:scale(.6) translateY(20px);
+  transform:scalex(.6) translateY(20px);
+}
+    </style>
+    
+</head>
+
+<body>
+    <!-- 메뉴 햄버거 -->
+    <div class="menu">
+        <input type="checkbox" id="burger" class="burger" name="burger">
+        <label for="burger" class="label"></label>
+    </div>
+    <script>
+        $('.menu').click(function () {
+            var checkbox = $(this).find('input[type=checkbox]');
+            checkbox.prop("checked", !checkbox.prop("checked"));
+        });
+
+        $('input[type=checkbox]').click(function (e) {
+            e.stopPropagation();
+            return true;
+        });
+        $(".menu").hover(function (e) {
+            if (!$(".burger").is(":checked"))
+                $(".label").addClass("hover");
+        }, function () {
+            !$(".label").removeClass("hover");
+        });
+        $(".menu").click(function () {
+            $(".label").removeClass("hover");
+        });
+    </script>
+</body>
+
+</html>

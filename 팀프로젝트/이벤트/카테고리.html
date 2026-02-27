@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리</title>
+    <style>
+        /* 전체 래퍼 */
+.tab-wrap {
+    max-width: 800px;
+    margin: 30px auto;
+    font-family: sans-serif;
+}
+
+/* 탭 메뉴 (가로 정렬, 밑줄) */
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #eee; /* 전체 밑줄 */
+}
+
+/* 개별 탭 버튼 */
+.tab-btn {
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    color: #888; /* 기본 회색 글씨 */
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px; /* 밑줄을 겹쳐서 자연스럽게 */
+    transition: all 0.2s;
+}
+
+/* 마우스 올렸을 때 */
+.tab-btn:hover {
+    color: #333;
+}
+
+/* 선택된(활성화된) 탭 버튼 */
+.tab-btn.active {
+    color: #ff4757; /* 브랜드 컬러 (포인트) */
+    border-bottom: 2px solid #ff4757; /* 활성화 밑줄 */
+}
+
+/* 콘텐츠 영역 여백 */
+.tab-content {
+    padding: 30px 10px;
+}
+
+/* 기본적으로 모든 패널 숨김 */
+.tab-panel {
+    display: none; 
+    animation: fadeIn 0.4s ease-in-out; /* 부드럽게 나타나는 효과 */
+}
+
+/* 선택된(활성화된) 패널만 보여줌 */
+.tab-panel.active {
+    display: block; 
+}
+
+/* 화면 전환 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="tab-wrap">
+    <ul class="tab-menu">
+        <li class="tab-btn active" data-target="stay">숙박</li>
+        <li class="tab-btn" data-target="tour">관광지</li>
+        <li class="tab-btn" data-target="food">식당</li>
+        <li class="tab-btn" data-target="comm">커뮤니티</li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="stay" class="tab-panel active">
+            <h2>숙박 리스트</h2>
+            <p>여기에 숙박 관련 카드나 내용이 들어갑니다.</p>
+        </div>
+        
+        <div id="tour" class="tab-panel">
+            <h2>관광지 추천</h2>
+            <p>여기에 관광지 관련 내용이 들어갑니다.</p>
+        </div>
+        
+        <div id="food" class="tab-panel">
+            <h2>맛집 탐방</h2>
+            <p>여기에 식당 관련 내용이 들어갑니다.</p>
+        </div>
+        
+        <div id="comm" class="tab-panel">
+            <h2>커뮤니티 게시판</h2>
+            <p>여기에 유저들의 소통 공간이 들어갑니다.</p>
+        </div>
+    </div>
+</div>
+<script>
+    window.addEventListener('load', ()=>{
+        const tabBtns = document.querySelectorAll(".tab-btn");
+        const tabPanel = document.querySelectorAll(".tab-panel");
+        
+        tabBtns.forEach(btn =>{
+            btn.addEventListener('click', function(){
+                // 전체 active 클래스 제거
+                tabBtns.forEach(b => b.classList.remove('active'));
+                
+                //클릭한 대상만 active클래스 추가
+                this.classList.add('active');
+
+                //화면의 모든 panel에서 active제거 -> 화면 비우기
+                tabPanel.forEach(p => p.classList.remove('active'));
+
+                //클릭한 대상을 변수에 담음
+                const targetId = this.dataset.target;
+
+                //변수에 담은 DOM을 생성하고, active클래스를 줘서 화면에 나타나게함.
+                document.getElementById(targetId).classList.add('active');
+            })
+        })
+    })
+</script>
+</body>
+</html>

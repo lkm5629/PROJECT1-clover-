@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>예약 시스템 테스트 모듈</title>
+    <style>
+        /* 1. 전체 컨테이너: 팀원 프로젝트 어디든 쏙 들어가게 가로폭 고정 */
+        .reservation-test-container {
+            width: 350px;
+            padding: 20px;
+            border: 1px solid #e1e1e1;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* 2. 입력 그룹 스타일 */
+        .date-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .field input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .field input[type="date"]:focus {
+            border-color: #007bff;
+        }
+
+        /* 3. 결과 창 및 버튼 */
+        .result-panel {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .result-panel .count {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4757;
+        }
+
+        .btn-reset {
+            width: 100%;
+            padding: 12px;
+            background-color: #2f3542;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-reset:hover {
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reservation-test-container">
+        <h2>📅 숙박 예약 테스트</h2>
+
+        <div class="date-input-group">
+            <div class="field">
+                <label for="startDate">체크인 날짜</label>
+                <input type="date" id="startDate">
+            </div>
+
+            <div class="field">
+                <label for="endDate">체크아웃 날짜</label>
+                <input type="date" id="endDate">
+            </div>
+        </div>
+
+        <div class="result-panel">
+            <p style="margin:0; font-size: 14px; color: #777;">숙박 기간</p>
+            <div><span id="nightCount" class="count">0</span> 박</div>
+        </div>
+
+        <button type="button" id="resetBtn" class="btn-reset">선택 초기화</button>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const today = new Date().toISOString().split('T')[0];
+            const startInput = document.querySelector("#startDate");
+            const endInput = document.querySelector("#endDate");
+            startInput.value = today; //시작 날짜 = 오늘
+            startInput.min = today;
+            endInput.min = today;
+            const nightD = document.querySelector("#nightCount");
+            const resetBtn = document.querySelector("#resetBtn");
+
+            //시작 날짜, 종료 날짜 동작시 night함수 실행
+            startInput.addEventListener('change', night);
+            endInput.addEventListener('change', night);
+
+
+            function night() {
+
+                endInput.min = startInput.value;
+
+                if (startInput.value && endInput.value) {
+                    const start = new Date(startInput.value);
+                    const end = new Date(endInput.value);
+
+                    if(end <= start){
+                        alert("체크아웃은 체크인 다음 날부터 가능합니다.");
+                        endInput.value = "";
+                        nightD.innerText = "0";
+                        return;
+                    }
+
+                    //날짜 계산
+                    const diff = (end - start) / (1000 * 60 * 60 * 24);
+                    nightD.innerText = diff > 0 ? diff : 0; //방어로직
+                }
+            }//night함수 종료
+
+            resetBtn.addEventListener('click', ()=>{
+                startInput.value = today;
+                endInput.value = "";
+                nightD.innerText = "0";
+            });
+        })
+
+    </script>
+</body>
+
+</html>

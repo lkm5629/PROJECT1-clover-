@@ -1,0 +1,643 @@
+@font-face { 
+    font-family: 'Escoredream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Escoredream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Escoredream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Escoredream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff') format('woff');
+    font-weight: 900;
+    font-display: swap;
+}
+
+:root{
+--main-color: #FBCB4C;
+--second-color:#feeb70;
+--error-color: #e74c3c;
+--bg-light: #f4f4f4;
+}
+
+:root{
+--space-xs: 4px;
+--space-sm: 8px;
+--space-md: 16px;
+--space-lg: 24px;
+--space-xl: 32px;
+--space-xxl: 48px;
+
+--border-radius-sm: 4px;
+--border-radius-md: 8px;
+--border-radius-lg: 11px;
+--border-radius-max: 50%; 
+}
+
+:root{
+--font-main-w300: 'Escoredream', 'Pretendard';
+--size-xs: 12px;
+--size-sm: 14px;
+--size-base: 16px;
+--size-lg: 18px;
+--size-xl:24px;
+--size-xxl: 32px;
+
+--size-btn-w1: 50px;
+}
+
+body{
+margin: 10%;
+background-color: aqua;
+display: flex;
+}
+#btn-all{
+    width: 15%;
+}
+
+ .menu{
+  width:80px;
+  height:80px;
+  position:absolute;
+  left:calc(50% - 40px);
+  top:calc(50% - 40px);
+  cursor:pointer;
+}
+.menu input{
+  visibility:hidden;
+}
+label{
+  pointer-events: none;
+  width:80px;
+  height:3px;
+  position:relative;
+  background-color:#000;
+  display:block;
+  top:calc(50% - 20px);
+  transition:all 0.3s ease-out;
+}
+label:before{
+  pointer-events: none;
+  content: "";
+  width:80px;
+  height:3px;
+  position:absolute;
+  background-color:#000;
+  display:block;
+  transform:translateY(-20px);
+  transition:all 0.3s ease-out;
+}
+label:after{
+  pointer-events: none;
+  content: "";
+  width:80px;
+  height:3px;
+  position:absolute;
+  background-color:#000;
+  display:block;
+  transform:translateY(20px);
+  transition:all 0.3s ease-out;
+}
+input:checked + label{
+  width:0;
+  transform:rotatex(180deg);
+}
+input:checked + label:before{
+  height:3px;
+  border:none;
+  -webkit-transform:rotate(45deg) translate(0px);
+  transform:rotate(45deg) translate(0px);
+}
+input:checked + label:after{
+  height:3px;
+  border:none;
+  -webkit-transform:rotate(-45deg) translate(0px);
+  transform:rotate(-45deg) translate(0px);
+}
+.label.hover:before{
+  height:3px;
+  border:none;
+  -webkit-transform:scale(.6) translateY(-20px);
+  transform:scalex(.6) translateY(-20px);
+}
+.label.hover:after{
+  height:3px;
+  border:none;
+  -webkit-transform:scale(.6) translateY(20px);
+  transform:scalex(.6) translateY(20px);
+}
+
+ button{
+    cursor: pointer;
+ }
+.btn1 {
+  width: 100px;
+  height: 50px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  z-index: 1;
+  overflow: hidden;
+  
+  font-family: 'Escoredream', sans-serif;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  line-height: 50px;
+
+  background-color: #FBCB4C;
+  background-image: linear-gradient(315deg, rgb(255, 151, 0) 0%, #FBCB4C 74%);
+  background-size: 100% 0%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+              7px 7px 20px 0px rgba(0,0,0,.1),
+              4px 4px 5px 0px rgba(0,0,0,.1);
+              
+  transition: all 0.3s ease;
+}
+
+.btn1:hover {
+  background-size: 100% 100%;
+  color: #000;
+}
+
+.btn1:active {
+  transform: translateY(2px);
+}
+.btn2 {
+  width: 100px;
+  height: 50px;
+  background: #FBCB4C;
+  line-height: 50px;
+  padding: 0;
+  border: none;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.btn2 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn2:before,
+.btn2:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #FBCB4C;
+  box-shadow: -7px -7px 20px 0px rgba(255,255,255,.9),
+              -4px -4px 5px 0px rgba(255,255,255,.9),
+              7px 7px 20px 0px rgba(0,0,0,.2),
+              4px 4px 5px 0px rgba(0,0,0,.3);
+  transition: all 0.3s ease;
+}
+
+.btn2:before {
+  height: 0%;
+  width: 2px;
+}
+
+.btn2:after {
+  width: 0%;
+  height: 2px;
+}
+
+.btn2:hover {
+  color: #000;
+  background: transparent;
+}
+
+.btn2:hover:before {
+  height: 100%;
+}
+
+.btn2:hover:after {
+  width: 100%;
+}
+
+.btn2 span:before,
+.btn2 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #FBCB4C;
+  box-shadow: -7px -7px 20px 0px rgba(255,255,255,.9),
+              -4px -4px 5px 0px rgba(255,255,255,.9),
+              7px 7px 20px 0px rgba(0,0,0,.2),
+              4px 4px 5px 0px rgba(0,0,0,.3);
+  transition: all 0.3s ease;
+}
+
+.btn2 span:before {
+  width: 2px;
+  height: 0%;
+}
+
+.btn2 span:after {
+  height: 2px;
+  width: 0%;
+}
+
+.btn2 span:hover:before {
+  height: 100%;
+}
+
+.btn2 span:hover:after {
+  width: 100%;
+}
+
+.btn3 {
+  width: 100px;
+  height: 50px;
+  background: #ffffff;
+  border: none;
+  border-radius: 0;
+  box-shadow: 10px 10px 0 0 #FBCB4C, inset 10px 10px 0 0 #FBCB4C;
+  transition: 0.3s;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+}
+
+.btn3:hover {
+  background: transparent;
+  box-shadow: 0 0 0 0 #FBCB4C, inset 100px 50px 0 0 #FBCB4C;
+}
+
+.btn4 {
+  width: 100px;
+  height: 50px;
+  background: white;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  position: relative;
+  color: #000;
+  z-index: 2;
+  line-height: 50px;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+.btn4:hover {
+  border: none;
+}
+
+.btn4:before,
+.btn4:after {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 0%;
+  border: 2px solid;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.btn4:before {
+  top: 0;
+  left: 0;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: #000;
+  border-left-color: #000;
+}
+
+.btn4:after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: #000;
+  border-right-color: #000;
+}
+
+.btn4:hover:before,
+.btn4:hover:after {
+  border-color: #000;
+  height: 100%;
+  width: 100%;
+}
+
+.btn5 {
+  width: 100px;
+  height: 50px;
+  position: relative;
+  background: white;
+  border: 2px solid black;
+  border-radius: 6px;
+  color: white;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+}
+.btn5:hover {
+  color: green; 
+}
+
+.btn5::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.btn5::after {
+  content: "";
+  position: absolute;
+  background: green;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.btn5:hover::after {
+  height: 0;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  color: #FBCB4C;
+}
+
+.btn6 {
+  width: 100px;
+  height: 50px;
+  position: relative;
+  background: #FBCB4C;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn6::after {
+  content: "";
+  position: absolute;
+  background-color: #ffffff;
+  height: 100%;
+  left: -35%;
+  top: 0;
+  transform: skew(50deg);
+  transition-duration: 0.6s;
+  transform-origin: top left;
+  width: 0;
+  z-index: -1;
+}
+
+.btn6:hover::after {
+  height: 50px;
+  width: 100px;
+}
+
+.btn7 {
+  width: 100px;
+  height: 50px;
+  background: green;
+  color: #000;
+  border: none;
+  position: relative;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  padding: 0;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.btn7:hover {
+  background: #ffffff;
+  color: green;
+}
+
+.btn7:before,
+.btn7:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: green;
+  transition: 400ms ease all;
+}
+
+.btn7:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.btn7:hover:before,
+.btn7:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.btn8 {
+  width: 100px;
+  height: 50px;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  color: #000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn8:hover {
+  background-color: #FBCB4C;
+  box-shadow: 0px 20px 25px rgba(251, 203, 76, 0.4);
+  color: #000;
+  transform: translateY(-7px);
+}
+.btn9 {
+  width: 100px;
+  height: 50px;
+  font-family: 'Escoredream', sans-serif;
+  border: 2px solid #FBCB4C;
+  font-weight: bold;
+  color: #FBCB4C;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.btn9:hover {
+  animation: sawtooth 0.35s infinite linear;
+  background: linear-gradient(45deg, #FBCB4C 0.5em, transparent 0.5em) 0 0 / 1em 1em,
+              linear-gradient(-45deg, #FBCB4C 0.5em, transparent 0.5em) 0 0 / 1em 1em;
+  color: #6e5cfe;
+  border: 2px solid #FBCB4C;
+}
+
+@keyframes sawtooth {
+  100% {
+    background-position: 1em 0;
+  }
+}
+
+.btn10 {
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  background: #FBCB4C;
+  color: #000;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.btn10::before,
+.btn10::after {
+  content: '\27F6';
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.btn10::before {
+  transform: translateX(-15px);
+  opacity: 0;
+  transition: all 700ms ease-out;
+}
+
+.btn10::after {
+  transform: translateX(0px);
+  opacity: 1;
+  transition: all 400ms ease-out;
+}
+
+.btn10:hover::before {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.btn10:hover::after {
+  transform: translateX(15px);
+  opacity: 0;
+}
+
+.btn11 {
+  width: 100px;
+  height: 50px;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  background-image: linear-gradient(to right, #FBCB4C, #ffffff, #FBCB4C, #ffffff);
+  box-shadow: 0 4px 15px 0 rgba(251, 203, 76, 0.75);
+}
+
+.btn11:hover {
+  background-position: 100% 0;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn11:focus {
+  outline: none;
+}
+
+.btn12 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #FBCB4C;
+  padding: 0;
+  border-radius: 30px;
+  font-family: 'Escoredream', sans-serif;
+  font-weight: 500;
+  color: #000;
+  background-size: 200% 100%;
+  box-shadow: 0 0 0 4px #FBCB4C inset;
+  box-sizing: border-box;
+}
+
+.btn12:hover {
+  background-image: linear-gradient(
+    55deg,
+    transparent 10%,
+    #ffffff 10% 20%,
+    transparent 20% 30%,
+    #ffffff 30% 40%,
+    transparent 40% 50%,
+    #ffffff 50% 60%,
+    transparent 60% 70%,
+    #ffffff 70% 80%,
+    transparent 80% 90%,
+    #ffffff 90% 100%
+  );
+  animation: background 0.7s linear infinite;
+}
+
+@keyframes background {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}

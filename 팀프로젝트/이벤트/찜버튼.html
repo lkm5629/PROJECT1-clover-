@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트관련</title>
+    <style>
+   .only-wish-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    
+
+    background-color: #ffffff;
+    border: 2px solid #ff4757;
+    border-radius: 30px;
+    color: #ff4757;
+    
+
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+
+.only-wish-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 71, 87, 0.2);
+}
+
+
+.only-wish-btn.active {
+    background-color: #ff4757;
+    color: #ffffff;
+}
+
+.only-wish-btn i {
+    transition: transform 0.2s ease;
+}
+
+.only-wish-btn:active i {
+    transform: scale(1.3); /* 클릭하는 순간 하트 팝업 효과 */
+}
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<button type="button" class="only-wish-btn" id="wishBtn">
+    <i class="fa-regular fa-heart"></i>
+    <span id="countH">0</span>
+</button>
+    <script>
+        window.addEventListener('load', ()=>{
+            //찜 버튼 클릭 이벤트 
+            let heart = document.querySelector(".fa-regular");
+            const btn = document.querySelector("#wishBtn");
+            let countH = document.querySelector("#countH");
+            btn.addEventListener('click',()=>{
+                //하트 텍스트(기존 라이브러리)
+                heart.classList.toggle('fa-regular');
+                heart.classList.toggle('fa-solid');
+                btn.classList.toggle('active');
+                let currentCount = Number(countH.innerText);
+                if(btn.classList.contains('active')){
+                    countH.innerText = currentCount + 1;
+                }else{
+                    countH.innerText = currentCount - 1;
+                }
+            })
+        })
+    </script>
+</body>
+</html>

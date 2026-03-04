@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">LOGO</div>
+
+        <div class="login-box">
+            <div class="intro">
+                우리 로고의 간략 소개<br>
+                세줄로 작성<br>
+                반갑습니다!
+            </div>
+
+            <form id="loginForm">
+                <input type="text" id="userId" placeholder="아이디" class="input-field">
+                <div class="pw-group">
+                    <input type="password" id="userPw" placeholder="비밀번호" class="input-field">
+                    <span class="eye-icon" id="pwToggle">👁️</span>
+                </div>
+                
+                <div id="errorMessage" class="error-msg"></div>
+
+                <button type="submit" class="btn-main">로그인하기</button>
+            </form>
+
+            <div class="social-group">
+                <button type="button" class="btn-sub" onclick="location.href='https://nid.naver.com/nidlogin.login'">네이버 계정으로 로그인</button>
+                <button type="button" class="btn-sub" onclick="location.href='https://accounts.google.com/'">구글 계정으로 로그인</button>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">아이디 찾기</a>
+                <span class="bar">|</span>
+                <a href="#">비밀번호 찾기</a>
+                <span class="bar">|</span>
+                <a href="#">회원가입</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 보내주신 이미지 속 사용자 데이터 적용
+        const userData = [
+            {
+                "id": "test1234",
+                "pw": "password1234",
+                "name": "홍길동"
+            },
+            {
+                "id": "admin1",
+                "pw": "adminpassword",
+                "name": "관리자"
+            }
+        ];
+
+        const loginForm = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const inputId = document.getElementById('userId').value.trim();
+            const inputPw = document.getElementById('userPw').value.trim();
+
+            // 1. 유효성 검사 (빨간 글씨 출력)
+            if (!inputId && !inputPw) {
+                errorDiv.textContent = "아이디와 비밀번호를 입력하세요.";
+                return;
+            } else if (!inputId) {
+                errorDiv.textContent = "아이디를 입력하세요.";
+                return;
+            } else if (!inputPw) {
+                errorDiv.textContent = "비밀번호를 입력하세요.";
+                return;
+            }
+
+            // 2. 데이터 대조
+            const user = userData.find(u => u.id === inputId && u.pw === inputPw);
+
+            if (user) {
+                errorDiv.textContent = "";
+                alert(user.name + "님 환영합니다!");
+                // 팀원분이 만드신 메인 페이지 파일명으로 이동
+                window.location.href = '메인페이지.html'; 
+            } else {
+                errorDiv.textContent = "아이디 또는 비밀번호가 일치하지 않습니다.";
+            }
+        });
+
+        // 비밀번호 토글 기능
+        document.getElementById('pwToggle').addEventListener('click', function() {
+            const pwInput = document.getElementById('userPw');
+            if (pwInput.type === 'password') {
+                pwInput.type = 'text';
+                this.textContent = '🙈';
+            } else {
+                pwInput.type = 'password';
+                this.textContent = '👁️';
+            }
+        });
+    </script>
+</body>
+</html>

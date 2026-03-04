@@ -1,4 +1,6 @@
-/* --- 프리미엄 폰트 & 리셋 --- */
+/* ==========================================================
+   메인페이지 CSS (나머지 전체)
+========================================================== */
 @font-face {
     font-family: 'SCDream';
     font-weight: 300;
@@ -65,19 +67,11 @@ a {
     color: inherit;
 }
 
+/* 공통 이미지 초기화 */
 img {
     max-width: 100%;
     display: block;
     border-radius: 12px;
-}
-
-.img2{
-width: 900px;
-height: 500px;
-
-}
-.img2-frame{
-margin-left: 30px;  
 }
 
 ul,
@@ -85,7 +79,6 @@ li {
     list-style: none;
 }
 
-/* --- 유틸리티 & 그리드 --- */
 .inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -155,7 +148,6 @@ li {
     overflow: hidden;
 }
 
-/* Flex & Grid */
 .flex {
     display: flex;
 }
@@ -203,7 +195,6 @@ li {
     gap: 20px;
 }
 
-/* 뱃지 & 버튼 */
 .badge {
     display: inline-block;
     background: var(--dark);
@@ -276,7 +267,6 @@ li {
     box-shadow: 0 15px 40px rgba(251, 203, 76, 0.5);
 }
 
-/* 배경색 & 공통 카드 */
 .bg-sub {
     background-color: var(--sub);
 }
@@ -316,7 +306,6 @@ li {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* --- 애니메이션 정의 --- */
 @keyframes float {
     0% {
         transform: translateY(0px);
@@ -376,6 +365,18 @@ li {
     }
 }
 
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .float-anim-1 {
     animation: float 6s ease-in-out infinite;
 }
@@ -388,73 +389,16 @@ li {
     animation: float 6s ease-in-out infinite 2s;
 }
 
-/* --- 헤더 --- */
-.hdr {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
+.img2 {
+    width: 900px;
+    height: 500px;
+    object-fit: cover;
 }
 
-.top-bar {
-    background: var(--dark);
-    padding: 8px 0;
-    font-size: 12px;
-    color: #aaa;
+.img2-frame {
+    margin-left: 30px;
 }
 
-.top-bar a {
-    margin-left: 25px;
-    transition: 0.2s;
-    letter-spacing: 1px;
-}
-
-.top-bar a:hover {
-    color: var(--main);
-}
-
-.nav {
-    padding: 25px 0;
-}
-
-.logo {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--dark);
-    letter-spacing: 3px;
-}
-
-.gnb {
-    gap: 40px;
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--text);
-}
-
-.gnb a {
-    position: relative;
-    padding: 10px 0;
-}
-
-.gnb a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 3px;
-    background: var(--main);
-    transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.gnb a:hover::after {
-    width: 100%;
-}
-
-/* --- 히어로 섹션 --- */
 .hero {
     height: 100vh;
     min-height: 800px;
@@ -521,7 +465,6 @@ li {
     gap: 20px;
 }
 
-/* --- Stats (신규) --- */
 .stats {
     padding: 60px 0;
     border-bottom: 1px solid #333;
@@ -555,7 +498,6 @@ li {
     letter-spacing: 1px;
 }
 
-/* --- Features --- */
 .icon-circle {
     width: 80px;
     height: 80px;
@@ -584,7 +526,6 @@ li {
     line-height: 1.7;
 }
 
-/* --- 강의실 대여 (데코레이션 추가) --- */
 .deco-circle {
     position: absolute;
     border-radius: 50%;
@@ -644,7 +585,6 @@ li {
     left: 150%;
 }
 
-/* --- 식단표 (CSS 화살표 끝판왕) --- */
 .meal-flow {
     gap: 30px;
 }
@@ -706,7 +646,6 @@ li {
     margin-top: 10px;
 }
 
-/* 화살표 애니메이션 */
 .premium-arrow {
     display: flex;
     align-items: center;
@@ -729,7 +668,6 @@ li {
     transform: rotate(45deg) translate(-5px, 5px);
 }
 
-/* --- 시스템 타임라인 (신규) --- */
 .timeline {
     position: relative;
 }
@@ -772,7 +710,6 @@ li {
     z-index: 1;
 }
 
-/* --- To-Do --- */
 .circle-2 {
     bottom: -150px;
     left: -150px;
@@ -823,10 +760,12 @@ li {
     margin-bottom: 8px;
 }
 
-/* --- 멘토진 (신규) --- */
+/* 멘토 이미지 깨짐 해결 */
 .mentor-card {
     padding: 0;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .mentor-card img {
@@ -836,6 +775,7 @@ li {
     border-radius: 20px 20px 0 0;
     transition: 0.5s;
     filter: grayscale(50%);
+    display: block;
 }
 
 .mentor-card:hover img {
@@ -862,7 +802,7 @@ li {
     font-size: 14px;
 }
 
-/* --- 갤러리 (Masonry 느낌 신규) --- */
+/* 갤러리 이미지 안나옴 해결 */
 .gal-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -874,6 +814,8 @@ li {
     border-radius: 16px;
     overflow: hidden;
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .gal-item img {
@@ -881,6 +823,7 @@ li {
     height: 100%;
     object-fit: cover;
     transition: 0.5s;
+    display: block;
 }
 
 .gal-item:hover img {
@@ -919,7 +862,11 @@ li {
     grid-row: 2 / 3;
 }
 
-/* --- 리뷰 --- */
+.review .grid-2 {
+    gap: 30px;
+    align-items: stretch;
+}
+
 .rv-card {
     position: relative;
     padding-top: 60px;
@@ -970,7 +917,6 @@ li {
     color: #666;
 }
 
-/* --- FAQ (신규) --- */
 .faq-list {
     max-width: 800px;
     margin: 0 auto;
@@ -1021,19 +967,6 @@ li {
     animation: fadeDown 0.3s ease;
 }
 
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- CTA --- */
 .cta {
     padding: 150px 0;
     background: var(--main);
@@ -1060,56 +993,6 @@ li {
     margin-bottom: 40px;
 }
 
-/* --- 푸터 --- */
-.ftr {
-    background: #0a0a0a;
-    color: #888;
-    padding: 80px 0 50px;
-    font-size: 15px;
-}
-
-.ftr-logo {
-    font-size: 28px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.ftr-logo span {
-    background: var(--main);
-    color: var(--dark);
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    letter-spacing: 1px;
-}
-
-.ftr-links a {
-    margin-left: 30px;
-    color: #ccc;
-    transition: 0.3s;
-}
-
-.ftr-links a:hover {
-    color: var(--main);
-}
-
-.ftr-info {
-    margin-top: 40px;
-    border-top: 1px solid #222;
-    padding-top: 40px;
-    line-height: 1.8;
-}
-
-.copy {
-    color: #555;
-    font-size: 13px;
-}
-
-/* --- 최상단 이동 버튼 --- */
 .top-btn {
     position: fixed;
     bottom: 40px;
@@ -1126,7 +1009,7 @@ li {
     font-size: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 999;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.4s;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -1138,19 +1021,235 @@ li {
     box-shadow: 0 15px 35px rgba(251, 203, 76, 0.4);
 }
 
-.nav .inner {
-    /* 기존 1200px로 제한된 너비를 풀어서 로고와 메뉴를 양쪽으로 더 밀어냅니다 */
-    max-width: 100%; /* 원하는 만큼 수치를 조절하세요. 100%로 주면 브라우저 양 끝까지 벌어집니다. */
-    
-    /* 화면 양쪽 끝에 너무 딱 붙지 않도록 좌우 여백을 약간 넉넉하게 줍니다 */
-    padding: 0 40px; 
+/* --- 나머지 요소 반응형 --- */
+@media screen and (max-width: 1024px) {
+    .inner {
+        padding: 0 20px;
+    }
+
+    .grid-4,
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .rental .flex-between {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .rental .txt-box {
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rental .chk-list {
+        text-align: left;
+        display: inline-block;
+    }
+
+    .gal-grid {
+        /* 2열 배치는 유지해서 이미지가 너무 작아지지 않게 함 */
+        grid-template-columns: repeat(2, 1fr); 
+        /* 높이를 고정하지 않고 '황금 비율' 가로형으로 설정 */
+        grid-template-rows: auto; 
+        gap: 12px;
+    }
+    .gal-item {
+        /* 가로로 긴 직사각형 비율(4:3)로 설정해서 높이 부담을 줄임 */
+        aspect-ratio: 4 / 3; 
+        height: auto; 
+        width: 100%;
+        grid-column: auto !important; /* PC 버전의 병합된 레이아웃 해제 */
+        grid-row: auto !important;
+    }
+    gal-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 이미지가 찌그러지지 않게 꽉 채움 */
+    }
+
+    .img2 {
+        width: 100%;
+        height: auto;
+    }
+
+    .img2-frame {
+        margin-left: 0;
+    }
+
+    .flow-card {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .todo .grid-2 {
+        gap: 40px;
+    }
+
+    .mentor-card img {
+        /* aspect-ratio: 4 / 5; */
+        height: auto;
+        object-fit: cover;
+    }
+
+    .review .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
 }
 
-/* --- 마이페이지, 로그인, 회원가입 링크를 더 오른쪽으로 밀기 --- */
-.top-bar .inner {
-    /* 내비게이션 바와 동일하게 최대 너비를 확장하여 링크들을 오른쪽 끝으로 보냅니다 */
-    max-width: 1600px; /* .nav .inner에 설정한 수치와 맞추는 것이 깔끔합니다 */
-    
-    /* 우측 끝 여백 조절 */
-    padding: 0 40px; 
+@media screen and (max-width: 768px) {
+    .sec {
+        padding: 60px 0;
+    }
+
+    .hero-tit {
+        font-size: 2.2rem;
+    }
+
+    .sec-hd h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .hero-btns .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .grid-4,
+    .grid-3,
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-flow {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .premium-arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+        width: 40px;
+    }
+
+    .gal-grid {
+        /* 2열 배치는 유지해서 이미지가 너무 작아지지 않게 함 */
+        grid-template-columns: repeat(2, 1fr); 
+        /* 높이를 고정하지 않고 '황금 비율' 가로형으로 설정 */
+        grid-template-rows: auto; 
+        gap: 12px;
+    }
+    .gal-item {
+        /* 가로로 긴 직사각형 비율(4:3)로 설정해서 높이 부담을 줄임 */
+        aspect-ratio: 4 / 3; 
+        height: auto; 
+        width: 100%;
+        grid-column: auto !important; /* PC 버전의 병합된 레이아웃 해제 */
+        grid-row: auto !important;
+    }
+    gal-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 이미지가 찌그러지지 않게 꽉 채움 */
+    }
+
+    .mentor-card img {
+        height: auto;
+        /* aspect-ratio: 1 / 1;  */
+        object-fit: cover;
+        filter: grayscale(0%);
+    }
+
+    .mentor-info {
+        padding: 15px; /* 정보창 간격 살짝 축소 */
+    }
+    .todo-img-box img {
+        height: auto;
+        aspect-ratio: 4/3;
+    }
+
+    .review .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .rv-card {
+        padding: 40px 25px 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-tit {
+        font-size: 1.8rem;
+    }
+
+    .grid-4 {
+        grid-template-columns: 1fr; /* 1열 배치로 사진 크기 확보 */
+    }
+
+    .stat-num {
+        font-size: 2rem;
+    }
+
+    .gal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-q {
+        font-size: 1rem;
+    }
+
+    .time-step {
+        padding: 25px 20px;
+    }
+
+    .step-num {
+        font-size: 30px;
+        right: 15px;
+        top: 15px;
+    }
+
+    .info-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .info-icon {
+        margin: 0 auto;
+    }
+
+    .faq-a {
+        font-size: 14px;
+        padding-left: 0;
+        margin-top: 10px;
+    }
+
+    .cta h2 {
+        font-size: 24px;
+    }
+
+    .top-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 13px;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .mentor-card img {
+        aspect-ratio: 3 / 4; /* 다시 인물 사진 최적 비율로 조절 */
+    }
 }

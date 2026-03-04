@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">LOGO</div>
+
+        <div class="login-box">
+            <div class="intro">
+                우리 로고의 간략 소개<br>
+                세줄로 작성<br>
+                반갑습니다!
+            </div>
+
+            <form id="loginForm">
+                <input type="text" id="userId" placeholder="아이디" class="input-field">
+                <div class="pw-group">
+                    <input type="password" id="userPw" placeholder="비밀번호" class="input-field">
+                    <span class="eye-icon" id="pwToggle">
+                        <img id="eyeImg" src="https://img.icons8.com/material-outlined/24/000000/invisible.png"
+                            width="20">
+                    </span>
+                </div>
+
+                <div id="errorMessage" class="error-msg"></div>
+
+                <button type="submit" class="btn-main">로그인하기</button>
+            </form>
+
+            <div class="social-group">
+                <button type="button" class="btn-sub" onclick="location.href='https://nid.naver.com/nidlogin.login'">네이버
+                    계정으로 로그인</button>
+                <button type="button" class="btn-sub" onclick="location.href='https://accounts.google.com/'">구글 계정으로
+                    로그인</button>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">아이디 찾기</a>
+                <span class="bar">|</span>
+                <a href="#">비밀번호 찾기</a>
+                <span class="bar">|</span>
+                <a href="#">회원가입</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        const loginForm = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('errorMessage');
+        (async () => {
+            if (!localStorage.getItem("users")) {
+                try {
+                    const response = await fetch('./유저.json');
+                    const data = await response.json();
+                    localStorage.setItem("users", JSON.stringify(data));
+                    console.log("로그인 페이지에서 유저 명단(users) 생성 완료");
+                } catch (err) {
+                    console.error("명단 생성 실패:", err);
+                }
+            }
+        })();
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const inputId = document.getElementById('userId').value.trim();
+            const inputPw = document.getElementById('userPw').value.trim();
+
+            // 1. 유효성 검사 (기존 로직 그대로 유지)
+            if (!inputId && !inputPw) {
+                errorDiv.textContent = "아이디와 비밀번호를 입력하세요.";
+                return;
+            } else if (!inputId) {
+                errorDiv.textContent = "아이디를 입력하세요.";
+                return;
+            } else if (!inputPw) {
+                errorDiv.textContent = "비밀번호를 입력하세요.";
+                return;
+            }
+
+            const userList = JSON.parse(localStorage.getItem("users")) || [];
+
+            try {
+
+                const user = userList.find(u => u.id === inputId && u.pw === inputPw);
+
+                if (user) {
+                    errorDiv.textContent = "";
+
+                    // 4. [유지] 로그인한 유저 정보를 창고에 저장 (마이페이지 연동의 핵심)
+                    localStorage.setItem("loginUser", JSON.stringify(user));
+
+                    alert(user.nick + "님 환영합니다!");
+
+                    // 5. [유지] 메인 페이지로 이동
+                    window.location.href = '메인페이지.html';
+                } else {
+                    errorDiv.textContent = "아이디 또는 비밀번호가 일치하지 않습니다.";
+                }
+            } catch (error) {
+                // 6. [추가] 파일 읽기 실패 시 에러 처리
+                console.error("데이터 로드 실패:", error);
+                errorDiv.textContent = "로그인 시스템 에러가 발생했습니다.";
+            }
+        });
+
+        // 비밀번호 토글 기능 (기존 로직 유지)
+        document.getElementById('pwToggle').addEventListener('click', function () {
+            const pwInput = document.getElementById('userPw');
+            if (pwInput.type === 'password') {
+                pwInput.type = 'text';
+                eyeImg.src = "https://img.icons8.com/material-outlined/24/000000/visible.png";
+                pwToggle.style.opacity = "1";
+            } else {
+                pwInput.type = 'password';
+                eyeImg.src = "https://img.icons8.com/material-outlined/24/000000/invisible.png";
+                pwToggle.style.opacity = "0.4";
+            }
+        });
+    </script>
+</body>
+
+</html>

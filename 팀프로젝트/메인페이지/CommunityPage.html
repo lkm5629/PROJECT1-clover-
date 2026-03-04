@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <!--
+    =========================================================
+    [head 영역]
+    ---------------------------------------------------------
+    - 문자 인코딩, 화면 크기 설정, 제목, CSS/JS 연결
+    - CSS 파일명 / JS 파일명은 네가 정한 실제 파일명 기준
+      -> CommunityPage.css
+      -> CommunityPage.js
+    =========================================================
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>커뮤니티 게시판</title>
+
+  <!--
+    CommunityPage.css 연결
+    - 화면 디자인(색감, 여백, 카드, 반응형 등)을 담당
+  -->
+  <link rel="stylesheet" href="./CommunityPage.css" />
+
+  <!--
+    CommunityPage.js 연결
+    - 게시글 저장, 좋아요, 댓글 저장, 화면 전환 등을 담당
+    - defer: HTML을 먼저 다 읽고 JS 실행
+  -->
+    <link rel="stylesheet" href="./common.css">
+  <script src="./CommunityPage.js" defer></script>
+</head>
+
+<body>
+  <header id="header-include" class="hdr"></header>
+  <!--
+    =========================================================
+    [전체 레이아웃 시작]
+    ---------------------------------------------------------
+    .wrap
+    - TODO 페이지와 비슷한 전체 큰 틀
+    - 좌측 side-menu + 우측 main-content 구조
+    =========================================================
+  -->
+  <div class="wrap">
+
+    <!--
+      =======================================================
+      [좌측 사이드 메뉴]
+      -------------------------------------------------------
+      - 전체 / 내 소식 / 채팅(현재 보류)
+      - 각 버튼은 JS에서 클릭 이벤트로 사용
+      - id는 JS와 연결되는 핵심 포인트라 이름 유지 추천
+      =======================================================
+    -->
+    <aside class="side-menu">
+
+      <!--
+        로고 박스
+        - 지금은 임시 텍스트 "로고"
+        - 나중에 이미지 / 사이트명 / 로고 아이콘으로 교체 가능
+      -->
+      <div class="logo-box">로고</div>
+
+      <!--
+        전체 메뉴 버튼
+        - 기본 진입 화면
+        - JS에서 menuBoard를 눌렀을 때 pageBoard를 보여줌
+      -->
+      <button type="button" id="menuBoard" class="menu-btn active">전체</button>
+
+      <!--
+        내 소식 메뉴 버튼
+        - 내가 쓴 글 / 내가 단 댓글을 모아보는 화면
+        - JS에서 menuMy 클릭 시 pageMy로 이동
+      -->
+      <button type="button" id="menuMy" class="menu-btn">내 소식</button>
+
+      <!--
+        채팅 메뉴 버튼
+        - 지금은 기능 보류 상태
+        - 보여주기만 하고 disabled 처리
+        - 나중에 실시간 채팅 붙일 때 이 버튼을 살리면 됨
+      -->
+      <button type="button" id="menuChat" class="menu-btn menu-disabled" disabled>채팅</button>
+    </aside>
+
+    <!--
+      =======================================================
+      [오른쪽 메인 콘텐츠 영역]
+      -------------------------------------------------------
+      - 실제 페이지 내용이 출력되는 곳
+      - 아래의 pageBoard / pageMy / pageDetail 중
+        하나만 active 클래스로 보여줌
+      =======================================================
+    -->
+    <main class="main-content">
+
+      <!-- ================================================== -->
+      <!-- 1) 게시글 목록 페이지 (전체) -->
+      <!-- ================================================== -->
+      <!--
+        pageBoard
+        - 전체 게시글 목록 화면
+        - 인기글도 여기서 함께 보여줌
+        - 기본적으로 가장 먼저 보이는 화면
+      -->
+      <section id="pageBoard" class="page active">
+
+        <!--
+          페이지 상단 제목 영역
+          - 좌측: 설명 문구 + 큰 제목
+          - 우측: 글쓰기 버튼
+        -->
+        <div class="page-top">
+          <div>
+            <!-- 보조 설명 텍스트 -->
+            <p class="page-sub-text">Escoredream / TODO / Community Board</p>
+
+            <!-- 페이지의 메인 제목 -->
+            <div class="page-title">커뮤니티 게시판</div>
+          </div>
+
+          <!--
+            오른쪽 버튼 구역
+            - 현재는 글쓰기 버튼만 있음
+          -->
+          <div class="db-top-right">
+            <!--
+              글쓰기 패널 열기 버튼
+              - 누르면 아래 writePanel이 열리고 닫힘
+            -->
+            <button type="button" id="openWritePanelBtn" class="main-btn">글쓰기</button>
+          </div>
+        </div>
+
+        <!--
+          =====================================================
+          [글쓰기 패널]
+          -----------------------------------------------------
+          - 처음에는 hide 클래스가 있어서 숨김
+          - 글쓰기 버튼 누르면 보이게 됨
+          - 게시글 입력 폼 역할
+          =====================================================
+        -->
+        <div id="writePanel" class="add-form-box hide">
+
+          <!-- 제목 입력 -->
+          <div class="form-row">
+            <label class="form-label" for="postTitleInput">제목</label>
+            <input type="text" id="postTitleInput" class="fix-input" placeholder="게시글 제목 입력" />
+          </div>
+
+          <!-- 내용 입력 -->
+          <div class="form-row">
+            <label class="form-label" for="postContentInput">내용</label>
+            <textarea id="postContentInput" class="fix-textarea" placeholder="게시글 내용을 입력해줘"></textarea>
+          </div>
+
+          <!-- 태그 입력 -->
+          <div class="form-row">
+            <label class="form-label" for="postTagInput">태그</label>
+            <input type="text" id="postTagInput" class="fix-input" placeholder="#프로젝트 #스터디 또는 프로젝트, 스터디" />
+          </div>
+
+          <!-- 썸네일 문구 입력 -->
+          <div class="form-row">
+            <label class="form-label" for="postThumbInput">썸네일 문구</label>
+            <input type="text" id="postThumbInput" class="fix-input" maxlength="6" placeholder="예: TALK" />
+          </div>
+
+          <!--
+            저장 / 취소 버튼 구역
+            - savePostBtn   : 새 게시글 저장
+            - cancelPostBtn : 입력 취소 및 패널 닫기
+          -->
+          <div class="form-btn-row">
+            <button type="button" id="savePostBtn" class="main-btn">저장</button>
+            <button type="button" id="cancelPostBtn" class="line-btn">취소</button>
+          </div>
+        </div>
+
+        <!--
+          =====================================================
+          [게시글 목록 + 인기글]
+          -----------------------------------------------------
+          community-grid
+          - 좌/우 2칸 레이아웃
+          - 왼쪽: 전체 게시글 목록
+          - 오른쪽: 인기글
+          =====================================================
+        -->
+        <div class="community-grid">
+
+          <!--
+            ---------------------------------------------------
+            [전체 게시글 목록 카드]
+            ---------------------------------------------------
+            - boardList 안에 JS가 게시글 카드들을 그려줌
+          -->
+          <section class="community-card">
+            <div class="section-head">
+              <div class="section-title-main">전체</div>
+              <div class="section-help-text">최신 게시글을 확인할 수 있어.</div>
+            </div>
+
+            <!-- JS가 게시글 목록을 넣는 영역 -->
+            <div id="boardList" class="post-list"></div>
+          </section>
+
+          <!--
+            ---------------------------------------------------
+            [인기글 카드]
+            ---------------------------------------------------
+            - popularList 안에 JS가 좋아요 높은 순으로 출력
+            - 숫자 랭킹(1,2,3...)도 여기서 같이 보임
+          -->
+          <section class="community-card">
+            <div class="section-head">
+              <div class="section-title-main">인기글</div>
+              <div class="section-help-text">하트 수가 많은 글 순서야.</div>
+            </div>
+
+            <!-- JS가 인기글 목록을 넣는 영역 -->
+            <div id="popularList" class="popular-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!-- 2) 내 소식 페이지 -->
+      <!-- ================================================== -->
+      <!--
+        pageMy
+        - 내가 작성한 글
+        - 내가 작성한 댓글
+        - 두 구역을 나눠서 보여줌
+      -->
+      <section id="pageMy" class="page">
+        <div class="page-top">
+          <div>
+            <p class="page-sub-text">내가 작성한 글 / 댓글 모아보기</p>
+            <div class="page-title">내 소식</div>
+          </div>
+        </div>
+
+        <!--
+          my-news-grid
+          - 왼쪽: 내가 작성한 글
+          - 오른쪽: 내가 작성한 댓글
+          - 모바일에서는 1열로 바뀜
+        -->
+        <div class="my-news-grid">
+
+          <!--
+            ---------------------------------------------------
+            [내가 작성한 글]
+            ---------------------------------------------------
+            - 정렬 버튼이 있음
+            - myPostList 안에 JS가 목록을 그림
+          -->
+          <section class="community-card">
+            <div class="section-head">
+              <div class="section-title-main">내가 작성한 글</div>
+              <div class="section-help-text">현재 작성자 기준으로 쓴 게시글이 보여.</div>
+            </div>
+
+            <!--
+              정렬 버튼 영역
+              - data-my-sort 값을 JS에서 읽어서 정렬 기준 사용
+              - latest   : 최신순
+              - likes    : 하트 높은순
+              - comments : 댓글 많은순
+              - views    : 조회수 높은순
+            -->
+            <div class="my-sort-row">
+              <button type="button" class="my-sort-btn active" data-my-sort="latest">최신순</button>
+              <button type="button" class="my-sort-btn" data-my-sort="likes">하트 높은순</button>
+              <button type="button" class="my-sort-btn" data-my-sort="comments">댓글 많은순</button>
+              <button type="button" class="my-sort-btn" data-my-sort="views">조회수 높은순</button>
+            </div>
+
+            <!-- JS가 내가 작성한 글 목록을 출력 -->
+            <div id="myPostList" class="post-list"></div>
+          </section>
+
+          <!--
+            ---------------------------------------------------
+            [내가 작성한 댓글]
+            ---------------------------------------------------
+            - 내가 어떤 글에 어떤 댓글을 달았는지 확인
+            - 클릭하면 해당 게시글 상세 화면으로 이동
+          -->
+          <section class="community-card">
+            <div class="section-head">
+              <div class="section-title-main">내가 작성한 댓글</div>
+              <div class="section-help-text">내가 남긴 댓글과 연결된 게시글을 확인할 수 있어.</div>
+            </div>
+
+            <!-- JS가 내가 작성한 댓글 목록을 출력 -->
+            <div id="myCommentList" class="post-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!-- 3) 게시글 상세 페이지 -->
+      <!-- ================================================== -->
+      <!--
+        pageDetail
+        - 게시글 하나를 클릭했을 때 보이는 상세 화면
+        - 제목, 본문, 태그, 좋아요, 댓글, 댓글작성창이 들어감
+      -->
+      <section id="pageDetail" class="page">
+        <div class="page-top">
+          <div>
+            <p class="page-sub-text">게시글 상세 화면</p>
+            <div class="page-title">게시글 상세</div>
+          </div>
+
+          <div class="db-top-right">
+            <!--
+              목록으로 버튼
+              - 이전에 보고 있던 화면(전체 / 내 소식)으로 돌아감
+            -->
+            <button type="button" id="detailBackBtn" class="line-btn">목록으로</button>
+          </div>
+        </div>
+
+        <!--
+          detailArea
+          - JS가 게시글 상세 카드 전체를 그리는 영역
+          - 댓글 목록 / 댓글쓰기 입력창도 여기 포함됨
+        -->
+        <div id="detailArea"></div>
+      </section>
+    </main>
+  </div>
+  <footer id="footer-include" class="ftr"></footer>
+  <script src="./common.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기 - 통합 단계</title>
+    <link rel="stylesheet" href="find_pw.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">LOGO</div>
+
+        <div class="find-box">
+            <div class="intro">
+                우리 로고의 간략 소개<br>
+                세줄로 작성
+            </div>
+
+            <div class="tab-menu">
+                <div class="tab" onclick="location.href='find_id.html'">아이디 찾기</div>
+                <div class="tab active">비밀번호 찾기</div>
+            </div>
+
+            <div id="step1" class="step-content">
+                <div class="input-group">
+                    <input type="text" id="findId" placeholder="가입한 아이디" class="input-field full">
+                </div>
+                <div id="error1" class="error-msg"></div>
+                <button type="button" class="btn-main" onclick="goStep2()">비밀번호 찾기</button>
+            </div>
+
+            <div id="step2" class="step-content" style="display: none;">
+                <div class="input-group">
+                    <input type="text" id="userContact" placeholder="이메일 또는 전화번호" class="input-field">
+                    <button type="button" class="btn-inline" onclick="sendCode()">번호전송</button>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="authCode" placeholder="이메일 인증 코드" class="input-field">
+                    <button type="button" class="btn-inline" onclick="verifyCode()">확인</button>
+                </div>
+                <div id="error2" class="error-msg"></div>
+                <button type="button" class="btn-main" onclick="goStep3()">비밀번호 찾기</button>
+            </div>
+
+            <div id="step3" class="step-content" style="display: none;">
+                <div class="input-group">
+                    <input type="password" id="newPw" placeholder="새 비밀번호" class="input-field full">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPw" placeholder="새 비밀번호 확인" class="input-field full">
+                </div>
+                <div id="error3" class="error-msg"></div>
+                <button type="button" class="btn-main" onclick="resetComplete()">저장</button>
+            </div>
+
+            <div class="footer-links">
+                <a href="find_id.html">아이디 찾기</a>
+                <span class="bar">|</span>
+                <a href="find_pw.html">비밀번호 찾기</a>
+                <span class="bar">|</span>
+                <a href="#">회원가입</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /** * [공통 기능] 빨간색 에러 메시지를 표시하는 함수
+         * @param {string} id - 메시지를 띄울 요소의 ID
+         * @param {string} msg - 표시할 경고 내용
+         */
+        function showErr(id, msg) {
+            const area = document.getElementById(id);
+            area.innerText = msg;
+            area.style.color = "red";
+        }
+
+        /**
+         * [1단계 -> 2단계 이동]
+         * 아이디 입력 여부를 확인하고 다음 화면을 보여줌
+         */
+        function goStep2() {
+            const id = document.getElementById('findId').value.trim();
+            if(!id) {
+                showErr('error1', "아이디를 입력하세요.");
+            } else {
+                document.getElementById('error1').innerText = ""; // 에러 초기화
+                document.getElementById('step1').style.display = 'none'; // 1단계 숨김
+                document.getElementById('step2').style.display = 'block'; // 2단계 표시
+            }
+        }
+
+        /**
+         * [2단계: 번호전송 버튼 클릭]
+         */
+        function sendCode() {
+            const contact = document.getElementById('userContact').value.trim();
+            if(!contact) {
+                showErr('error2', "이메일 또는 전화번호를 입력하세요.");
+            } else {
+                showErr('error2', ""); // 경고 문구 삭제
+                alert("인증번호가 발송되었습니다.");
+            }
+        }
+
+        /**
+         * [2단계: 확인 버튼 클릭]
+         */
+        let isVerified = false; // 인증 성공 여부를 저장하는 변수
+        function verifyCode() {
+            const code = document.getElementById('authCode').value.trim();
+            if(!code) {
+                showErr('error2', "인증코드를 입력하세요.");
+            } else {
+                alert("인증되었습니다.");
+                isVerified = true; // 인증 성공 상태로 변경
+            }
+        }
+
+        /**
+         * [2단계 -> 3단계 이동]
+         * 본인 인증이 완료되었는지 확인 후 재설정 화면으로 전환
+         */
+        function goStep3() {
+            if(!isVerified) {
+                showErr('error2', "먼저 본인 인증을 완료해주세요.");
+            } else {
+                document.getElementById('step2').style.display = 'none'; // 2단계 숨김
+                document.getElementById('step3').style.display = 'block'; // 3단계 표시
+            }
+        }
+
+        /**
+         * [3단계: 최종 저장 버튼 클릭]
+         * 비밀번호 입력 여부와 두 비밀번호가 일치하는지 검사
+         */
+        function resetComplete() {
+            const pw = document.getElementById('newPw').value;
+            const pwConfirm = document.getElementById('confirmPw').value;
+
+            if(!pw) {
+                showErr('error3', "새 비밀번호를 입력하세요.");
+            } else if(!pwConfirm) {
+                showErr('error3', "비밀번호 확인을 입력하세요.");
+            } else if(pw !== pwConfirm) {
+                showErr('error3', "비밀번호가 일치하지 않습니다.");
+            } else {
+                alert("비밀번호가 성공적으로 변경되었습니다.");
+                // 최종 완료 후 로그인 페이지로 이동
+                location.href = 'login.html'; 
+            }
+        }
+    </script>
+</body>
+</html>

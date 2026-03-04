@@ -132,25 +132,30 @@ window.addEventListener('load', async () => {
     const contents = document.querySelectorAll(".mypage-content");
 
 
-    let currentPage = 1;
-    const itemsPerPage = 50;
+   let currentPage = 1;
+    const itemsPerPage = 50; // 변수명 통일
+
     const displayUsers = () => {
         const userList = JSON.parse(localStorage.getItem("users")) || [];
         const tableB = document.querySelector("#users-table-body");
 
         if (!tableB) return;
-        console.log("찾은 테이블 바디:", tableB);
         tableB.innerHTML = "";
 
+        // 1. 현재 페이지 데이터만 자르기
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const currentPageUsers = userList.slice(startIndex, endIndex);
+
+        // 2. 전체 리스트가 아니라 '자른 리스트'를 돌려야 함
         currentPageUsers.forEach((u, i) => {
             const tr = document.createElement("tr");
 
+            // 3. No. 계산 로직 적용 (2페이지는 51번부터)
             const userNo = startIndex + i + 1;
+            
             tr.innerHTML = `
-            <td>${i + 1}</td>
+            <td>${userNo}</td> 
             <td>${u.id}</td>
             <td>${u.name}</td>
             <td>${u.email}</td>
@@ -158,32 +163,34 @@ window.addEventListener('load', async () => {
             <td>
                 <button class="delete-btn" data-id="${u.id}" style="color: red; cursor: pointer;">삭제</button>
             </td>
-            `
+            `;
             tableB.appendChild(tr);
-        })
-        renderPagination(userList.length);
-    }
-    const renderPagination = (totalItems) => {
-    const paginationContainer = document.querySelector("#pagination-container");
-    if (!paginationContainer) return;
-
-    paginationContainer.innerHTML = "";
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement("button");
-        btn.innerText = i;
-        btn.className = (i === currentPage) ? "page-btn active" : "page-btn";
-        btn.style.margin = "0 5px";
-        btn.style.cursor = "pointer";
-
-        btn.addEventListener("click", () => {
-            currentPage = i; 
-            displayUsers(); 
         });
-        paginationContainer.appendChild(btn);
-    }
-};
+
+        renderPagination(userList.length);
+    };
+
+    const renderPagination = (totalItems) => {
+        const paginationContainer = document.querySelector("#pagination-container");
+        if (!paginationContainer) return;
+
+        paginationContainer.innerHTML = "";
+        const totalPages = Math.ceil(totalItems / itemsPerPage); // 오타 수정 완료
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.innerText = i;
+            btn.className = (i === currentPage) ? "page-btn active" : "page-btn";
+            btn.style.margin = "0 5px";
+            btn.style.cursor = "pointer";
+
+            btn.addEventListener("click", () => {
+                currentPage = i; 
+                displayUsers(); 
+            });
+            paginationContainer.appendChild(btn);
+        }
+    };
     menuBtns.forEach((btn, index) => {
         btn.addEventListener("click", (e) => {
             if (btn.parentElement.classList.contains("role-admin") && savedUser.role !== "admin") {

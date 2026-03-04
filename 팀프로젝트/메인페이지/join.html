@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - 최종 프로젝트</title>
+    <link rel="stylesheet" href="join.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">LOGO</div>
+
+        <div class="join-box">
+            <h2 class="title">회원가입</h2>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <input type="text" id="userId" placeholder="아이디" class="input-field" oninput="validateId()">
+                    <p id="guideId" class="guide-text">* 영문 소문자 또는 영문 소문자, 숫자 조합 5~10자리</p>
+                </div>
+
+                <div class="input-group">
+                    <div class="pw-wrapper">
+                        <input type="password" id="userPw" placeholder="비밀번호" class="input-field"
+                            oninput="validatePw()">
+                        <span class="eye-icon" onclick="togglePwView('userPw')">👁️</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="pw-wrapper">
+                        <input type="password" id="pwConfirm" placeholder="비밀번호 확인" class="input-field"
+                            oninput="validatePw()">
+                        <span class="eye-icon" onclick="togglePwView('pwConfirm')">👁️</span>
+                    </div>
+                    <p id="guidePw" class="guide-text">* 영문, 숫자, 특수문자(~!@#$%) 조합 8~15 자리로 입력해주세요.</p>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" placeholder="생년월일 (8자리)" class="input-field" maxlength="8">
+                </div>
+
+                <div class="input-group">
+                    <select class="input-field select-box">
+                        <option value="">성별</option>
+                        <option value="M">남자</option>
+                        <option value="F">여자</option>
+                    </select>
+                </div>
+
+                <div class="input-group nation-row">
+                    <label><input type="radio" name="nation" checked> 내국인</label>
+                    <label><input type="radio" name="nation"> 외국인</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="userEmail" placeholder="이메일주소" class="input-field"
+                        oninput="validateEmail()">
+                    <p id="guideEmail" class="guide-text"></p>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="phoneNum" placeholder="휴대폰 번호" class="input-field">
+                    <button type="button" class="btn-action" onclick="sendAuthCode()">인증번호 전송</button>
+                </div>
+
+                <div class="input-group">
+                    <div class="timer-wrapper">
+                        <input type="text" id="authCode" placeholder="인증번호 입력" class="input-field">
+                        <span id="timerText" class="timer-text">03:00</span>
+                    </div>
+                    <button type="button" class="btn-action" onclick="verifyCode()">인증하기</button>
+                    <p id="guideAuth" class="guide-text"></p>
+                </div>
+            </div>
+
+            <div class="terms-section">
+                <div class="term-all">
+                    <input type="checkbox" id="checkAll" onclick="toggleAll(this)">
+                    <label for="checkAll">이용 약관 동의 (전체 동의)</label>
+                </div>
+
+                <ul class="term-list">
+                    <li>
+                        <input type="checkbox" id="t1" class="single-check"><label for="t1">만 14세 이상입니다.</label>
+                        <span class="arrow" onclick="openModal('terms1')">></span>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="t2" class="single-check"><label for="t2">[필수] 서비스 이용약관 동의</label>
+                        <span class="arrow" onclick="openModal('terms2')">></span>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="t3" class="single-check"><label for="t3">[필수] 개인정보 수집 및 이용 동의</label>
+                        <span class="arrow" onclick="openModal('terms3')">></span>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="t4" class="single-check"><label for="t4">[선택] 개인정보 수집 및 이용 동의</label>
+                        <span class="arrow" onclick="openModal('terms4')">></span>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="t5" class="single-check" onclick="toggleMarketing(this)"><label
+                            for="t5">[선택] 마케팅 정보 수신 동의</label>
+                    </li>
+                </ul>
+                <div class="marketing-options">
+                    <label><input type="checkbox" id="m1" class="m-sub"><label for="m1">푸시알림</label></label>
+                    <label><input type="checkbox" id="m2" class="m-sub"><label for="m2">이메일</label></label>
+                    <label><input type="checkbox" id="m3" class="m-sub"><label for="m3">SNS</label></label>
+                </div>
+            </div>
+
+            <button type="button" class="btn-join">가입하기</button>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">약관 상세내용</h3>
+            <div id="modalBody" class="modal-body"></div>
+            <button class="btn-close" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. 아이디 실시간 검사
+        function validateId() {
+            const id = document.getElementById('userId').value;
+            const guide = document.getElementById('guideId');
+            const reg = /^[a-z0-9]{5,10}$/;
+            if (id.length > 0 && !reg.test(id)) {
+                guide.style.color = "red";
+                guide.innerText = "형식에 맞지 않습니다. (영문 소문자/숫자 조합 5-10자)";
+            } else {
+                guide.style.color = "#999";
+                guide.innerText = "* 영문 소문자 또는 영문 소문자, 숫자 조합 5-10자리";
+            }
+        }
+
+        // 2. 비밀번호 실시간 검사
+        function validatePw() {
+            const pw = document.getElementById('userPw').value;
+            const confirm = document.getElementById('pwConfirm').value;
+            const guide = document.getElementById('guidePw');
+            const reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%])[A-Za-z\d~!@#$%]{8,15}$/;
+
+            if (pw.length > 0 && !reg.test(pw)) {
+                guide.style.color = "red";
+                guide.innerText = "보안 등급이 낮습니다. (영문, 숫자, 특수문자 조합 8-15자)";
+            } else if (confirm.length > 0 && pw !== confirm) {
+                guide.style.color = "red";
+                guide.innerText = "비밀번호가 일치하지 않습니다.";
+            } else {
+                guide.style.color = "#999";
+                guide.innerText = "* 영문, 숫자, 특수문자(~!@#$%) 조합 8~15 자리로 입력해주세요.";
+            }
+        }
+
+        // 3. 이메일 실시간 검사 (추가 기능)
+        function validateEmail() {
+            const email = document.getElementById('userEmail').value;
+            const guide = document.getElementById('guideEmail');
+            const reg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (email.length > 0 && !reg.test(email)) {
+                guide.style.color = "red";
+                guide.innerText = "이메일 형식에 맞게 입력하세요.";
+            } else {
+                guide.innerText = "";
+            }
+        }
+
+        // 4. 인증번호 전송 및 타이머 제어
+        let authTimer;
+        function sendAuthCode() {
+            alert("인증번호가 전송되었습니다.");
+            const timerSpan = document.getElementById('timerText');
+            const guide = document.getElementById('guideAuth');
+            guide.innerText = "";
+            timerSpan.style.display = "inline";
+
+            let time = 179;
+            clearInterval(authTimer);
+            authTimer = setInterval(() => {
+                let min = Math.floor(time / 60);
+                let sec = time % 60;
+                timerSpan.innerText = `0${min}:${sec < 10 ? '0' + sec : sec}`;
+                if (time-- <= 0) {
+                    clearInterval(authTimer);
+                    timerSpan.innerText = "시간만료";
+                }
+            }, 1000);
+        }
+
+        // 5. 인증 성공 처리 (초록색 문구)
+        function verifyCode() {
+            const guide = document.getElementById('guideAuth');
+            const timerSpan = document.getElementById('timerText');
+            // 실제 인증 로직 대신 성공 처리
+            guide.style.color = "#28a745";
+            guide.innerText = "인증에 성공하였습니다.";
+            clearInterval(authTimer);
+            timerSpan.style.display = "none";
+        }
+
+        // 6. 약관 및 모달 처리
+        function openModal(key) {
+            const content = {
+                terms1: "본 서비스는 만 14세 미만 아동의 가입을 제한합니다.",
+                terms2: "1) [필수] 이용약관 동의\n서비스 이용약관\n본 서비스는 회원에게 웹사이트 및 모바일 서비스를 제공합니다. 회원은 본 약관에 따라 서비스를 이용하며, 관련 법령과 운영정책을 준수해야 합니다.",
+                terms3: "2) [필수] 개인정보 수집·이용 동의\n회사는 아래와 같이 개인정보를 수집·이용합니다.\n• 수집 목적: 회원 식별, 서비스 제공\n• 수집 항목: 아이디, 비밀번호\n• 보유 기간: 회원 탈퇴 시까지",
+                terms4: "3) [선택] 마케팅 정보 수신 동의\n이벤트, 혜택 등의 정보를 이메일, 문자 등으로 안내할 수 있습니다."
+            };
+            document.getElementById('modalBody').innerText = content[key];
+            document.getElementById('modal').style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+        function togglePwView(id) {
+            const el = document.getElementById(id);
+            el.type = el.type === 'password' ? 'text' : 'password';
+        }
+        function toggleAll(el) {
+            document.querySelectorAll('.single-check, .m-sub').forEach(c => c.checked = el.checked);
+        }
+        function toggleMarketing(el) {
+            document.querySelectorAll('.m-sub').forEach(c => c.checked = el.checked);
+        }
+    </script>
+</body>
+
+</html>

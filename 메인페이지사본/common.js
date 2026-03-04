@@ -1,7 +1,7 @@
 // 1. 외부 HTML(헤더, 푸터)을 불러오는 함수
 async function loadHTML(id, path) {
-    try {
-        const response = await fetch(path);
+    try {        const response = await fetch(path);
+
         if (response.ok) {
             const text = await response.text();
             document.getElementById(id).innerHTML = text;
@@ -39,3 +39,7 @@ function logout() {
     alert("로그아웃 되었습니다.");
     location.href = "메인페이지.html"; // 메인 파일명에 맞게 수정
 }
+window.addEventListener('DOMContentLoaded', () => {
+    loadHTML('header-include', './header.html'); // 헤더 파일명 확인 필요
+    loadHTML('footer-include', './footer.html'); // 푸터 파일명 확인 필요
+});

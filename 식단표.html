@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>주차별 스마트 식단표</title>
+    <link rel="stylesheet" href="식단표.css">
+</head>
+
+<body>
+    <div class="menu-container">
+        <div class="header-section">
+            <div class="title-box">
+                <h1>식단 안내</h1>
+                <ul class="week-selector">
+                    <li onclick="changeWeek(1, this)"><span class="dot">○</span> 첫째주 식단 보기</li>
+                    <li class="active" onclick="changeWeek(2, this)"><span class="dot">●</span> 둘째주 식단 보기</li>
+                    <li onclick="changeWeek(3, this)"><span class="dot">○</span> 셋째주 식단 보기</li>
+                    <li onclick="changeWeek(4, this)"><span class="dot">○</span> 넷째주 식단 보기</li>
+                </ul>
+            </div>
+            <div class="origin-box">
+                <p>요일별 🔍 아이콘을 클릭하여<br>상세 원산지를 확인하세요!</p>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <h2 id="weekTitle" class="table-title">
+                <2026년 둘째주 식단표>
+            </h2>
+
+            <div id="mealGrid" class="grid-table"></div>
+        </div>
+    </div>
+
+    <div id="originModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalDay">월요일 원산지 정보</h3>
+            <div id="modalBody" class="modal-body"></div>
+            <button onclick="closeModal()" class="btn-close">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        // 랜덤 메뉴 구성을 위한 데이터베이스
+        const menuPool = ["불고기", "김치찌개", "돈까스", "비빔밥", "제육볶음", "미역국", "된장찌개", "생선구이", "카레라이스", "순두부찌개", "육개장", "스파게티"];
+        const days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
+
+        /** [기능 1] 주차 변경 처리 **/
+        function changeWeek(weekNum, element) {
+            // UI 업데이트: 선택된 주차 강조
+            document.querySelectorAll('.week-selector li').forEach(li => {
+                li.classList.remove('active');
+                li.querySelector('.dot').innerText = "○";
+            });
+            element.classList.add('active');
+            element.querySelector('.dot').innerText = "●";
+
+            // 타이틀 변경
+            const weekNames = ["첫", "둘", "셋", "넷"];
+            document.getElementById('weekTitle').innerText = `< 2026년 ${weekNames[weekNum - 1]}째주 식단표 >`;
+
+            // 식단표 랜덤 재생성
+            renderMealTable();
+        }
+
+        /** [기능 2] 식단표 렌더링 및 랜덤 메뉴 생성 **/
+        function renderMealTable() {
+            const grid = document.getElementById('mealGrid');
+            grid.innerHTML = ""; // 초기화
+
+            days.forEach(day => {
+                const col = document.createElement('div');
+                col.className = 'day-column';
+
+                // 요일 헤더와 돋보기 아이콘 추가
+                col.innerHTML = `
+                    <div class="day-header">
+                        ${day} 
+                        <span class="search-icon" onclick="openOrigin('${day}')">🔍</span>
+                    </div>
+                    ${createMealSlot("조식")}
+                    ${createMealSlot("중식")}
+                    ${createMealSlot("석식")}
+                `;
+                grid.appendChild(col);
+            });
+        }
+
+        // 식사 슬롯(조/중/석) 생성 함수
+        function createMealSlot(type) {
+            // 메뉴 풀에서 랜덤하게 4개 선택
+            const shuffled = [...menuPool].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 4);
+
+            return `
+                <div class="meal-slot">
+                    <p class="meal-type">${type}</p>
+                    <ul>
+                        ${selected.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        /** [기능 3] 원산지 돋보기 모달 제어 **/
+        function openOrigin(day) {
+            document.getElementById('modalDay').innerText = `${day} 원산지 상세 정보`;
+            document.getElementById('modalBody').innerHTML = `
+                <p>• 쌀: 국내산</p>
+                <p>• 배추김치: 국내산</p>
+                <p>• 돼지고기: 제주산</p>
+                <p>• 소고기: 호주산</p>
+                <p>• 닭고기: 국내산</p>
+            `;
+            document.getElementById('originModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('originModal').style.display = 'none';
+        }
+
+        // 초기 실행: 페이지 접속 시 둘째주 식단 표시
+        window.onload = renderMealTable;
+    </script>
+</body>
+
+</html>

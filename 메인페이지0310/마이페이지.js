@@ -5,6 +5,14 @@ window.addEventListener('load', async () => {
     // testName[0].name = "김도윤";
     // saveJs('User', testName);
     const loginUser = loadJs('loginUser');
+    await loadHTML();
+    await loadHTML2();
+    console.log("HTML로드 됨");
+    if (typeof initAll === 'function') {
+        console.log("알레르기 그림");
+        initAll();
+    }
+
     //비로그인시 메인 페이지로 돌려 보내는 로직
     if (window.location.pathname.includes('마이페이지.html') && !loginUser) {
         alert("마이페이지는 로그인 이후 이용 가능합니다.")
@@ -12,50 +20,50 @@ window.addEventListener('load', async () => {
         return;
     }
 
-    
-async function loadHTML() {
-    const response = await fetch('식단표.html');
-    const text = await response.text();
-    
-    // 1. 내용을 div에 삽입
-    document.getElementById('식단표').innerHTML = text;
-    
-    // 2. 중요! 불러온 HTML 안에 정의된 함수가 있다면 여기서 호출
-    // 하지만 HTML만 불러오면 함수 정의가 안 되어 있을 수 있으므로
-    // 식단표 로직(JS)은 메인 페이지에 있거나 별도 파일로 로드되어 있어야 합니다.
-    if (typeof updateUI === 'function') {
-        updateUI(); 
-    }
-}
-loadHTML();
-async function loadHTML2() {
-    try {
-        const response = await fetch('사용자예약.html');
-        const text = await response.text();
-        
-        // 1. HTML 삽입
-        const container = document.getElementById('사용자예약');
-        container.innerHTML = text;
-        
-        // 2. 삽입된 HTML 내부의 스크립트 강제 실행 (동적 로드)
-        const oldScript = container.querySelector('script');
-        if (oldScript) {
-            const newScript = document.createElement("script");
-            newScript.src = oldScript.src; // 기존 src 복사
-            document.body.appendChild(newScript); // body에 추가하여 실행 유도
-        }
 
-        // 3. 만약 초기화 함수가 있다면 실행
-        // (사용자예약.js 안에 initReservation() 같은 함수를 만들어두는 것이 좋습니다)
-        if (typeof initReservation === 'function') {
-            initReservation();
+    async function loadHTML() {
+        const response = await fetch('allergy_list.html');
+        const text = await response.text();
+
+        // 1. 내용을 div에 삽입
+        document.getElementById('al').innerHTML = text;
+
+        // 2. 중요! 불러온 HTML 안에 정의된 함수가 있다면 여기서 호출
+        // 하지만 HTML만 불러오면 함수 정의가 안 되어 있을 수 있으므로
+        // 식단표 로직(JS)은 메인 페이지에 있거나 별도 파일로 로드되어 있어야 합니다.
+        if (typeof updateUI === 'function') {
+            updateUI();
         }
-        
-    } catch (error) {
-        console.error("HTML 로드 중 오류 발생:", error);
     }
-}
-loadHTML2();
+
+    async function loadHTML2() {
+        try {
+            const response = await fetch('사용자예약.html');
+            const text = await response.text();
+
+            // 1. HTML 삽입
+            const container = document.getElementById('사용자예약');
+            container.innerHTML = text;
+
+            // 2. 삽입된 HTML 내부의 스크립트 강제 실행 (동적 로드)
+            const oldScript = container.querySelector('script');
+            if (oldScript) {
+                const newScript = document.createElement("script");
+                newScript.src = oldScript.src; // 기존 src 복사
+                document.body.appendChild(newScript); // body에 추가하여 실행 유도
+            }
+
+            // 3. 만약 초기화 함수가 있다면 실행
+            // (사용자예약.js 안에 initReservation() 같은 함수를 만들어두는 것이 좋습니다)
+            if (typeof initReservation === 'function') {
+                initReservation();
+            }
+
+        } catch (error) {
+            console.error("HTML 로드 중 오류 발생:", error);
+        }
+    }
+
 
     //로그인한 유저의 role에 따라서 왼쪽 카테고리 보여주는 동작변경 로직
     const userMenu = document.querySelectorAll(".role-user");
@@ -89,18 +97,18 @@ loadHTML2();
 
     console.log(loginUser.name);
     console.log(loginUser.id);
-    
+
 
     //마이페이지 아이디, 이름 계정 주인에 맞게 보여주는 로직
     const myname = document.querySelector(".mypage-name");
     const myid = document.querySelector(".mypage-id");
     // loginUser = loadJs('loginUser');
-        myname.innerText = loginUser.name;
+    myname.innerText = loginUser.name;
     myid.innerText = loginUser.id;
-        //이건 닉네임 input 창에 placeholder 표시
+    //이건 닉네임 input 창에 placeholder 표시
     const myNick = document.querySelector(".mypage-content1-inputT.a-1");
     myNick.setAttribute("placeholder", loginUser.nick);
-        //이건 연락처 input 창에 placeholder 표시
+    //이건 연락처 input 창에 placeholder 표시
     const myPhone = document.querySelector(".mypage-content1-inputT.a-2");
     myPhone.setAttribute("placeholder", loginUser.phone);
 

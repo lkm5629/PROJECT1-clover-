@@ -1946,3 +1946,6 @@ body {
 .chat2{
   display: block;
 }
+#logoImg{
+    top: 50px !important;
+}

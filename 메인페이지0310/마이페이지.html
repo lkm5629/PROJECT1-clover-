@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./마이페이지.css">
     <link rel="stylesheet" href="./식단표.css">
     <link rel="stylesheet" href="./사용자예약.css">
+    <link rel="stylesheet" href="./allergy_list.css">
     <!-- <script src="./common테스트.js"></script> -->
     <title>Document</title>
 </head>
@@ -27,7 +28,7 @@
                 <!-- <li><a href="#" class="menu-btn">알림설정</a></li> -->
                 <!-- active 추가하면 회색으로 표시 됨 -->
                 <li class="role-user"><a href="#" class="menu-btn">알레르기 정보 등록</a></li>
-                <li class="role-user"><a href="#" class="menu-btn">내소식</a></li>
+                <!-- <li class="role-user"><a href="#" class="menu-btn">내소식</a></li> -->
                 <li class="role-user"><a href="#" class="menu-btn">사용자 예약정보</a></li>
                 <li class="role-user"><a href="#" class="menu-btn">회원탈퇴</a></li>
 
@@ -170,10 +171,8 @@
         </section>
 
 
-        <section id="mypage-content2" class="mypage-content">
-            <div id="식단표" class="include_wrap" data-include-path="./식단표.html"></div>
-        </section>
-        <section id="mypage-content3" class="mypage-content">내 소식
+        <section id="mypage-content2" class="mypage-content activeM">
+            <div id="al" ></div>
         </section>
         <section id="mypage-content4" class="mypage-content">
             <div id="사용자예약전체">
@@ -316,8 +315,9 @@
     <footer id="footer-include" class="ftr"></footer>
     <script src="./common.js"></script>
     <script src="./마이페이지.js"></script>
-    <script src="./식단표.js"></script>
+    <!-- <script src="./식단표.js"></script> -->
     <script src="./사용자예약.js"></script>
+      <script src="./allergy_list.js"></script>
 </body>
 
 </html>

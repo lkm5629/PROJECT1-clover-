@@ -1,9 +1,42 @@
 /* ==========================================================
    마이페이지 레이아웃 (왼쪽 사이드바 + 오른쪽 콘텐츠)
 ========================================================== */
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 300;
+    src: url('./SCDream3.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 400;
+    src: url('./SCDream4.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 500;
+    src: url('./SCDream5.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 600;
+    src: url('./SCDream6.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 700;
+    src: url('./SCDream7.otf') format('opentype');
+}
+
 body{
-    margin-top: 20px;
-    padding: 0px;
+    /* margin-top: 20px; */
+    /* padding: 0px; */
+       /* font-family: "Escoredream", sans-serif !important; */
+    /* font-weight: 700 !important; */
 }
 /* 전체 컨테이너 (Flexbox로 좌우 배치) */
 .mypage-wrap {
@@ -98,17 +131,17 @@ body{
 }
 
 /* 전체 레이아웃 리셋 & 폰트 설정 */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* * { */
+    /* box-sizing: border-box; */
+    /* margin: 0; */
+    /* padding: 0; */
+/* } */
 
-body {
+/* body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     background-color: #f3f4f6;
     color: #333;
-}
+} */
 
 /* 메인 컨테이너 (카드 형태) */
 .profile-setting-container {
@@ -919,7 +952,8 @@ margin-bottom: 10px;
 }
 
 #사용자예약전체{
-    width: 900px;
+    max-width: 900px;
+     width: 100%;
     background-color: white;
     height: 1200px;
 }

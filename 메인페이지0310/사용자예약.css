@@ -269,14 +269,14 @@
             color: #111;
         }
 
-        .top-bar {
+        /* .top-bar {
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
-        }
+        } */
 
         /* PC 기본: 오른쪽 */
-        .top-bar .inner {
+        /* .top-bar .inner {
             height: 44px !important;
             min-height: 44px !important;
 
@@ -293,9 +293,9 @@
             width: 100% !important;
             max-width: none !important;
             margin: 0 auto !important;
-        }
+        } */
 
-        .top-bar .inner a {
+        /* .top-bar .inner a {
             display: inline-flex !important;
             align-items: center !important;
             height: 44px !important;
@@ -303,7 +303,7 @@
             padding: 0 8px !important;
             margin: 0 !important;
             white-space: nowrap !important;
-            float: none !important;        }
+            float: none !important;        } */
 
         @media (max-width: 600px) {
             .top-bar .inner {

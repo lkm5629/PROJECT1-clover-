@@ -71,4 +71,11 @@ const updateHead = function () {
     }
 }
 
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('logoutBtn')) {
+            console.log("로그아웃 버튼 클릭 감지 됨");
+            localStorage.removeItem('loginUser');
+            location.reload();
+        }
+    })
 fun();

@@ -47,6 +47,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+        font-family: "Escoredream", sans-serif !important;
+    font-weight: 700 !important;
 }
 
 html {

@@ -1,6 +1,24 @@
 let startHour = null;
 let endHour = null;
 
+const loginUser = loadJs("loginUser");
+
+
+//강의실 페이지 비 로그인시 숨길항목 숨기는 로직
+const hr = document.querySelector(".hr1");
+const div1 = document.querySelector("#div1");
+const reserveBtn = document.querySelectorAll(".reserve-btn");
+reserveBtn.forEach(el => {
+    if (!loginUser) {
+        el.style.display = "none";
+    }
+})
+if (!loginUser) {
+    div1.style.display = "none";
+    hr.style.display = " none";
+}
+
+
 const openDateBtn = document.getElementById('open-date');//달력/시간 선택
 const openPersonBtn = document.getElementById('open-person-btn');//인원 선택
 

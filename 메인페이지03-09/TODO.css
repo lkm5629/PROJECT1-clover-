@@ -341,7 +341,8 @@ a {
 .filter-grid {
   padding: 0 16px 16px 16px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* 4-1. 조회 항목이 4개(구분/날짜/상태/버튼)라서 4칸으로 맞춘다. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 .filter-item label {
@@ -351,6 +352,7 @@ a {
   font-weight: 700;
 }
 .filter-btns {
+  /* 4-2. 적용 / 초기화 버튼은 아래 라벨 기준선에 맞춘다. */
   display: flex;
   align-items: end;
   gap: 10px;
@@ -526,7 +528,7 @@ a {
   border-radius: 10px;
   background: #fff;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 700;
 }
 .delete-btn:hover {
   background: #fff1bf;
@@ -1159,4 +1161,23 @@ a {
   .weekly-event-time {
     display: none;
   }
+}
+/* 상단바 및 네비게이션 텍스트 수직 중앙 정렬 강제화 */
+.top-bar .inner, 
+.nav .inner {
+    display: flex !important;
+    align-items: center !important; /* 수직 중앙 정렬 */
+    height: 100% !important;
+}
+
+/* 폰트 때문에 위로 쏠리는 현상 보정 */
+.top-bar a, 
+.nav .gnb a {
+    line-height: 1 !important;
+    padding-top: 4px !important; /* 위쪽 여백을 수동으로 살짝 추가 */
+}
+
+/* body에 들어간 패딩 제거 (헤더 밀림 방지) */
+body {
+    padding: 0 !important;
 }

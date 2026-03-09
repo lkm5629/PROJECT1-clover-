@@ -1,6 +1,34 @@
 /* ==========================================================
    공통 설정 (변수, 폰트, 레이아웃)
 ========================================================== */
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff") format("woff");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff") format("woff");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff") format("woff");
+    font-weight: 700;
+    font-display: swap;
+}
+
 :root {
     --main: #FBCB4C;
     --main-dark: #dcae32;
@@ -15,6 +43,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 body {
@@ -40,6 +69,8 @@ li {
     margin: 0 auto;
     width: 100%;
     padding: 0 20px;
+    font-family: "Escoredream", sans-serif !important;
+    font-weight: 700 !important;
 }
 
 .flex {
@@ -83,8 +114,13 @@ li {
 .top-bar {
     background: var(--dark);
     padding: 8px 0;
-    font-size: 12px;
+    font-size: 12px !important;
     color: #aaa;
+    /* height: 50px !important; */
+    font-family: "Escoredream", sans-serif !important;
+    font-weight: 900 !important;
+    
+    
 }
 
 .top-bar a {
@@ -98,6 +134,9 @@ li {
 
 .nav {
     padding: 25px 0;
+    font-family: "Escoredream", sans-serif !important;
+    font-weight: 700 !important;
+    height: 100px;
 }
 
 .logo {
@@ -147,6 +186,8 @@ li {
     display: flex;
     align-items: center;
     gap: 10px;
+        font-family: "Escoredream", sans-serif !important;
+    font-weight: 700 !important;
 }
 
 .ftr-logo span {
@@ -160,10 +201,14 @@ li {
 .ftr-links a {
     margin-left: 30px;
     color: #ccc;
+        font-family: "Escoredream", sans-serif !important;
+    font-weight: 700 !important;
 }
 
 .ftr-info {
     margin-top: 40px;
     border-top: 1px solid #222;
     padding-top: 40px;
+        font-family: "Escoredream", sans-serif !important;
+    font-weight: 700 !important;
 }

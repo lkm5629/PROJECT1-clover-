@@ -6,12 +6,13 @@ window.addEventListener('load', async () => {
     // saveJs('User', testName);
     const loginUser = loadJs('loginUser');
     //비로그인시 메인 페이지로 돌려 보내는 로직
-    if (!loginUser) {
+    if (window.location.pathname.includes('마이페이지.html') && !loginUser) {
         alert("마이페이지는 로그인 이후 이용 가능합니다.")
         location.href = "login.html";
         return;
     }
 
+    
 async function loadHTML() {
     const response = await fetch('식단표.html');
     const text = await response.text();
@@ -85,21 +86,28 @@ loadHTML2();
         }
     })
 
+
+    console.log(loginUser.name);
+    console.log(loginUser.id);
+    
+
     //마이페이지 아이디, 이름 계정 주인에 맞게 보여주는 로직
     const myname = document.querySelector(".mypage-name");
     const myid = document.querySelector(".mypage-id");
     // loginUser = loadJs('loginUser');
-    console.log(loginUser.name);
-    console.log(loginUser.id);
-    myname.innerText = loginUser.name;
+        myname.innerText = loginUser.name;
     myid.innerText = loginUser.id;
-    //이건 닉네임 input 창에 placeholder 표시
+        //이건 닉네임 input 창에 placeholder 표시
     const myNick = document.querySelector(".mypage-content1-inputT.a-1");
     myNick.setAttribute("placeholder", loginUser.nick);
-
-    //이건 연락처 input 창에 placeholder 표시
+        //이건 연락처 input 창에 placeholder 표시
     const myPhone = document.querySelector(".mypage-content1-inputT.a-2");
     myPhone.setAttribute("placeholder", loginUser.phone);
+
+
+
+
+
     /////////////////////////////////////////////////////////
 
 

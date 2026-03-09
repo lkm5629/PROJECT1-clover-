@@ -1,26 +1,46 @@
+/* ===============================
+   1. 폰트 설정
+   =============================== */
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff")
+    format("woff");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff")
+    format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff")
+    format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: white;
 }
 
-main {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
 /* 메인페이지에만 쓰는 hero가 남아있으면 공백 원인이라 숨김 */
 .hero {
-    display: none !important;
+    display: none;
 }
-
-/* 상단 네비/탑바에 기본 여백이 잡혀있으면 제거 */
-.top-bar,
-.nav {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 
 #div1 {
     display: flex;
@@ -29,9 +49,7 @@ main {
     font-size: 14px;
     width: 85%;
     max-width: 800px;
-
     margin: 30px auto 30px auto;
-
     padding: 15px;
     border-radius: 10px;
     border: 1px solid #ddd;
@@ -151,18 +169,18 @@ main {
 
 .time-buttons button.selected-time,
 .time-buttons button.range-time {
-    background-color: #FBCB4C !important;
-    border: 1px solid #FBCB4C !important;
-    color: black !important;
+    background-color: #FBCB4C;
+    border: 1px solid #FBCB4C;
+    color: black;
 }
 
 .time-buttons button.selected-time:hover,
 .time-buttons button.range-time:hover {
-    background-color: #FBCB4C !important;
-    border: 1px solid #FBCB4C !important;
-    color: black !important;
-    transform: none !important;
-    box-shadow: none !important;
+    background-color: #FBCB4C;
+    border: 1px solid #FBCB4C;
+    color: black;
+    transform: none;
+    box-shadow: none;
 }
 
 /* 인원 선택 */
@@ -210,7 +228,6 @@ main {
     color: black;
 }
 
-/* ✅ 초기화 버튼 흰색 버전 */
 .reserve-btn--ghost {
     background: #fff;
 }
@@ -218,7 +235,6 @@ main {
 .reserve-btn--ghost:hover {
     background: #FBCB4C;
 }
-
 
 #calendar-actions {
     position: absolute;
@@ -232,8 +248,8 @@ main {
 
 #close-calendar,
 #reset-calendar {
-    position: static !important;
-    margin: 0 !important;
+    position: static;
+    margin: 0;
 }
 
 /* 구분선 */
@@ -285,13 +301,11 @@ main {
     font-size: 18px;
 }
 
-/* 상태 */
 .status {
     color: #1aa34a;
     font-weight: bold;
 }
 
-/* 카드 안 예약 버튼은 오른쪽 정렬 */
 .class-item .reserve-btn {
     margin-top: 15px;
     align-self: flex-end;
@@ -333,55 +347,7 @@ main {
     cursor: not-allowed;
 }
 
-@media (max-width: 1200px) {
-
-    /* 상단바 */
-    .top-bar .inner {
-        padding: 0 16px;
-        justify-content: flex-end;
-
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    /* 네비 */
-    .nav .inner {
-        padding: 0 16px;
-        display: flex;
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 10px;
-    }
-
-    .nav .logo {
-        width: 100%;
-        margin: 0;
-        text-align: center;
-
-    }
-
-    .nav .gnb {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        gap: 10px;
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav .gnb a {
-        font-size: 13px;
-        padding: 6px 8px;
-        display: inline-block;
-        white-space: nowrap;
-    }
-}
-
+/* 상단 네비게이션 관련 */
 .nav .gnb li a {
     transition: 0.2s ease;
 }
@@ -392,52 +358,47 @@ main {
     border-radius: 10px;
 }
 
-
 .nav .gnb li a:focus-visible {
     outline: 2px solid rgba(251, 203, 76, 0.6);
     outline-offset: 2px;
     border-radius: 10px;
 }
 
+/* .top-bar {
+    margin: 0;
+    padding: 0;
+} */
 
-.top-bar {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.top-bar .inner {
+/* .top-bar .inner {
     min-height: 44px;
-
     display: flex;
     align-items: center;
-    justify-content: flex;
     gap: 14px;
     padding: 8px 0;
-}
+} */
 
-.nav .gnb a {
+/* .nav .gnb a {
     display: inline-block;
     padding: 10px 12px;
-
     border-radius: 10px;
     transition: 0.2s ease;
     text-decoration: none;
-}
+} */
 
-.nav .gnb a:hover {
+/* .nav .gnb a:hover {
     background: rgba(251, 203, 76, 0.25);
-
     color: #111;
-}
+} */
 
-@media (max-width: 600px) {
-    .top-bar .inner {
-        justify-content: center !important;
-        text-align: center !important;
-    }
-}
-
+/* 반응형 모바일 */
 @media (max-width: 1200px) {
+    .top-bar .inner {
+        padding: 0 16px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
     .nav .inner {
         padding: 0 16px;
         display: flex;
@@ -470,26 +431,17 @@ main {
     }
 }
 
-/* =========================
-   ✅ 모바일(창 줄였을 때) 달력/시간 안 깨지게
-   2컬럼 → 1컬럼 세로 배치
-========================= */
 @media (max-width: 768px) {
-
-    /* 달력 전체 박스 폭 확보 */
     #calendar-box {
         width: 92%;
-        max-width: none;
         margin: 0 auto 30px auto;
     }
 
-    /* 안쪽 여백 줄여서 화면에 맞춤 */
     .calendar-inner {
         padding: 18px;
         border-radius: 16px;
     }
 
-    /* 좌/우 → 세로로 쌓기 */
     .calendar-content {
         flex-direction: column;
         gap: 18px;
@@ -501,19 +453,9 @@ main {
         width: 100%;
     }
 
-    /* 달력 날짜 칸 조금 작게 */
     #calendar {
         font-size: 14px;
         gap: 6px;
-    }
-
-    #calendar div {
-        padding: 6px 0;
-    }
-
-    /* 시간 버튼: 모바일에서 버튼 크기 줄이고 3~4개씩 자동 줄바꿈 */
-    .time-buttons {
-        gap: 8px;
     }
 
     .time-buttons button {
@@ -521,16 +463,9 @@ main {
         font-size: 13px;
         border-radius: 14px;
         flex: 1 1 calc(25% - 8px);
-        /* 한 줄에 4개 정도 */
         box-sizing: border-box;
     }
 
-    /* 인원 선택 줄 정리 */
-    .people-selector {
-        font-size: 15px;
-    }
-
-    /* 하단 버튼(초기화/닫기) 고정 위치 해제 -> 밑으로 자연스럽게 */
     #calendar-actions {
         position: static;
         margin-top: 16px;
@@ -538,11 +473,16 @@ main {
     }
 }
 
-/* 더 작은 폰(아주 작은 모바일) */
+@media (max-width: 600px) {
+    .top-bar .inner {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
 @media (max-width: 420px) {
     .time-buttons button {
         flex: 1 1 calc(33.333% - 8px);
-        /* 한 줄에 3개 */
         font-size: 12px;
         padding: 7px 9px;
     }

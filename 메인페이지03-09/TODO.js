@@ -41,6 +41,8 @@ window.onload = function () {
   // 일정DB 필터
   const categoryFilter = document.getElementById("categoryFilter");
   const dateFilter = document.getElementById("dateFilter");
+  // 1-3-3. 일정 상태(완료 / 미완료 / 진행중)를 조회할 때 사용하는 select 요소
+  const statusFilter = document.getElementById("statusFilter");
   const applyFilterBtn = document.getElementById("applyFilterBtn");
   const resetFilterBtn = document.getElementById("resetFilterBtn");
   const selectedCountText = document.getElementById("selectedCountInfo");
@@ -106,7 +108,12 @@ window.onload = function () {
   // 2-2-2. 일정DB 화면에서 현재 페이지 / 선택 일정 / 필터 상태
   let currentDatabasePage = 1;
   let selectedScheduleId = null;
-  let currentFilter = { category: "all", date: "" };
+  // 2-2-2. 일정DB 화면에서 현재 페이지 / 선택 일정 / 조회 상태
+  let currentFilter = {
+    category: "all",
+    date: "",
+    status: "all",
+  };
 
   // 2-2-3. 캘린더와 위클리가 어떤 날짜를 기준으로 그려질지 저장
   let calendarYear = new Date().getFullYear();
@@ -413,6 +420,11 @@ window.onload = function () {
       list = list.filter((e) => e.category === currentFilter.category);
     if (currentFilter.date !== "")
       list = list.filter((e) => e.date === currentFilter.date);
+
+    // 3-3-4. 상태 조회값이 전체가 아니면 해당 상태만 남긴다.
+    if (currentFilter.status !== "all")
+      list = list.filter((e) => e.status === currentFilter.status);
+
     return list;
   }
 
@@ -1195,7 +1207,7 @@ window.onload = function () {
             1,
             Math.ceil(
               (timeToMinutes(item.endTime) - timeToMinutes(item.startTime)) /
-                60,
+              60,
             ),
           );
           eventDiv.style.height = duration * 66 - 8 + "px";
@@ -1258,9 +1270,9 @@ window.onload = function () {
      10) 이벤트 연결
      ===================================================== */
 
-  mobileMenuToggleButton.addEventListener("click", function () {
-    mobileMenuPanel.classList.toggle("open");
-  });
+  // mobileMenuToggleButton.addEventListener("click", function () {
+  //   mobileMenuPanel.classList.toggle("open");
+  // });
 
   // 8-1-1. 좌측 메뉴 클릭 시 화면 전환
   navDatabaseButton.addEventListener("click", function () {
@@ -1295,18 +1307,25 @@ window.onload = function () {
     renderAll();
   });
 
-  // 8-1-3. 필터 적용 / 초기화 / 전체 체크 / 페이지 이동
+  // 8-1-3. 조회 적용: 구분 / 날짜 / 상태 값을 currentFilter에 저장한다.
   applyFilterBtn.addEventListener("click", function () {
     currentFilter.category = categoryFilter.value;
     currentFilter.date = dateFilter.value;
+    currentFilter.status = statusFilter.value;
     currentDatabasePage = 1;
     renderDb();
   });
 
+  // 8-1-4. 조회 초기화: 구분 / 날짜 / 상태를 모두 전체값으로 되돌린다.
   resetFilterBtn.addEventListener("click", function () {
-    currentFilter = { category: "all", date: "" };
+    currentFilter = {
+      category: "all",
+      date: "",
+      status: "all",
+    };
     categoryFilter.value = "all";
     dateFilter.value = "";
+    statusFilter.value = "all";
     currentDatabasePage = 1;
     renderDb();
   });
@@ -1590,4 +1609,40 @@ window.onload = function () {
   sortEvents();
   showPage("db");
   renderAll();
+
+
+
+  //////////////////////////////////////////////////////////////
+  //일정 수정 로직 버튼 수정
+  let loginUser = loadJs("loginUser");
+  let mainBtn = document.querySelectorAll(".main-btn");
+
+  let selectedMenuBtn = document.querySelector("#selectedMenuBtn");
+  let deleteBtn = document.querySelectorAll(".delete-btn");
+  let colDel = document.querySelector(".col-del");
+  let fabBtn = document.querySelectorAll(".fab-btn");
+
+
+  if (!loginUser) {
+    // edit.style.display= "none";
+    selectedMenuBtn.style.display = "none";
+    colDel.style.display = "none";
+  }
+
+  fabBtn.forEach(el => {
+    if (!loginUser) {
+      el.style.display = "none";
+    }
+  })
+
+  mainBtn.forEach(el => {
+    if (!loginUser) {
+      el.style.display = "none";
+    }
+  })
+  deleteBtn.forEach(el => {
+    if (!loginUser) {
+      el.style.display = "none";
+    }
+  })
 };

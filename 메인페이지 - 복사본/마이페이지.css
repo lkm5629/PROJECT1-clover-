@@ -1,28 +1,38 @@
 /* ==========================================================
    마이페이지 레이아웃 (왼쪽 사이드바 + 오른쪽 콘텐츠)
 ========================================================== */
-
+body{
+    margin-top: 20px;
+    padding: 0px;
+}
 /* 전체 컨테이너 (Flexbox로 좌우 배치) */
 .mypage-wrap {
     display: flex;
     padding: 80px 20px;
-    gap: 50px; /* 왼쪽 사이드바와 오른쪽 콘텐츠 사이의 간격 */
+    gap: 50px;
+    /* 왼쪽 사이드바와 오른쪽 콘텐츠 사이의 간격 */
     min-height: 800px;
 }
-.disn{
+
+.disn {
     display: none;
 }
-.disb{
+
+.disb {
     display: block;
 }
+
 /* .gtx{
     display: none;
 } */
 /* --- 왼쪽 사이드바 --- */
 .mypage-sidebar {
-    width: 200px; /* 사이드바 너비 고정 */
-    flex-shrink: 0; /* 창이 좁아져도 사이드바 너비가 줄어들지 않음 */
-    border-right: 1px solid var(--border, #e2e8f0); /* 오른쪽 구분선 */
+    width: 200px;
+    /* 사이드바 너비 고정 */
+    flex-shrink: 0;
+    /* 창이 좁아져도 사이드바 너비가 줄어들지 않음 */
+    border-right: 1px solid var(--border, #e2e8f0);
+    /* 오른쪽 구분선 */
     padding-right: 30px;
 }
 
@@ -52,7 +62,8 @@
     border-radius: 12px;
     font-weight: 600;
     font-size: 15px;
-    text-align: left; /* 스토리보드처럼 텍스트 왼쪽 정렬 */
+    text-align: left;
+    /* 스토리보드처럼 텍스트 왼쪽 정렬 */
     transition: all 0.3s ease;
     background-color: #fff;
 }
@@ -63,28 +74,41 @@
 
 /* 활성화된(선택된) 메뉴 스타일 */
 .menu-btn.active {
-    background-color: #e0e0e0; /* 스토리보드의 회색 배경 */
+    background-color: #e0e0e0;
+    /* 스토리보드의 회색 배경 */
 }
 
 /* --- 오른쪽 콘텐츠 영역 --- */
 .mypage-content {
-    flex-grow: 1; /* 남은 오른쪽 공간을 꽉 채움 */
+    flex-grow: 1;
+    /* 남은 오른쪽 공간을 꽉 채움 */
     /* 영역이 잘 나뉘었는지 눈으로 확인하기 위한 임시 선 (나중에 지우면 돼!) */
-    border: 2px dashed #ccc; 
+    border: 2px dashed #ccc;
     border-radius: 20px;
     padding: 40px;
     display: none;
 }
 
-.mypage-content.activeM{
+.mypage-content.activeM {
     display: block;
 }
-.mypage-content.activeN{
+
+.mypage-content.activeN {
     display: none;
 }
+
 /* 전체 레이아웃 리셋 & 폰트 설정 */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background-color: #f3f4f6; color: #333; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+}
 
 /* 메인 컨테이너 (카드 형태) */
 .profile-setting-container {
@@ -101,8 +125,18 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     padding: 30px 40px;
     border-bottom: 1px solid #e5e7eb;
 }
-.setting-header h2 { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 6px; }
-.setting-header p { font-size: 14px; color: #6b7280; }
+
+.setting-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.setting-header p {
+    font-size: 14px;
+    color: #6b7280;
+}
 
 /* Grid Row 설정 (핵심 구조) */
 .form-row {
@@ -110,7 +144,10 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     grid-template-columns: 200px 1fr;
     border-bottom: 1px solid #f3f4f6;
 }
-.form-row:last-child { border-bottom: none; }
+
+.form-row:last-child {
+    border-bottom: none;
+}
 
 /* 레이블 (왼쪽 칸) */
 .form-label {
@@ -138,22 +175,41 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 }
 
 /* Flex 정렬 유틸리티 */
-.flex-row { flex-direction: row; align-items: center; gap: 10px; }
-.flex-col { flex-direction: column; align-items: flex-start; gap: 12px; }
-.gap-large { gap: 24px; }
+.flex-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.flex-col {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.gap-large {
+    gap: 24px;
+}
 
 /* 프로필 아바타 (원형) */
 .profile-avatar {
-    width: 80px; height: 80px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid #e5e7eb;
 }
-.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 /* 입력창 (Input Box) 디자인 */
 .input-box {
-    width: 100%; max-width: 280px;
+    width: 100%;
+    max-width: 280px;
     height: 42px;
     padding: 0 14px;
     font-size: 14px;
@@ -163,8 +219,10 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     transition: all 0.2s ease;
     outline: none;
 }
-.input-box2{
-    width: 100%; max-width: 280px;
+
+.input-box2 {
+    width: 100%;
+    max-width: 280px;
     height: 42px;
     padding: 0 14px;
     font-size: 14px;
@@ -174,12 +232,19 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     transition: all 0.2s ease;
     outline: none;
 }
+
 .input-box:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
-.input-box.short { max-width: 140px; }
-.input-box.mini { max-width: 80px; }
+
+.input-box.short {
+    max-width: 140px;
+}
+
+.input-box.mini {
+    max-width: 80px;
+}
 
 /* 읽기 전용 입력창 (부드러운 음영) */
 .input-box.readonly {
@@ -188,7 +253,11 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     border-color: #e5e7eb;
     cursor: not-allowed;
 }
-.input-box.readonly:focus { box-shadow: none; border-color: #e5e7eb; }
+
+.input-box.readonly:focus {
+    box-shadow: none;
+    border-color: #e5e7eb;
+}
 
 /* 작은 입력 래퍼 (아이디, 이름 등) */
 .input-wrapper {
@@ -197,11 +266,24 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     gap: 12px;
     width: 100%;
 }
-.input-prefix { font-size: 13px; color: #6b7280; width: 50px; }
+
+.input-prefix {
+    font-size: 13px;
+    color: #6b7280;
+    width: 50px;
+}
 
 /* 안내 텍스트 */
-.guide-text { font-size: 12px; color: #9ca3af; margin-top: 4px; }
-.at-sign { color: #6b7280; font-weight: 500; }
+.guide-text {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+.at-sign {
+    color: #6b7280;
+    font-weight: 500;
+}
 
 /* 버튼 디자인 (모던 스타일) */
 .btn {
@@ -216,20 +298,54 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     align-items: center;
     justify-content: center;
 }
+
 .btn-outline {
-    background: #fff; border: 1px solid #d1d5db; color: #374151;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    color: #374151;
 }
-.btn-outline:hover { background: #f9fafb; border-color: #9ca3af; }
 
-.btn-text { background: transparent; border: none; padding: 0 8px; }
-.text-danger { color: #ef4444; }
-.text-danger:hover { background: #fef2f2; }
+.btn-outline:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
 
-.btn-primary { background: #3b82f6; color: #fff; border: none; padding: 0 32px; font-weight: 600; }
-.btn-primary:hover { background: #2563eb; }
+.btn-text {
+    background: transparent;
+    border: none;
+    padding: 0 8px;
+}
 
-.btn-secondary { background: #fff; color: #374151; border: 1px solid #d1d5db; padding: 0 32px; }
-.btn-secondary:hover { background: #f3f4f6; }
+.text-danger {
+    color: #ef4444;
+}
+
+.text-danger:hover {
+    background: #fef2f2;
+}
+
+.btn-primary {
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 0 32px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 0 32px;
+}
+
+.btn-secondary:hover {
+    background: #f3f4f6;
+}
 
 /* 하단 푸터 (버튼 영역) */
 .setting-footer {
@@ -243,10 +359,21 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 
 /* 체크박스 커스텀 (깔끔하게) */
 .checkbox-label {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 14px; color: #374151; cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
 }
-.checkbox-label input { width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; }
+
+.checkbox-label input {
+    width: 16px;
+    height: 16px;
+    accent-color: #3b82f6;
+    cursor: pointer;
+}
+
 /* 휴대폰 번호 전용 입력창 (가운데 정렬 및 너비 축소) */
 .phone-input {
     width: 80px !important;
@@ -279,7 +406,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 /* 파란색 제목 라벨 */
 .withdraw-label {
     display: inline-block;
-    color: #4b629b; /* 이미지와 유사한 차분한 파란색 */
+    color: #4b629b;
+    /* 이미지와 유사한 차분한 파란색 */
     font-weight: 700;
     font-size: 16px;
     margin-bottom: 12px;
@@ -295,7 +423,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 
 .withdraw-row.input-row .withdraw-label {
     margin-bottom: 0;
-    width: 150px; /* 라벨 너비 고정 */
+    width: 150px;
+    /* 라벨 너비 고정 */
 }
 
 .withdraw-input {
@@ -304,7 +433,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     font-size: 16px;
     color: #111827;
     flex-grow: 1;
-    letter-spacing: 3px; /* 비밀번호 동그라미 간격 넓게 */
+    letter-spacing: 3px;
+    /* 비밀번호 동그라미 간격 넓게 */
 }
 
 /* 약관 텍스트 박스 */
@@ -314,7 +444,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     border: 1px solid #6b7280;
     background-color: #fcfcfc;
     padding: 20px;
-    overflow-y: auto; /* 내용이 길어지면 스크롤 생성 */
+    overflow-y: auto;
+    /* 내용이 길어지면 스크롤 생성 */
     font-size: 14px;
     color: #374151;
     line-height: 1.8;
@@ -326,6 +457,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     justify-content: center;
     margin-bottom: 20px;
 }
+
 .flex-center-box {
     display: flex;
     align-items: center;
@@ -337,7 +469,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 .btn-withdraw {
     width: 100%;
     height: 54px;
-    background-color: #4b629b; /* 라벨 색상과 통일 */
+    background-color: #4b629b;
+    /* 라벨 색상과 통일 */
     color: #ffffff;
     font-size: 18px;
     font-weight: 700;
@@ -350,9 +483,10 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     background-color: #384c7d;
 }
 
-.role-admin{
+.role-admin {
     display: none;
 }
+
 /* ==========================================================
    Dashboard 전용 스타일 (mypage-content 내부에 적용)
 ========================================================== */
@@ -362,16 +496,19 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    padding: 0; /* 내부 패딩을 header와 body로 나눔 */
+    padding: 0;
+    /* 내부 패딩을 header와 body로 나눔 */
     overflow: hidden;
 }
 
 /* 위젯들을 그리드로 배치 */
 .dashboard-widgets {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 반응형 그리드 */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* 반응형 그리드 */
     gap: 20px;
-    padding: 30px 40px; /* form-content와 유사한 패딩 */
+    padding: 30px 40px;
+    /* form-content와 유사한 패딩 */
 }
 
 /* 개별 위젯 카드 */
@@ -412,14 +549,38 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 }
 
 /* 유틸리티 클래스 (텍스트 색상) */
-.text-primary { color: #3b82f6; }
-.text-success { color: #10b981; }
-.text-warning { color: #f59e0b; }
-.text-danger { color: #ef4444; }
-.text-gray { color: #6b7280; font-weight: 500;}
-.text-sm { font-size: 14px; }
-.w-100 { width: 100%; }
-.mt-20 { margin-top: 20px; }
+.text-primary {
+    color: #3b82f6;
+}
+
+.text-success {
+    color: #10b981;
+}
+
+.text-warning {
+    color: #f59e0b;
+}
+
+.text-danger {
+    color: #ef4444;
+}
+
+.text-gray {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
 
 /* ==========================================================
    Users 관리 섹션 전용 스타일
@@ -446,7 +607,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 
 /* 테이블 컨테이너 */
 .users-table-container {
-    overflow-x: auto; /* 내용이 길면 가로 스크롤 */
+    overflow-x: auto;
+    /* 내용이 길면 가로 스크롤 */
     border: 1px solid #e5e7eb;
     border-radius: 8px;
 }
@@ -456,6 +618,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     border-collapse: collapse;
     text-align: left;
     min-width: 600px;
+    display: table !important;
 }
 
 .users-table th,
@@ -463,6 +626,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
     padding: 16px;
     border-bottom: 1px solid #e5e7eb;
     font-size: 14px;
+    display:  table-cell !important;
 }
 
 .users-table th {
@@ -543,6 +707,219 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 
 .max-w-100 {
     max-width: 100%;
 }
+
 .w-auto {
     width: auto;
+}
+
+
+
+
+
+
+/* 따로 제작 */
+li {
+    margin-top: 5px;
+}
+
+#mypage-sec1-all {
+    background-color: #fcefc283;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+/* #mypage-sec1-all input{} */
+.mypage-content1-top {
+    border-bottom: 1px solid gray;
+    margin-bottom: 30px;
+}
+
+.mypage-content1-bottom {
+    /* border: 1px solid blue; */
+}
+
+th {
+    width: 190px;
+    background-color: #FBCB4C;
+    display: flex;
+    align-items: center;
+    height: 90px;
+    border-radius: 10px;
+}
+
+td {
+    height: 60px;
+    padding: 20px;
+    background-color: #FFF1BF;
+    width: 800px;
+    border-radius: 10px;
+}
+
+.tr-star {
+    width: 10px;
+    color: red;
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 10px;
+
+}
+
+/* 항목 글씨 (아이디, 이름, 닉네임 등) */
+.content1-status {
+    margin-left: 20px;
+}
+
+/* input type = text */
+.mypage-content1-inputT, .phoneChk3-text {
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+/* password 텍스트 문구 */
+.pw-text {
+    font-size: 13px;
+    margin: 10px;
+}
+
+
+/* 닉네임 중복 체크 버튼 */
+.nickChk {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 80px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* 핸드폰 인증번호 발송 버튼 */
+.phoneChk,
+.phoneChk2 {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* select 이메일 */
+#email-select {
+    border-radius: 5px;
+    height: 25px;
+    border: 2px solid black;
+    width: 120px;
+}
+
+/* select 생년월일 */
+.birth {
+    height: 25px;
+    width: 70px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.newpw-text1{
+    color: red;
+}
+
+
+/* 확인 버튼 */
+.mypage-content1-btn  {
+    width: 100px;
+    height: 40px;
+    font-weight: 700;
+    cursor: pointer;
+    /* margin-left: 350px; */
+    margin: 50px 0px 50px 350px;
+    border-radius: 10px;
+    background-color: #FBCB4C;
+}
+
+/* 보안강도 상중하 span */
+.tier{
+    font-weight: 900;
+}
+
+/* 회원탈퇴 화면 */
+#Delete-Account{
+    /* border: 1px solid black; */
+    width: auto;
+    height: 750px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 40px;
+}
+#delete-text{
+margin-bottom: 10px;
+}
+.delete-span-text{
+    font-size: 15px;
+    
+}
+.delete-gap{
+    margin-top: 30px;
+}
+.delete-pw{
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+.delete-pw-input{
+    width: 550px;
+    height: 40px;
+    background-color:  white;
+    border: none;
+    font-size: 20px;
+    outline: none;
+}
+.delete-Terms{
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 30px 30px 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.delete-Terms-span{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.delete-botom{
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.delete-btn{
+    width: 100px;
+    height: 40px;
+    font-weight: 700;
+    cursor: pointer;
+    /* margin-left: 350px; */
+    /* margin: 50px 0px 50px 350px; */
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #FBCB4C;
+}
+
+/* admin로그인 페이지 */
+#user-search-btn{
+    width: 70px;
+}
+
+.active{
+    background-color: #6b7280;
+    
+}
+
+#사용자예약전체{
+    width: 900px;
+    background-color: white;
+    height: 1200px;
 }

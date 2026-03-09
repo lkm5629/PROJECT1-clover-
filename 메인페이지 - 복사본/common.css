@@ -20,6 +20,8 @@
 body {
     font-family: 'SCDream', sans-serif;
     color: var(--text);
+    margin: 0px;
+    padding: 0px;
 }
 
 a {

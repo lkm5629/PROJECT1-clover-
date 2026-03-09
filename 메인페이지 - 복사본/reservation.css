@@ -1,0 +1,549 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+main {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 메인페이지에만 쓰는 hero가 남아있으면 공백 원인이라 숨김 */
+.hero {
+    display: none !important;
+}
+
+/* 상단 네비/탑바에 기본 여백이 잡혀있으면 제거 */
+.top-bar,
+.nav {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+#div1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    width: 85%;
+    max-width: 800px;
+
+    margin: 30px auto 30px auto;
+
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.search {
+    width: 30px;
+    cursor: pointer;
+}
+
+#category-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 150px;
+}
+
+#category-dropdown .category-item {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#category-dropdown .category-item:hover {
+    background-color: #FBCB4C;
+    color: white;
+}
+
+/* 날짜/시간 선택 버튼 */
+#open-date,
+#open-f,
+#open-person-btn {
+    cursor: pointer;
+}
+
+#open-date:hover,
+#open-f:hover,
+#open-person-btn:hover {
+    color: #FBCB4C;
+}
+
+/* 달력 영역 */
+#calendar-box {
+    display: none;
+    width: 85%;
+    max-width: 1000px;
+    margin: 0 auto 40px auto;
+}
+
+.calendar-inner {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 40px;
+    background: white;
+    position: relative;
+}
+
+.calendar-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.calendar-left,
+.calendar-right {
+    width: 48%;
+}
+
+/* 달력 날짜 영역 */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+#calendar div {
+    text-align: center;
+    cursor: pointer;
+}
+
+#calendar div.selected {
+    font-weight: bold;
+    color: #FBCB4C;
+}
+
+/* 시간 버튼 */
+.time-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.time-buttons button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #FBCB4C;
+}
+
+.time-buttons button.selected-time,
+.time-buttons button.range-time {
+    background-color: #FBCB4C !important;
+    border: 1px solid #FBCB4C !important;
+    color: black !important;
+}
+
+.time-buttons button.selected-time:hover,
+.time-buttons button.range-time:hover {
+    background-color: #FBCB4C !important;
+    border: 1px solid #FBCB4C !important;
+    color: black !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* 인원 선택 */
+.people-selector {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.people-selector button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #FBCB4C;
+    background-color: white;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.people-selector button:hover {
+    background-color: #FBCB4C;
+    color: white;
+}
+
+/* 공통 버튼 */
+.reserve-btn {
+    padding: 8px 18px;
+    border: 1px solid #FBCB4C;
+    border-radius: 8px;
+    background-color: #FBCB4C;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.reserve-btn:hover {
+    background-color: #FFFFFF;
+    color: black;
+}
+
+/* ✅ 초기화 버튼 흰색 버전 */
+.reserve-btn--ghost {
+    background: #fff;
+}
+
+.reserve-btn--ghost:hover {
+    background: #FBCB4C;
+}
+
+
+#calendar-actions {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 10;
+}
+
+#close-calendar,
+#reset-calendar {
+    position: static !important;
+    margin: 0 !important;
+}
+
+/* 구분선 */
+.hr1 {
+    width: 80%;
+    margin: 0 auto 40px auto;
+}
+
+/* 강의실 리스트 */
+.class-list {
+    width: 85%;
+    max-width: 900px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* 카드 */
+.class-item {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background: white;
+}
+
+/* 이미지 */
+.class-item img {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    align-items: center;
+}
+
+/* 정보 영역 */
+.class-info {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+.class-info h2 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+}
+
+/* 상태 */
+.status {
+    color: #1aa34a;
+    font-weight: bold;
+}
+
+/* 카드 안 예약 버튼은 오른쪽 정렬 */
+.class-item .reserve-btn {
+    margin-top: 15px;
+    align-self: flex-end;
+}
+
+.pagination {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto 60px auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.pagination button {
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pagination button:hover {
+    border-color: #FBCB4C;
+}
+
+.pagination button.active {
+    background: #FBCB4C;
+    border-color: #FBCB4C;
+    font-weight: bold;
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+
+    /* 상단바 */
+    .top-bar .inner {
+        padding: 0 16px;
+        justify-content: flex-end;
+
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* 네비 */
+    .nav .inner {
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 10px;
+    }
+
+    .nav .logo {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+
+    }
+
+    .nav .gnb {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav .gnb a {
+        font-size: 13px;
+        padding: 6px 8px;
+        display: inline-block;
+        white-space: nowrap;
+    }
+}
+
+.nav .gnb li a {
+    transition: 0.2s ease;
+}
+
+.nav .gnb li a:hover {
+    color: #111;
+    background: rgba(251, 203, 76, 0.18);
+    border-radius: 10px;
+}
+
+
+.nav .gnb li a:focus-visible {
+    outline: 2px solid rgba(251, 203, 76, 0.6);
+    outline-offset: 2px;
+    border-radius: 10px;
+}
+
+
+.top-bar {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.top-bar .inner {
+    min-height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex;
+    gap: 14px;
+    padding: 8px 0;
+}
+
+.nav .gnb a {
+    display: inline-block;
+    padding: 10px 12px;
+
+    border-radius: 10px;
+    transition: 0.2s ease;
+    text-decoration: none;
+}
+
+.nav .gnb a:hover {
+    background: rgba(251, 203, 76, 0.25);
+
+    color: #111;
+}
+
+@media (max-width: 600px) {
+    .top-bar .inner {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .nav .inner {
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav .logo {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav .gnb {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav .gnb a {
+        font-size: 13px;
+        padding: 6px 8px;
+        display: inline-block;
+        white-space: nowrap;
+    }
+}
+
+/* =========================
+   ✅ 모바일(창 줄였을 때) 달력/시간 안 깨지게
+   2컬럼 → 1컬럼 세로 배치
+========================= */
+@media (max-width: 768px) {
+
+    /* 달력 전체 박스 폭 확보 */
+    #calendar-box {
+        width: 92%;
+        max-width: none;
+        margin: 0 auto 30px auto;
+    }
+
+    /* 안쪽 여백 줄여서 화면에 맞춤 */
+    .calendar-inner {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    /* 좌/우 → 세로로 쌓기 */
+    .calendar-content {
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 18px;
+    }
+
+    .calendar-left,
+    .calendar-right {
+        width: 100%;
+    }
+
+    /* 달력 날짜 칸 조금 작게 */
+    #calendar {
+        font-size: 14px;
+        gap: 6px;
+    }
+
+    #calendar div {
+        padding: 6px 0;
+    }
+
+    /* 시간 버튼: 모바일에서 버튼 크기 줄이고 3~4개씩 자동 줄바꿈 */
+    .time-buttons {
+        gap: 8px;
+    }
+
+    .time-buttons button {
+        padding: 8px 10px;
+        font-size: 13px;
+        border-radius: 14px;
+        flex: 1 1 calc(25% - 8px);
+        /* 한 줄에 4개 정도 */
+        box-sizing: border-box;
+    }
+
+    /* 인원 선택 줄 정리 */
+    .people-selector {
+        font-size: 15px;
+    }
+
+    /* 하단 버튼(초기화/닫기) 고정 위치 해제 -> 밑으로 자연스럽게 */
+    #calendar-actions {
+        position: static;
+        margin-top: 16px;
+        justify-content: flex-end;
+    }
+}
+
+/* 더 작은 폰(아주 작은 모바일) */
+@media (max-width: 420px) {
+    .time-buttons button {
+        flex: 1 1 calc(33.333% - 8px);
+        /* 한 줄에 3개 */
+        font-size: 12px;
+        padding: 7px 9px;
+    }
+}

@@ -1,93 +1,101 @@
 [
-    {
-        "id": "user1234",
-        "pw": "password1234",
-        "name": "김유저",
-        "nick": "테스트user1",
-        "email": "user1234@google.com",
-        "role": "user",
-        "phone": "01012345678",
-        "birth": "2000-01-01",
-        "gender": "남성"
-    },
-    {
-        "id": "admin1",
-        "pw": "adminpassword",
-        "name": "관리자",
-        "nick": "어드민1",
-        "email": "admin1@nate.com",
-        "role": "admin",
-        "phone": "01098765432",
-        "birth": "2026-01-01",
-        "gender": "남성"
-    },
-    {
-        "id": "user2222",
-        "pw": "dbwj2222",
-        "name": "박유저",
-        "nick": "테스트user2",
-        "email": "user2@nate.com",
-        "role": "user",
-        "phone": "01022223333",
-        "birth": "1999-01-01",
-        "gender": "남성"
-    },
-    {
-        "id": "rlaalswn1",
-        "pw": "rlaalswn1",
-        "name": "김민주",
-        "nick": "어드민",
-        "email": "rlaalswn1@google.com",
-        "role": "admin",
-        "phone": "01012441244",
-        "birth": "2001-11-28",
-        "gender": "여성"
-    },
-    {
-        "id": "thdtkdals1",
-        "pw": "thdtkdals1",
-        "name": "송상민",
-        "nick": "캡짱상민",
-        "email": "thdtkdals123@daum.com",
-        "role": "user",
-        "phone": "01010102020",
-        "birth": "02-06-17",
-        "gender": "남성"
-    },
-    {
-        "id": "cvb5123",
-        "pw": "thdwhdgks1",
-        "name": "송종한",
-        "nick": "종딱",
-        "email": "cvb5123@nate.com",
-        "role": "admin",
-        "phone": "01023234545",
-        "birth": "99-09-30",
-        "gender": "남성"
-    },
-    {
-        "id": "admin2",
-        "pw": "adminpassword",
-        "name": "관리자",
-        "nick": "어드민2",
-        "email": "admin2@nate.com",
-        "role": "admin",
-        "phone": "01079791313",
-        "birth": "1967-05-09",
-        "gender": "여성"
-    },
-    {
-        "id": "rlafud1",
-        "pw": "rlafud1",
-        "name": "김령",
-        "nick": "clover",
-        "email": "rlafud1@google.com",
-        "role": "admin",
-        "phone": "01090901010",
-        "birth": "95-02-21",
-        "gender": "여성"
-    },
-    {
+  {
+    "id": "user1234",
+    "pw": "password1234",
+    "name": "김유저",
+    "nick": "테스트user1",
+    "email": "user1234@google.com",
+    "role": "user",
+    "phone": "01012345678",
+    "birth": "2000-01-01",
+    "gender": "남성",
+    "diddma": "양력"
+  },
+  {
+    "id": "admin1",
+    "pw": "adminpassword",
+    "name": "관리자",
+    "nick": "어드민1",
+    "email": "admin1@nate.com",
+    "role": "admin",
+    "phone": "01098765432",
+    "birth": "2026-01-01",
+    "gender": "남성",
+    "diddma": "양력"
+  },
+  {
+    "id": "user2222",
+    "pw": "dbwj2222",
+    "name": "박유저",
+    "nick": "테스트user2",
+    "email": "user2@nate.com",
+    "role": "user",
+    "phone": "01022223333",
+    "birth": "1999-01-01",
+    "gender": "남성",
+    "diddma": "양력"
+  },
+  {
+    "id": "rlaalswn1",
+    "pw": "rlaalswn1",
+    "name": "김민주",
+    "nick": "어드민",
+    "email": "rlaalswn1@google.com",
+    "role": "admin",
+    "phone": "01012441244",
+    "birth": "2001-11-28",
+    "gender": "여성",
+    "diddma": "양력"
+  },
+  {
+    "id": "thdtkdals1",
+    "pw": "thdtkdals1",
+    "name": "송상민",
+    "nick": "캡짱상민",
+    "email": "thdtkdals123@daum.com",
+    "role": "user",
+    "phone": "01010102020",
+    "birth": "2002-06-17",
+    "gender": "남성",
+    "diddma": "양력"
+  },
+  {
+    "id": "cvb5123",
+    "pw": "thdwhdgks1",
+    "name": "송종한",
+    "nick": "종딱",
+    "email": "cvb5123@nate.com",
+    "role": "admin",
+    "phone": "01023234545",
+    "birth": "1999-09-30",
+    "gender": "비공개",
+    "diddma": "음력"
+  },
+  {
+    "id": "admin2",
+    "pw": "adminpassword",
+    "name": "관리자",
+    "nick": "어드민2",
+    "email": "admin2@nate.com",
+    "role": "admin",
+    "phone": "01079791313",
+    "birth": "1967-05-09",
+    "gender": "여성",
+    "diddma": "양력"
+  },
+  {
+    "id": "rlafud1",
+    "pw": "rlafud1",
+    "name": "김령",
+    "nick": "clover",
+    "email": "rlafud1@google.com",
+    "role": "admin",
+    "phone": "01090901010",
+    "birth": "1995-02-21",
+    "gender": "여성",
+    "diddma": "양력"
+  },
+  {
     "id": "jimenez840",
     "pw": "password6230",
     "name": "HawkinsBillie",
@@ -96,7 +104,8 @@
     "role": "user",
     "phone": "01058627000",
     "birth": "1991-01-06",
-    "gender": "남성"
+    "gender": "남성",
+    "diddma": "양력"
   },
   {
     "id": "williams189",
@@ -107,7 +116,8 @@
     "role": "admin",
     "phone": "01076945121",
     "birth": "1990-02-23",
-    "gender": "여성"
+    "gender": "여성",
+    "diddma": "양력"
   },
   {
     "id": "teri309",
@@ -3167,5 +3177,4 @@
     "birth": "2000-01-18",
     "gender": "남성"
   }
-
 ]

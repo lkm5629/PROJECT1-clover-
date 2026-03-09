@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO</title>
+    <link rel="stylesheet" href="./TODO.css" />
+    <link rel="stylesheet" href="./common.css">
+    <script src="./TODO.js" defer></script>
+  </head>
+  <body>
+       <header id="header-include" class="hdr"></header>
+    <!-- 1. 공통 헤더 영역 시작 -->
+
+    <!-- <header class="site-header">
+      <div class="top-bar">
+        <div class="inner util-row">
+          <a href="#">마이페이지</a>
+          <a href="#">로그인</a>
+          <a href="#">회원가입</a>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <div class="inner nav-row">
+          <a href="index.html" class="brand-link">
+            <img
+              src="./메인로고 노란색 제거.png"
+              alt="로고"
+              class="brand-logo"
+            />
+          </a> -->
+
+          <button
+            type="button"
+            id="mobileMenuBtn"
+            class="mobile-menu-btn"
+            aria-label="메뉴 열기"
+          >
+            <span></span><span></span><span></span>
+          </button>
+
+          <!-- <ul class="desktop-gnb">
+            <li><a href="index.html">메인페이지</a></li>
+            <li><a href="#">학원소개</a></li>
+            <li><a href="#">강의실</a></li>
+            <li><a href="#">식단표 열람</a></li>
+            <li><a href="./TODO_matchfix.html" class="active">TODO</a></li>
+            <li><a href="#">커뮤니티</a></li>
+            <li><a href="#">공지사항</a></li>
+          </ul>
+        </div> -->
+
+        <div id="mobileMenuPanel" class="mobile-menu-panel">
+          <div class="mobile-menu-inner">
+            <a href="index.html">메인페이지</a>
+            <a href="#">학원소개</a>
+            <a href="#">강의실</a>
+            <a href="#">식단표 열람</a>
+            <a href="./TODO_matchfix.html" class="active">TODO</a>
+            <a href="#">커뮤니티</a>
+            <a href="#">공지사항</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 2. TODO 본문 전체 영역 시작 -->
+    <main class="todo-main">
+      <div class="todo-shell">
+        <!-- 2-1. 좌측 화면 전환 메뉴 -->
+        <aside class="left-nav">
+          <button type="button" id="menuDb" class="left-nav-btn active">
+            일정DB
+          </button>
+          <button type="button" id="menuCalendar" class="left-nav-btn">
+            캘린더
+          </button>
+          <button type="button" id="menuWeekly" class="left-nav-btn">
+            위클리
+          </button>
+        </aside>
+
+        <!-- 2-2. 우측 실제 내용 표시 영역 -->
+        <section class="content-area">
+          <!-- 2-2-1. 일정DB 화면 -->
+          <section id="pageDb" class="todo-page active">
+            <div class="page-top">
+              <div>
+                <p class="page-sub-text">TODO / 첫 화면 / 일정 관리</p>
+                <h2 class="page-title">일정 DB</h2>
+              </div>
+
+              <div class="page-action-row">
+                <button type="button" id="dbEditBtn" class="main-btn">
+                  수정
+                </button>
+
+                <div class="menu-area">
+                  <button type="button" id="selectedMenuBtn" class="line-btn">
+                    선택메뉴
+                  </button>
+                  <div id="selectedMenuList" class="drop-menu">
+                    <button type="button" id="selectAllBtn">전체 선택</button>
+                    <button type="button" id="deleteSelectedBtn">
+                      선택 삭제
+                    </button>
+                    <button type="button" id="uncheckSelectedBtn">
+                      선택 해제
+                    </button>
+                    <button type="button" id="deleteAllBtn">전체 삭제</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-wrap">
+              <details class="filter-details">
+                <summary class="filter-summary">필터 확인</summary>
+
+                <div class="filter-grid">
+                  <div class="filter-item">
+                    <label for="categoryFilter">구분</label>
+                    <select id="categoryFilter" class="fix-input">
+                      <option value="all">전체</option>
+                      <option value="회의">회의</option>
+                      <option value="업무">업무</option>
+                      <option value="개인">개인</option>
+                    </select>
+                  </div>
+
+                  <div class="filter-item">
+                    <label for="dateFilter">날짜</label>
+                    <input
+                      type="date"
+                      id="dateFilter"
+                      class="fix-input"
+                      min="2000-01-01"
+                      max="2099-12-31"
+                    />
+                  </div>
+
+                  <div class="filter-item filter-btns">
+                    <button type="button" id="applyFilterBtn" class="line-btn">
+                      적용
+                    </button>
+                    <button type="button" id="resetFilterBtn" class="line-btn">
+                      초기화
+                    </button>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div id="selectedCountInfo" class="selected-count-info hide">
+              1개 선택
+            </div>
+
+            <div class="table-box">
+              <table class="todo-table">
+                <thead>
+                  <tr>
+                    <th class="col-check">
+                      <input type="checkbox" id="checkAll" />
+                    </th>
+                    <th class="col-category">구분</th>
+                    <th class="col-title">제목</th>
+                    <th class="col-date">날짜</th>
+                    <th class="col-time">시간</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-detail">상세내용</th>
+                    <th class="col-del">삭제</th>
+                  </tr>
+                </thead>
+                <tbody id="todoTableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="pager-row">
+              <button type="button" id="prevPageBtn" class="line-btn">
+                &lt; 이전
+              </button>
+              <div id="pageInfoText" class="page-info-text">1 / 1 페이지</div>
+              <button type="button" id="nextPageBtn" class="line-btn">
+                다음 &gt;
+              </button>
+            </div>
+          </section>
+
+          <!-- 2-2-2. 월간 캘린더 화면 -->
+          <section id="pageCalendar" class="todo-page">
+            <div class="page-top">
+              <div>
+                <p class="page-sub-text">TODO / 월간 일정 확인</p>
+                <h2 class="page-title">캘린더</h2>
+              </div>
+
+              <div class="page-action-row">
+                <button type="button" id="calendarEditBtn" class="main-btn">
+                  수정
+                </button>
+
+                <div class="switch-control">
+                  <button
+                    type="button"
+                    id="calendarPrevBtn"
+                    class="switch-arrow"
+                  >
+                    &lt;
+                  </button>
+                  <button
+                    type="button"
+                    id="calendarOpenBtn"
+                    class="switch-title"
+                  >
+                    3월
+                  </button>
+                  <button
+                    type="button"
+                    id="calendarNextBtn"
+                    class="switch-arrow"
+                  >
+                    &gt;
+                  </button>
+                </div>
+
+                <input
+                  type="month"
+                  id="monthPicker"
+                  class="month-picker-hidden"
+                />
+              </div>
+            </div>
+
+            <div class="calendar-modern-box">
+              <div class="calendar-week-header">
+                <div class="sun-text">일</div>
+                <div>월</div>
+                <div>화</div>
+                <div>수</div>
+                <div>목</div>
+                <div>금</div>
+                <div class="sat-text">토</div>
+              </div>
+              <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+          </section>
+
+          <!-- 2-2-3. 주간 위클리 화면 -->
+          <section id="pageWeekly" class="todo-page">
+            <div class="page-top">
+              <div>
+                <p class="page-sub-text">TODO / 시간 단위 주간 보기</p>
+                <h2 class="page-title">위클리</h2>
+              </div>
+
+              <div class="page-action-row">
+                <button type="button" id="weeklyEditBtn" class="main-btn">
+                  수정
+                </button>
+
+                <div class="switch-control">
+                  <button type="button" id="weeklyPrevBtn" class="switch-arrow">
+                    &lt;
+                  </button>
+                  <button type="button" id="weeklyOpenBtn" class="switch-title">
+                    주간
+                  </button>
+                  <button type="button" id="weeklyNextBtn" class="switch-arrow">
+                    &gt;
+                  </button>
+                </div>
+
+                <input
+                  type="date"
+                  id="weekDatePicker"
+                  class="month-picker-hidden"
+                  min="2000-01-01"
+                  max="2099-12-31"
+                />
+              </div>
+            </div>
+
+            <div class="weekly-guide-box">
+              <div class="weekly-guide-title">안내</div>
+              <div class="weekly-guide-text">
+                빈 칸 드래그 = 새 일정 생성 / 일정 블록 드래그 = 이동 / 아래
+                핸들 드래그 = 시간 늘리기 / 일정 한 번 클릭 = 바로 수정
+              </div>
+            </div>
+
+            <div id="weeklyBox" class="weekly-box">
+              <table class="weekly-table">
+                <thead>
+                  <tr id="weeklyHeadRow">
+                    <th class="time-col">시간</th>
+                  </tr>
+                </thead>
+                <tbody id="weeklyBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <!-- 3. 우측 하단 플로팅 추가 버튼 -->
+    <button type="button" id="fabBtn" class="fab-btn" aria-label="만들기">
+      +
+    </button>
+    <!-- 3-1. + 버튼을 눌렀을 때 열리는 간단 메뉴 -->
+    <div id="fabMenu" class="fab-menu">
+      <button type="button" id="openTodoModalBtn" class="fab-menu-item">
+        일정추가하기
+      </button>
+    </div>
+
+    <!-- 모달 뒤 배경 -->
+    <!-- 4. 모달 뒤쪽 어두운 배경 -->
+    <div id="modalOverlay" class="modal-overlay hide"></div>
+
+    <!-- 일정 추가 / 상세 보기 / 수정 모달 -->
+    <!-- 5. 일정 추가 / 보기 / 수정 공통 모달 -->
+    <section
+      id="todoModal"
+      class="todo-modal modal-view-mode hide"
+      aria-hidden="true"
+    >
+      <!-- 5-1. 모달 상단 제목 / 닫기 버튼 -->
+      <div class="modal-top">
+        <div>
+          <div id="modalModeText" class="modal-mode-text">상세 보기</div>
+          <div class="modal-title">일정 정보를 입력해 주세요</div>
+        </div>
+        <button type="button" id="closeModalBtn" class="line-btn small-btn">
+          닫기
+        </button>
+      </div>
+
+      <!-- 5-2. 모달 입력 폼 영역 -->
+      <div class="modal-form-grid">
+        <div class="form-row">
+          <label for="todoCategoryInput" class="form-label">구분</label>
+          <select id="todoCategoryInput" class="fix-input">
+            <option value="회의">회의</option>
+            <option value="업무">업무</option>
+            <option value="개인">개인</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="todoTitleInput" class="form-label">제목</label>
+          <input
+            type="text"
+            id="todoTitleInput"
+            class="fix-input"
+            placeholder="예: 프로젝트 회의"
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="todoDateInput" class="form-label">날짜</label>
+          <input
+            type="date"
+            id="todoDateInput"
+            class="fix-input"
+            min="2000-01-01"
+            max="2099-12-31"
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="todoStatusInput" class="form-label">상태</label>
+          <select id="todoStatusInput" class="fix-input">
+            <option value="todo">미완료</option>
+            <option value="progress">진행중</option>
+            <option value="done">완료</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="todoStartTimeInput" class="form-label">시작 시간</label>
+          <select id="todoStartTimeInput" class="fix-input"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="todoEndTimeInput" class="form-label">종료 시간</label>
+          <select id="todoEndTimeInput" class="fix-input"></select>
+        </div>
+
+        <div class="form-row full-row">
+          <label for="todoDetailInput" class="form-label">상세내용</label>
+          <textarea
+            id="todoDetailInput"
+            class="fix-textarea"
+            placeholder="상세내용 입력"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- 5-3. 모달 하단 액션 버튼 -->
+      <div class="modal-btn-row">
+        <button type="button" id="editTodoBtn" class="line-btn">수정</button>
+        <button type="button" id="saveTodoBtn" class="main-btn hide">
+          저장
+        </button>
+        <button type="button" id="deleteTodoBtn" class="line-btn danger-btn">
+          삭제
+        </button>
+        <button type="button" id="cancelModalBtn" class="line-btn">취소</button>
+      </div>
+    </section>
+    <footer id="footer-include" class="ftr"></footer>
+    <script src="./common.js"></script>
+    <script src="./마이페이지.js"></script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표시대상 알레르기 유발물질 관리</title>
+    <link rel="stylesheet" href="./allergy_list.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <h2 class="main-title">○ 표시대상 알레르기 유발물질</h2>
+        <div class="dual-list-container">
+            <div class="list-box">
+                <div class="list-header">알레르기 추가 항목</div>
+                <div id="sourceList" class="item-list"></div>
+            </div>
+            <div class="arrow-area">
+                <div class="arrow-icon">➡</div>
+                <div class="arrow-icon">⬅</div>
+            </div>
+            <div class="list-box">
+                <div class="list-header">표시 될 알레르기 항목</div>
+                <div id="targetList" class="item-list"></div>
+            </div>
+        </div>
+        <div class="info-footer">
+            * 추가 된 알레르기 항목들은 개인 식단표 페이지에 실시간으로 표시 됩니다.
+        </div>
+        <div class="btn-area">
+            <button class="save-btn" onclick="saveSelection()">선택 완료</button>
+        </div>
+    </div>
+    <script src="./allergy_list.js"></script>
+</body>
+
+</html>

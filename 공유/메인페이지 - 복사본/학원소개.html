@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학원소개 | CLOVER</title>
+    <link rel="stylesheet" href="./메인페이지.css">
+    <link rel="stylesheet" href="./common.css">
+
+    <style>
+        :root {
+            --point: #FBCB4C;
+            --point-soft: #FFF4D2;
+            --bg: #f7f6f2;
+            --bg-sub: #f2efe8;
+            --line: #e2ddd2;
+            --text: #2f2f2f;
+            --text-sub: #6d685f;
+            --white: #ffffff;
+            --black: #1f1f1f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .academy-page {
+            background: var(--bg);
+        }
+
+        .academy-wrap {
+            width: 1200px;
+            max-width: calc(100% - 48px);
+            margin: 0 auto;
+        }
+
+        .philo-hero {
+            padding: 120px 0 90px;
+            background: linear-gradient(180deg, #fffdf8 0%, #f7f6f2 100%);
+        }
+
+        .philo-label {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--point-soft);
+            color: #7b5f08;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .philo-title {
+            font-size: 52px;
+            line-height: 1.18;
+            letter-spacing: -0.03em;
+            font-weight: 700;
+            margin: 0 0 24px;
+            color: var(--text);
+        }
+
+        .philo-sub {
+            max-width: 760px;
+            font-size: 18px;
+            line-height: 1.9;
+            color: var(--text-sub);
+            margin: 0;
+        }
+
+        .philo-building {
+            padding: 0 0 90px;
+        }
+
+        .philo-building-frame {
+            overflow: hidden;
+            border-radius: 32px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .philo-building-frame img {
+            display: block;
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+        }
+
+        .philo-building-caption {
+            padding: 18px 22px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-sub);
+            background: #fffdf8;
+            border-top: 1px solid var(--line);
+        }
+
+        .philo-quote-wrap {
+            padding-bottom: 90px;
+        }
+
+        .philo-quote {
+            background: linear-gradient(135deg, #fff9e8 0%, #fffdf8 100%);
+            border: 1px solid #f1dfaa;
+            border-radius: 32px;
+            padding: 54px 56px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .philo-quote .small {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e7940;
+            margin-bottom: 16px;
+        }
+
+        .philo-quote h3 {
+            font-size: 40px;
+            line-height: 1.42;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+            margin: 0 0 18px;
+            color: var(--text);
+        }
+
+        .philo-quote p {
+            max-width: 900px;
+            font-size: 16px;
+            line-height: 1.95;
+            color: var(--text-sub);
+            margin: 0;
+        }
+
+        .philo-section {
+            padding: 88px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .philo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .philo-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 34px 30px;
+        }
+
+        .philo-card .small {
+            font-size: 12px;
+            font-weight: 600;
+            color: #8a8479;
+            margin-bottom: 12px;
+        }
+
+        .philo-card h4 {
+            font-size: 24px;
+            line-height: 1.45;
+            font-weight: 700;
+            margin: 0 0 14px;
+            color: var(--text);
+        }
+
+        .philo-card p {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--text-sub);
+            margin: 0;
+        }
+
+        .philo-statement {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 34px;
+            align-items: start;
+        }
+
+        .philo-statement-left .small,
+        .philo-statement-right .small {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8a8479;
+            margin-bottom: 14px;
+        }
+
+        .philo-statement-left h3,
+        .philo-statement-right h3 {
+            font-size: 34px;
+            line-height: 1.45;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text);
+        }
+
+        .philo-statement-right p {
+            font-size: 16px;
+            line-height: 2;
+            color: var(--text-sub);
+            margin: 0 0 18px;
+        }
+
+        .philo-line-box {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+        }
+
+        .philo-line-box strong {
+            display: block;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .philo-line-box span {
+            display: block;
+            font-size: 14px;
+            line-height: 1.85;
+            color: var(--text-sub);
+        }
+
+        .philo-banner {
+            padding: 88px 0;
+        }
+
+        .philo-banner-box {
+            background: var(--point);
+            border-radius: 32px;
+            padding: 56px 54px;
+        }
+
+        .philo-banner-box .small {
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(62, 46, 0, 0.75);
+            margin-bottom: 14px;
+        }
+
+        .philo-banner-box h3 {
+            font-size: 38px;
+            line-height: 1.45;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+            margin: 0 0 14px;
+            color: #2d2408;
+        }
+
+        .philo-banner-box p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: rgba(45, 36, 8, 0.82);
+            margin: 0;
+        }
+
+        .academy-contact {
+            padding: 90px 0 110px;
+            background: var(--bg-sub);
+            border-top: 1px solid var(--line);
+        }
+
+        .academy-contact-inner {
+            width: 1200px;
+            max-width: calc(100% - 48px);
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .academy-contact h3 {
+            font-size: 52px;
+            line-height: 1.25;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .academy-contact p {
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--text-sub);
+            margin-bottom: 38px;
+        }
+
+        .academy-contact-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .academy-contact-form input {
+            width: 300px;
+            height: 68px;
+            border: 1px solid #e4dcc8;
+            outline: 0;
+            border-radius: 12px;
+            padding: 0 22px;
+            font-size: 17px;
+            color: var(--text);
+            background: #fffdf8;
+        }
+
+        .academy-contact-form input::placeholder {
+            color: #9b9487;
+        }
+
+        .academy-contact-form a {
+            width: 300px;
+            height: 68px;
+            border-radius: 12px;
+            background: var(--black);
+            color: #fff;
+            font-size: 21px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s ease;
+        }
+
+        .academy-contact-form a:hover {
+            transform: translateY(-2px);
+        }
+
+        .academy-contact-agree {
+            font-size: 14px;
+            color: #7b7569;
+        }
+
+        .academy-contact-agree input {
+            transform: translateY(1px);
+            margin-right: 6px;
+        }
+
+        .academy-contact-agree a {
+            border-bottom: 1px solid #9f9684;
+            padding-bottom: 1px;
+        }
+
+        @media (max-width: 1024px) {
+            .philo-title {
+                font-size: 46px;
+            }
+
+            .philo-quote h3,
+            .academy-contact h3 {
+                font-size: 34px;
+            }
+
+            .philo-grid,
+            .philo-statement {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .academy-wrap,
+            .academy-contact-inner {
+                max-width: calc(100% - 32px);
+            }
+
+            .philo-hero {
+                padding: 92px 0 58px;
+            }
+
+            .philo-title {
+                font-size: 34px;
+                line-height: 1.3;
+            }
+
+            .philo-sub {
+                font-size: 15px;
+            }
+
+            .philo-building {
+                padding: 0 0 58px;
+            }
+
+            .philo-building-frame {
+                border-radius: 22px;
+            }
+
+            .philo-building-frame img {
+                display: block;
+                width: 100%;
+                height: 520px;
+                object-fit: cover;
+            }
+
+            .philo-building-caption {
+                font-size: 13px;
+            }
+
+            .philo-quote-wrap,
+            .philo-section,
+            .philo-banner,
+            .academy-contact {
+                padding: 58px 0;
+            }
+
+            .philo-quote,
+            .philo-card,
+            .philo-banner-box {
+                padding: 28px 22px;
+                border-radius: 22px;
+            }
+
+            .philo-quote h3,
+            .philo-statement-left h3,
+            .philo-statement-right h3,
+            .philo-banner-box h3,
+            .academy-contact h3 {
+                font-size: 26px;
+            }
+
+            .academy-contact p {
+                font-size: 16px;
+                margin-bottom: 24px;
+            }
+
+            .academy-contact-form {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .academy-contact-form input,
+            .academy-contact-form a {
+                width: 100%;
+                height: 58px;
+                font-size: 16px;
+            }
+
+            .academy-contact-form a {
+                font-size: 18px;
+            }
+
+            .academy-contact-agree {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header-include" class="hdr"></header>
+
+    <main class="academy-page">
+        <section class="philo-hero">
+            <div class="academy-wrap">
+                <span class="philo-label">CLOVER HUB</span>
+                <h2 class="philo-title">
+                    좋은 교육은<br>
+                    학생의 속도를 존중하는 것에서 시작합니다
+                </h2>
+                <p class="philo-sub">
+                    클로버는 더 빠르게, 더 많이를 강조하기보다
+                    학생이 자신의 흐름 안에서 제대로 이해하고 오래 이어갈 수 있는 공부를 중요하게 생각합니다.
+                    학원의 철학은 결국 학생이 매일 마주하는 공간과 분위기, 그리고 공부를 대하는 방식에 드러난다고 믿습니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="philo-building">
+            <div class="academy-wrap">
+                <div class="philo-building-frame">
+                    <img src="./Img/836a7e7ca1b3b7dc.png" alt="클로버 학원 건물 전경">
+                    <div class="philo-building-caption">
+                        클로버는 학생이 오래 머물러도 편안하게 집중할 수 있도록 공간의 분위기와 흐름까지 함께 설계합니다.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="philo-quote-wrap">
+            <div class="academy-wrap">
+                <div class="philo-quote">
+                    <div class="small">OUR BELIEF</div>
+                    <h3>
+                        성장은 강한 압박으로 만들어지지 않습니다.<br>
+                        이해할 수 있는 설명, 흔들리지 않는 환경,<br>
+                        그리고 다시 시작할 수 있는 여유가 필요합니다.
+                    </h3>
+                    <p>
+                        클로버는 학생이 무너지지 않고 꾸준히 앞으로 나아갈 수 있도록 돕는 학원이 되고자 합니다.
+                        한 번의 자극보다 오래 유지되는 학습 리듬, 획일적인 속도보다 각자의 이해 방식,
+                        결과만을 재촉하기보다 과정 속에서 분명하게 남는 변화를 더 중요하게 생각합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="philo-section">
+            <div class="academy-wrap">
+                <div class="philo-grid">
+                    <div class="philo-card">
+                        <div class="small">01</div>
+                        <h4>이해가 먼저인 수업</h4>
+                        <p>
+                            반복을 위한 반복보다, 왜 그런지 스스로 설명할 수 있는 이해를 더 중요하게 생각합니다.
+                            배운 내용을 자기 언어로 정리할 수 있을 때 학습은 오래 남습니다.
+                        </p>
+                    </div>
+
+                    <div class="philo-card">
+                        <div class="small">02</div>
+                        <h4>지속 가능한 공부</h4>
+                        <p>
+                            무리한 속도로 단기간 몰아붙이는 방식은 오래가기 어렵습니다.
+                            클로버는 학생이 일상 속에서 안정적으로 유지할 수 있는 공부 리듬을 지향합니다.
+                        </p>
+                    </div>
+
+                    <div class="philo-card">
+                        <div class="small">03</div>
+                        <h4>존중받는 학습 환경</h4>
+                        <p>
+                            학생이 편안함을 느끼는 공간은 집중의 밀도를 바꿉니다.
+                            정돈된 분위기와 불필요한 긴장을 줄인 환경 또한 교육의 중요한 일부라고 생각합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="philo-section">
+            <div class="academy-wrap">
+                <div class="philo-statement">
+                    <div class="philo-statement-left">
+                        <div class="small">PHILOSOPHY STATEMENT</div>
+                        <h3>
+                            클로버는 학생을<br>
+                            하나의 기준으로만<br>
+                            판단하지 않습니다
+                        </h3>
+                    </div>
+
+                    <div class="philo-statement-right">
+                        <div class="small">OUR DIRECTION</div>
+                        <p>
+                            같은 목표를 향하더라도 학생마다 익숙한 속도와 이해 방식은 다를 수 있습니다.
+                            클로버는 모두를 같은 틀에 맞추기보다, 각자가 자신의 힘으로 공부를 이어갈 수 있도록
+                            전체적인 학습 환경을 균형 있게 설계합니다.
+                        </p>
+                        <p>
+                            우리가 중요하게 생각하는 것은 순간적인 성과를 만드는 자극보다,
+                            시간이 지나도 무너지지 않는 공부의 태도와 기본입니다.
+                        </p>
+
+                        <div class="philo-line-box">
+                            <strong>결국 남는 것은 습관과 태도입니다</strong>
+                            <span>
+                                작은 이해가 반복되고, 익숙한 공부 흐름이 만들어질 때
+                                학생은 스스로 성장할 수 있는 힘을 갖게 됩니다.
+                                클로버는 그 힘이 자연스럽게 자리 잡도록 돕는 공간이 되고자 합니다.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="philo-banner">
+            <div class="academy-wrap">
+                <div class="philo-banner-box">
+                    <div class="small">CLOVER HUB</div>
+                    <h3>
+                        공간 대여/맞춤 식단표/맞춤 To-Do까지 한곳에서
+                    </h3>
+                    <p>
+                        클로버는 학생이 공부에만 집중할 수 있도록 학습 외적인 흐름까지 함께 설계합니다.
+                        필요한 시간에 맞춰 이용할 수 있는 공간 대여, 개인 설정에 따라 제공되는 맞춤 식단표,
+                        그리고 하루의 학습 계획을 정리할 수 있는 맞춤 To-Do 기능까지
+                        하나의 흐름 안에서 편리하게 이용할 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="academy-contact">
+            <div class="academy-contact-inner">
+                <h3>지금 바로 문의하세요!</h3>
+                <p>학원 안내 및 상담 문의</p>
+
+                <div class="academy-contact-form">
+                    <input type="text" placeholder="이름">
+                    <input type="text" placeholder="'-' 없이 숫자만 입력">
+                    <a href="tel:0410000000">문의하기</a>
+                </div>
+
+                <div class="academy-contact-agree">
+                    <label>
+                        <input type="checkbox">
+                        개인정보 수집/이용동의
+                    </label>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-include" class="ftr"></footer>
+
+    <a href="#" class="top-btn">TOP</a>
+
+    <script src="./common.js"></script>
+    <script>
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('logoutBtn')) {
+                localStorage.removeItem('loginUser');
+                location.href = "메인페이지.html";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

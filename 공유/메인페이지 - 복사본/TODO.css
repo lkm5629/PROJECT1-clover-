@@ -1,0 +1,1218 @@
+/* ===============================
+   1. 폰트 설정
+   =============================== */
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff")
+    format("woff");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff")
+    format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff")
+    format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Escoredream", sans-serif;
+  background: #fff;
+  color: #333;
+  overflow-x: hidden;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.hide {
+  display: none !important;
+}
+
+/* ===============================
+   2. 공통 기본 스타일
+   =============================== */
+/* .hdr {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+} */
+.top-bar {
+  background: #fafafa;
+  border-bottom: 1px solid #f2f2f2;
+}
+.inner {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+}
+.util-row {
+  min-height: 38px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  color: #777;
+}
+.nav-row {
+  min-height: 82px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.brand-logo {
+  height: 52px;
+  display: block;
+}
+.desktop-gnb {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.desktop-gnb a {
+  font-size: 15px;
+  font-weight: 500;
+}
+.desktop-gnb a.active {
+  color: #8a6a00;
+  font-weight: 700;
+}
+.mobile-menu-btn {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.mobile-menu-btn span {
+  width: 18px;
+  height: 2px;
+  background: #333;
+  border-radius: 999px;
+  display: block;
+}
+.mobile-menu-panel {
+  display: none;
+  border-top: 1px solid #eaeaea;
+  background: #fff;
+}
+.mobile-menu-panel.open {
+  display: block;
+}
+.mobile-menu-inner {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 14px 0 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mobile-menu-inner a {
+  padding: 14px 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  background: #fff;
+}
+.mobile-menu-inner a.active {
+  background: #fff1bf;
+  border-color: #fbcb4c;
+}
+
+/* ===============================
+   3. TODO 레이아웃
+   =============================== */
+.todo-main {
+  padding: 24px 0 110px 0;
+  background: linear-gradient(180deg, #fffdf7 0%, #ffffff 180px);
+}
+.todo-shell {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+}
+
+.left-nav {
+  padding: 18px;
+  border: 1px solid #eaeaea;
+  border-radius: 22px;
+  background: #fff;
+  align-self: start;
+  position: sticky;
+  top: 122px;
+}
+.left-nav-btn {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  background: #fff;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 700;
+}
+.left-nav-btn:last-child {
+  margin-bottom: 0;
+}
+.left-nav-btn:hover {
+  background: #fffcf1;
+}
+.left-nav-btn.active {
+  background: #fbcb4c;
+  border-color: #fbcb4c;
+}
+
+.content-area {
+  min-width: 0;
+}
+.todo-page {
+  display: none;
+}
+.todo-page.active {
+  display: block;
+}
+.page-top {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.page-sub-text {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #777;
+}
+.page-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+}
+.page-action-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.main-btn {
+  padding: 12px 18px;
+  border: 1px solid #fbcb4c;
+  border-radius: 14px;
+  background: #fbcb4c;
+  font-size: 14px;
+  font-weight: 700;
+}
+.main-btn:hover {
+  background: #fff1bf;
+}
+.line-btn {
+  padding: 12px 18px;
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+.line-btn:hover {
+  background: #fafafa;
+}
+.small-btn {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.danger-btn {
+  color: #c44a4a;
+}
+
+.menu-area {
+  position: relative;
+}
+.drop-menu {
+  width: 160px;
+  padding: 8px;
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  background: #fff;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+  display: none;
+  z-index: 50;
+}
+.drop-menu.open {
+  display: block;
+}
+.drop-menu button {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+.drop-menu button:hover {
+  background: #fff1bf;
+}
+
+/* ===============================
+   4. 일정DB 필터 / 테이블
+   =============================== */
+.filter-wrap {
+  margin-bottom: 14px;
+}
+.filter-details {
+  border: 1px solid #eaeaea;
+  border-radius: 18px;
+  background: #fff;
+  overflow: hidden;
+}
+.filter-summary {
+  padding: 14px 16px;
+  list-style: none;
+  position: relative;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+}
+.filter-summary::-webkit-details-marker {
+  display: none;
+}
+.filter-summary::after {
+  content: "⌄";
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+.filter-details[open] .filter-summary::after {
+  transform: rotate(180deg);
+}
+.filter-grid {
+  padding: 0 16px 16px 16px;
+  display: grid;
+  /* 4-1. 조회 항목이 4개(구분/날짜/상태/버튼)라서 4칸으로 맞춘다. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.filter-item label {
+  margin-bottom: 8px;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+.filter-btns {
+  /* 4-2. 적용 / 초기화 버튼은 아래 라벨 기준선에 맞춘다. */
+  display: flex;
+  align-items: end;
+  gap: 10px;
+}
+
+.selected-count-info {
+  margin: 0 0 10px 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #8a6a00;
+}
+
+.fix-input,
+.fix-textarea {
+  width: 100%;
+  border: 1px solid #d7d7d7;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  color: #222;
+}
+.fix-input {
+  height: 46px;
+  padding: 0 12px;
+}
+.fix-textarea {
+  min-height: 110px;
+  padding: 12px;
+  resize: vertical;
+}
+
+/* ===============================
+   5. 모달 입력창 / 보기 / 수정 상태
+   =============================== */
+
+/* 보기 모드 = 값 확인용 */
+.modal-view-mode .fix-input,
+.modal-view-mode .fix-textarea {
+  background: #fff;
+  border-color: #d7d7d7;
+  color: #222;
+  opacity: 1;
+  font-weight: 500;
+}
+
+/* ✅ 모달 수정 모드 = 연하게 */
+.modal-edit-mode .fix-input,
+.modal-edit-mode .fix-textarea {
+  background: #fafafa;
+  border-color: #e6e6e6;
+  color: #222; /* ✅ 작성된 값/입력 글씨는 검정 */
+  font-weight: 400;
+}
+
+.modal-edit-mode .fix-input::placeholder,
+.modal-edit-mode .fix-textarea::placeholder {
+  color: #b5b5b5; /* ✅ 미작성(placeholder)만 연한 회색 */
+}
+
+.modal-edit-mode select.fix-input {
+  color: #222;
+}
+
+/* 보기 모드일 때 선택/입력 막기 */
+.modal-view-mode .fix-input,
+.modal-view-mode .fix-textarea {
+  pointer-events: none;
+}
+
+.table-box {
+  width: 100%;
+  overflow-x: hidden;
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.todo-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.todo-table th,
+.todo-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #eaeaea;
+  text-align: center;
+  font-size: 14px;
+  min-width: 0;
+}
+
+.todo-table th {
+  background: #fafafa;
+  font-weight: 800;
+}
+.todo-table tr.checked-row td {
+  background: #fff8db;
+}
+.text-left {
+  text-align: left !important;
+}
+
+.col-check {
+  width: 48px;
+}
+.col-category {
+  width: 110px;
+}
+.col-title {
+  width: 24%;
+}
+.col-date {
+  width: 150px;
+}
+.col-time {
+  width: 170px;
+}
+.col-status {
+  width: 120px;
+}
+.col-detail {
+  width: 24%;
+}
+.col-del {
+  width: 90px;
+}
+
+.status-badge {
+  min-width: 78px;
+  padding: 7px 10px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  background: #fff;
+}
+.status-badge.progress {
+  background: #fff1bf;
+  border-color: #fbcb4c;
+}
+.status-badge.done {
+  background: #fbcb4c;
+  border-color: #fbcb4c;
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+}
+.dot {
+  font-size: 15px;
+  line-height: 1;
+}
+.dot.meeting {
+  color: #e14b4b;
+}
+.dot.work {
+  color: #2b6de5;
+}
+.dot.personal {
+  color: #2fa36b;
+}
+
+.delete-btn {
+  padding: 8px 10px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.delete-btn:hover {
+  background: #fff1bf;
+}
+
+.pager-row {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.page-info-text {
+  font-size: 14px;
+  color: #666;
+  font-weight: 700;
+}
+
+.switch-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.switch-arrow {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 900;
+}
+.switch-title {
+  min-width: 90px;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.month-picker-hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ======================================
+   6. 월간 캘린더 화면
+   6-1. 요일 헤더 / 날짜 셀
+   6-2. 일정 카드(캘린더 내부 글씨 굵기 = 위클리와 동일)
+   ====================================== */
+.calendar-modern-box {
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  background: #fff;
+  overflow: hidden;
+}
+.calendar-week-header {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-bottom: 1px solid #eaeaea;
+  background: #fafafa;
+  width: 100%;
+}
+.calendar-week-header > div {
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 800;
+  min-width: 0;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+}
+.calendar-cell {
+  min-height: 150px;
+  padding: 8px;
+  border-right: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  background: #fff;
+  cursor: pointer;
+  min-width: 0;
+}
+.calendar-cell:nth-child(7n) {
+  border-right: none;
+}
+.calendar-cell.empty {
+  background: #fcfcfc;
+  cursor: default;
+}
+.calendar-cell.selected {
+  background: #fff8db;
+}
+.calendar-cell-top {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+.calendar-day-number {
+  min-width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: #fafafa;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+.calendar-day-number.sun {
+  color: #e14b4b;
+}
+.calendar-day-number.sat {
+  color: #2457d6;
+}
+.calendar-day-number.holiday {
+  color: #e14b4b;
+}
+.holiday-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #e14b4b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 6-2-1. 캘린더 일정 카드
+   - 캘린더 일정은 button 태그로 만들어진다.
+   - button 기본 진한 표현이 남아 있으면 위클리(div)보다 더 굵게 보일 수 있다.
+   - 그래서 기본 버튼 모양을 제거하고, 카드 자체는 가볍게 두고,
+     실제 글씨 굵기는 아래 상태/제목 요소에서만 따로 잡는다. */
+.calendar-event-chip {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 6px 8px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  color: #333;
+  font-family: "Escoredream", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: left;
+  cursor: grab;
+  font-weight: 400;
+  min-width: 0;
+  overflow: hidden;
+}
+.calendar-event-chip:active {
+  cursor: grabbing;
+}
+.calendar-event-chip.progress {
+  background: #fff1bf;
+  border-color: #fbcb4c;
+}
+.calendar-event-chip.done {
+  background: #fbcb4c;
+  border-color: #fbcb4c;
+}
+.calendar-event-chip.selected {
+  box-shadow: 0 0 0 2px #fbcb4c inset;
+}
+/* 6-2-2. 캘린더 상태 글씨
+   - 실제 로드한 폰트 굵기(700) 기준으로 고정해서
+     위클리와 화면상 최대한 같은 체감으로 보이게 맞춘다. */
+.calendar-status {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+/* 6-2-3. 캘린더 제목 글씨
+   - 제목도 상태와 같은 방식으로 700 기준으로 통일한다. */
+.calendar-title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sun-text {
+  color: #e14b4b;
+}
+.sat-text {
+  color: #2457d6;
+}
+
+/* ======================================
+   7. 위클리 화면
+   7-1. 안내 박스
+   7-2. 주간 표 / 일정 블록 / 리사이즈 핸들
+   ====================================== */
+.weekly-guide-box {
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  background: #fafafa;
+}
+.weekly-guide-title {
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 900;
+}
+.weekly-guide-text {
+  font-size: 13px;
+  color: #777;
+  font-weight: 600;
+}
+
+.weekly-box {
+  height: 620px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  background: #fff;
+  position: relative;
+}
+.weekly-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.weekly-table th,
+.weekly-table td {
+  border-right: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  text-align: center;
+  background: #fff;
+}
+.weekly-table th:last-child,
+.weekly-table td:last-child {
+  border-right: none;
+}
+.weekly-table th {
+  height: 56px;
+  background: #fafafa;
+  font-size: 14px;
+  font-weight: 900;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.time-col {
+  width: 90px;
+}
+.time-cell {
+  height: 66px;
+  background: #fafafa;
+  font-size: 13px;
+  font-weight: 900;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+}
+.weekly-slot {
+  height: 66px;
+  padding: 4px;
+  position: relative;
+  vertical-align: top;
+}
+.weekly-slot.drag-hover {
+  background: #fff8db;
+}
+.weekly-head-main {
+  display: block;
+  font-size: 14px;
+  font-weight: 900;
+}
+.weekly-head-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #777;
+  font-weight: 700;
+}
+
+.weekly-event {
+  width: calc(100% - 8px);
+  padding: 8px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  background: #fff;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  z-index: 6;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.08);
+  cursor: grab;
+  user-select: none;
+}
+.weekly-event:active {
+  cursor: grabbing;
+}
+.weekly-event.progress {
+  background: #fff1bf;
+  border-color: #fbcb4c;
+}
+.weekly-event.done {
+  background: #fbcb4c;
+  border-color: #fbcb4c;
+}
+.weekly-event.selected {
+  box-shadow: 0 0 0 2px #fbcb4c inset;
+}
+/* 7-2-1. 위클리 상태 글씨 기준
+   - 캘린더와 완전히 같은 체감이 나도록 700으로 통일한다. */
+.weekly-event-status {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 7-2-2. 위클리 제목 글씨 기준
+   - 캘린더와 동일한 글씨 기준으로 맞춘다. */
+.weekly-event-title {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.weekly-event-time {
+  font-size: 11px;
+  color: #555;
+  font-weight: 700;
+}
+.resize-handle {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  cursor: ns-resize;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ===============================
+   8. 플로팅 버튼 / 모달 레이아웃
+   =============================== */
+.fab-btn {
+  width: 62px;
+  height: 62px;
+  border: none;
+  border-radius: 50%;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2200;
+  background: #fbcb4c;
+  color: #333;
+  font-size: 30px;
+  font-weight: 900;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.16);
+}
+.fab-btn:hover {
+  background: #fff1bf;
+}
+.fab-menu {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  z-index: 2200;
+  display: none;
+}
+.fab-menu.open {
+  display: block;
+}
+.fab-menu-item {
+  padding: 12px 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.1);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.28);
+  z-index: 2300;
+}
+.todo-modal {
+  width: min(760px, calc(100% - 24px));
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 24px;
+  background: #fff;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2301;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
+}
+.modal-top {
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.modal-mode-text {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #8a6a00;
+}
+.modal-title {
+  font-size: 24px;
+  font-weight: 900;
+}
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+.full-row {
+  grid-column: 1 / -1;
+}
+.form-label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 900;
+}
+.modal-btn-row {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cell-ellipsis {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+.todo-table td:nth-child(3) .cell-ellipsis,
+.todo-table td:nth-child(7) .cell-ellipsis {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .todo-shell {
+    grid-template-columns: 1fr;
+  }
+  .left-nav {
+    position: static;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .left-nav-btn {
+    width: auto;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .desktop-gnb {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+  .util-row {
+    display: none;
+  }
+  .nav-row {
+    min-height: 72px;
+  }
+  .brand-logo {
+    height: 46px;
+  }
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .switch-control {
+    gap: 6px;
+  }
+  .switch-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .switch-title {
+    min-width: 72px;
+    height: 36px;
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  .table-box {
+    overflow-x: hidden;
+  }
+  .todo-table {
+    min-width: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .col-time,
+  .col-status,
+  .col-detail,
+  .col-del {
+    display: none;
+  }
+  .todo-table td:nth-child(5),
+  .todo-table td:nth-child(6),
+  .todo-table td:nth-child(7),
+  .todo-table td:nth-child(8) {
+    display: none;
+  }
+
+  .col-check {
+    width: 44px;
+  }
+  .col-category {
+    width: 92px;
+  }
+  .col-title {
+    width: auto;
+  }
+  .col-date {
+    width: 120px;
+  }
+
+  .todo-table th,
+  .todo-table td {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+  .todo-table td:nth-child(3) .cell-ellipsis {
+    max-width: 100px;
+  }
+
+  .calendar-week-header > div {
+    font-size: 13px;
+    height: 42px;
+  }
+  .calendar-cell {
+    min-height: 110px;
+    padding: 5px;
+  }
+  .calendar-day-number {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  /* 6-2-1. 캘린더 일정 카드: 카드 자체는 가볍게, 글씨는 내부 요소에서 따로 제어 */
+  .calendar-event-chip {
+    padding: 4px 5px;
+    min-height: 36px;
+  }
+  /* 6-2-2. 캘린더 상태 글씨: 위클리 상태 글씨와 동일 굵기 */
+  .calendar-status {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  /* 6-2-3. 캘린더 제목 글씨: 위클리 제목 글씨와 동일 굵기 */
+  .calendar-title {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  .holiday-label {
+    display: none;
+  }
+
+  .weekly-event {
+    padding: 6px;
+  }
+  /* 7-2-1. 위클리 상태 글씨 기준 */
+  .weekly-event-status {
+    margin-bottom: 4px;
+    font-size: 10px;
+  }
+  /* 7-2-2. 위클리 제목 글씨 기준 */
+  .weekly-event-title {
+    margin-bottom: 0;
+    font-size: 11px;
+  }
+  .weekly-event-time {
+    display: none;
+  }
+}
+/* 상단바 및 네비게이션 텍스트 수직 중앙 정렬 강제화 */
+/* .top-bar .inner, 
+.nav .inner {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% ;
+} */
+
+/* 폰트 때문에 위로 쏠리는 현상 보정 */
+/* .top-bar a, 
+.nav .gnb a {
+    line-height: 1 !important;
+    padding-top: 4px !important; 
+} */
+
+/* body에 들어간 패딩 제거 (헤더 밀림 방지) */
+/* body {
+    padding: 0 !important;
+} */
+ #logoImg{
+    top: 50px !important;
+}
+/* ==========================================================
+   투두 페이지 전용 상단바 고정 강제 설정
+========================================================== */
+
+/* 1. 헤더 전체 고정 */
+.hdr {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0;
+    width: 100%;
+    z-index: 9999 !important; /* 모달보다 높거나 비슷하게 설정 */
+    background: #fff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* 2. 헤더가 고정되어 붕 뜨기 때문에 본문이 겹치지 않도록 여백 추가 */
+.todo-main {
+    margin-top: 138px !important; /* common.css의 top-bar(38px) + nav(100px) 합산 높이 */
+}
+
+/* 3. 좌측 네비게이션(Sticky) 위치 조정 */
+/* 헤더가 fixed가 되면 기준점이 바뀌므로 좌측 메뉴의 top 값을 헤더 높이만큼 더 내려줘야 합니다. */
+.left-nav {
+    top: 158px !important; /* 헤더 높이(138px) + 여유분(20px) */
+}
+
+/* 모바일 대응 여백 조정 */
+@media screen and (max-width: 960px) {
+    .todo-main {
+        margin-top: 100px !important; /* 모바일에서 줄어드는 헤더 높이에 맞춤 */
+    }
+}

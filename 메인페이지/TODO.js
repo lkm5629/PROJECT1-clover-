@@ -1,4 +1,10 @@
 window.onload = function () {
+   let loginUser = loadJs("loginUser");
+   if(!loginUser){
+    alert("Todo List는 로그인 이후 이용이 가능합니다.");
+    location.href = "./login.html";
+    return;
+   }
   /*
     TODO 화면 전체 동작 파일
     - 일정DB / 캘린더 / 위클리 화면을 한 파일에서 같이 관리한다.
@@ -686,6 +692,9 @@ window.onload = function () {
       if (item.checked) tr.classList.add("checked-row");
 
       tr.addEventListener("click", function (evt) {
+        if(!loginUser){
+          return;
+        }
         const tag = evt.target.tagName.toLowerCase();
         if (tag === "input" || tag === "button") return;
 
@@ -842,6 +851,7 @@ window.onload = function () {
 
       for (const e of dayEvents) {
         // 하루 안에 들어갈 일정 칩 하나를 만든다.
+     
         const chip = document.createElement("button");
         chip.type = "button";
         chip.className = "calendar-event-chip";
@@ -863,6 +873,7 @@ window.onload = function () {
           `<span class="calendar-title">${title}</span>`;
 
         chip.addEventListener("click", function (evt) {
+
           evt.stopPropagation();
           selectSingle(e.id);
           openModalForView(e);
@@ -875,7 +886,12 @@ window.onload = function () {
           calendarDraggedEventId = null;
         });
 
-        cell.appendChild(chip);
+        // if(loginUser){
+          cell.appendChild(chip);
+        // }
+        
+
+        
       }
 
       cell.addEventListener("dragover", function (evt) {
@@ -901,6 +917,7 @@ window.onload = function () {
       });
 
       cell.addEventListener("click", function (evt) {
+
         if (
           evt.target !== cell &&
           !evt.target.classList.contains("calendar-day-number") &&
@@ -1614,7 +1631,7 @@ window.onload = function () {
 
   //////////////////////////////////////////////////////////////
   //일정 수정 로직 버튼 수정
-  let loginUser = loadJs("loginUser");
+ 
   let mainBtn = document.querySelectorAll(".main-btn");
 
   let selectedMenuBtn = document.querySelector("#selectedMenuBtn");

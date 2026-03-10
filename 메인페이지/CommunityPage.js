@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+const loginUser = loadJs("loginUser");
 
   /* ====================================================================== */
   /* [01] 기본 설정값                                                         */
@@ -77,10 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const imagePreviewListEl = document.getElementById('imagePreviewList');
   const savePostButtonEl = document.getElementById('savePostBtn');
   const fabBtn = document.querySelector(".fab-btn");
-  const loginUser = loadJs("loginUser");
-  if (!loginUser) {
-    fabBtn.style.display = "none";
-  }
+
   /* [02-7] 확인 모달 관련 요소 */
   const confirmModalEl = document.getElementById('confirmModal');
   const confirmTextEl = document.getElementById('confirmText');
@@ -855,14 +852,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ` : ''}
       </div>
     `;
-
+          const recommendBtn = document.querySelector(".recommend-btn ");
+          if(!loginUser){
+            recommendBtn.addEventListener('click',()=>{
+              return
+            })
+          }
     detailCardEl.querySelectorAll('.js-detail-edit').forEach((detailEditButtonEl) => {
+      detailEditButtonEl.style.display = "none";
       detailEditButtonEl.onclick = () => {
+        
         openEditModal(selectedPostItem.id);
       };
     });
 
     detailCardEl.querySelectorAll('.js-detail-delete').forEach((detailDeleteButtonEl) => {
+      detailDeleteButtonEl.style.display = "none";
       detailDeleteButtonEl.onclick = () => {
         openConfirmModal('이 게시글을 삭제하시겠습니까?', () => {
           deletePostAndRefresh(selectedPostItem.id);
@@ -876,9 +881,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const reportDetailButtonEl = document.getElementById('reportDetailBtn');
 
     recommendButtonEl.onclick = () => {
+      if(!loginUser){
+        recommendButtonEl.classList.remove("active");
+        return
+      }
       selectedPostItem.liked = !selectedPostItem.liked;
       selectedPostItem.likes += selectedPostItem.liked ? 1 : -1;
-
+      
       if (selectedPostItem.likes < 0) {
         selectedPostItem.likes = 0;
       }
@@ -890,6 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     saveDetailButtonEl.onclick = () => {
+       if(!loginUser){
+        // recommendButtonEl.classList.remove("active");
+        alert("로그인 이후에 이용 가능합니다.");
+        return
+      }
       selectedPostItem.saved = !selectedPostItem.saved;
       selectedPostItem.saveCount = Math.max(0, (selectedPostItem.saveCount || 0) + (selectedPostItem.saved ? 1 : -1));
 
@@ -900,6 +914,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     shareDetailButtonEl.onclick = async () => {
+      if(!loginUser){
+        alert("로그인 이후에 이용 가능합니다.");
+        return;
+      }
       selectedPostItem.shareCount = (selectedPostItem.shareCount || 0) + 1;
       savePostList();
 
@@ -914,6 +932,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     reportDetailButtonEl.onclick = () => {
+       if(!loginUser){
+        alert("로그인 이후에 이용 가능합니다.");
+        return;
+      }
       openConfirmModal('진짜 이 게시글을 신고하겠습니까?', () => {
         selectedPostItem.reportCount = (selectedPostItem.reportCount || 0) + 1;
         savePostList();
@@ -1054,6 +1076,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function bindReplyToggleButtons(postItem) {
     commentListEl.querySelectorAll('.js-reply-toggle').forEach((replyToggleButtonEl) => {
+      if(!loginUser){
+        replyToggleButtonEl.style.display = "none";
+        return;
+      }
       replyToggleButtonEl.onclick = () => {
         const replyBoxEl = document.getElementById(`replyBox-${replyToggleButtonEl.dataset.commentId}`);
         const replyInputEl = document.getElementById(`replyInput-${replyToggleButtonEl.dataset.commentId}`);
@@ -1164,6 +1190,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function bindReplyEditButtons(postItem) {
     commentListEl.querySelectorAll('.js-edit-reply').forEach((editReplyButtonEl) => {
+      if(!loginUser){
+        editReplyButtonEl.style.display = "none";
+      }
       editReplyButtonEl.onclick = () => {
         clearInlineEditState();
         editingReplyParentCommentId = editReplyButtonEl.dataset.commentId;
@@ -1222,6 +1251,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* [13-2] 답글 삭제 버튼 이벤트 */
   function bindReplyDeleteButtons(postItem) {
     commentListEl.querySelectorAll('.js-delete-reply').forEach((deleteReplyButtonEl) => {
+      if(!loginUser){
+        deleteReplyButtonEl.style.display = "none";
+      }
       deleteReplyButtonEl.onclick = () => {
         openConfirmModal('이 답글을 삭제하시겠습니까?', () => {
           const targetCommentItem = postItem.comments.find((commentItem) => String(commentItem.id) === String(deleteReplyButtonEl.dataset.commentId));
@@ -1889,8 +1921,12 @@ document.addEventListener('DOMContentLoaded', () => {
   /* [17] 댓글 작성                                                            */
   /* ====================================================================== */
   function addComment() {
+    if(!loginUser){
+      alert("로그인 이후에 이용이 가능합니다.");
+      return;
+    }
     const commentText = commentInputEl.value.trim();
-
+    
     if (!commentText) {
       alert('댓글 내용을 입력해 주세요.');
       return;

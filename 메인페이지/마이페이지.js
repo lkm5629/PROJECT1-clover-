@@ -1,5 +1,6 @@
 // 페이지가 완전히 뜨면 실행
 window.addEventListener('load', async () => {
+    
     // console.log(loadJs('User')[0].name);
     // let testName = loadJs('User');
     // testName[0].name = "김도윤";

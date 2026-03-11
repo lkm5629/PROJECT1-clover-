@@ -1095,7 +1095,7 @@ img {
   position: fixed;
   inset: 0;
   /* [11-0] 상단 GNB보다 위에 오도록 z-index를 크게 올려 모달이 헤더 밑에 가려지지 않게 수정 */
-  z-index: 3000;
+  z-index: 3000 !important;
   background: rgba(30, 30, 30, 0.38);
 }
 
@@ -1107,7 +1107,7 @@ img {
   top: 104px;
   transform: translateX(-50%);
   /* [11-0-2] 실제 모달 본문도 오버레이보다 위에 떠야 하므로 별도 높은 z-index 지정 */
-  z-index: 3010;
+  z-index: 3010 !important;
 }
 
 .post-modal {
@@ -2304,7 +2304,7 @@ img {
     /* [18-1] 모바일도 저장 버튼이 안 잘리도록 높이를 조금 더 줄이고 화면 안쪽 여백을 확보 */
     width: calc(70vw - -117.5px);
     max-height: calc(100dvh -32px);
-    padding: 60px;
+    padding: 29px;
   }
 
   .modal-bottom {
@@ -2350,8 +2350,8 @@ img {
 
 @media (max-width: 760px) {
   .post-modal {
-    left: 50%;
-    top: 59%;
+    left: 41%;
+    top: 50%;
     transform: translate(-50%, -50%);
   }
 
@@ -3032,9 +3032,9 @@ img {
   .fab-btn {
     display: block !important;
     position: fixed !important;
-    top: 780px !important;  /* 아까 확인한 값 */
-    left: 343px !important; /* 아까 확인한 값 */
-    z-index: 99999 !important;
+    top: 820px !important;  
+    left: 330px !important; 
+    z-index: 2000 !important ;
     bottom: auto !important;
     right: auto !important;
   }

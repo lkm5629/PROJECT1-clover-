@@ -52,9 +52,9 @@ body {
 }
 
 .main-container {
-    max-width: 1000px;
+    max-width: 100%;
     margin: 0px 0px 0px 0px;
-    margin-left: 123px !important;
+    margin-left: 0px !important;
     background: #fff;
     border-radius: 10px;
     /* padding: 30px; */
@@ -568,9 +568,10 @@ body {
 
 /* 2. 날짜/화살표/달력 영역: 오른쪽 끝으로 바짝 붙이기 */
 .control-panel {
+    
     display: flex !important;
     justify-content: flex-end !important; /* 오른쪽 정렬 */
-    padding-right: 0 !important;
+    padding-right: 155px !important;
     margin-top: 20px !important;
 }
 
@@ -594,6 +595,6 @@ body {
     }
     .week-selector {
         margin-left: 0 !important;
-        margin-right: 0 !important;
+        margin-right: -168px !important;
     }
 }

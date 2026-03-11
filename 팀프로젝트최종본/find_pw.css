@@ -1,0 +1,174 @@
+/* [초기 설정] 여백 초기화 및 폰트 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'S-Core Dream', sans-serif;
+}
+
+body {
+    background-color: #F8F9FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 520px;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.sub-desc {
+    font-size: 15px;
+    color: #333333;
+    font-weight: 600;
+}
+
+.find-box {
+    background: white;
+    border: 1px solid #EAEAEA;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tab-menu {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #EAEAEA;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #888;
+    font-weight: 600;
+}
+
+.tab-btn.active {
+    color: #333333;
+    font-weight: 800;
+    border-bottom: 4px solid #FBCB4C;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+/* [추가] 입력창과 아이콘을 감싸는 컨테이너 */
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-field {
+    width: 100%;
+    /* 입력창 너비 확장 */
+    height: 55px;
+    border: 1.8px solid #EAEAEA;
+    padding: 0 50px 0 20px;
+    /* 아이콘 자리를 위해 오른쪽 패딩 추가 */
+    font-size: 15px;
+    outline: none;
+    border-radius: 12px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.input-field:focus {
+    border-color: #FBCB4C;
+}
+
+/* [추가] 회원가입 페이지 스타일과 동일한 눈 모양 버튼 위치 */
+.input-eye-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #CCC;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.side-btn {
+    width: 90px;
+    height: 55px;
+    background-color: #FBCB4C;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 800;
+    color: #333333;
+    transition: 0.2s;
+}
+
+.result-box {
+    margin-top: 15px;
+    padding: 18px;
+    background-color: #FFFAEC;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px dashed #FBCB4C;
+}
+
+.center-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btn-submit-yellow {
+    width: 100%;
+    max-width: 240px;
+    height: 60px;
+    background-color: #FBCB4C;
+    color: #333333;
+    border: none;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 800;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 5px;
+}
+
+.link-item {
+    text-decoration: none;
+    color: #333333;
+    padding: 5px 8px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.bar {
+    color: #DDD;
+}

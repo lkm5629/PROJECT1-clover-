@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/팀프로젝트/메인페이지/메인페이지.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>강의실 예약</title>
+    <link rel="stylesheet" href="./common.css" />
+    <link rel="stylesheet" href="./reservation.css" />
+</head>
+
+<body>
+    <header id="header-include" class="hdr"></header>
+
+    <!-- <main>
+        <section class="hero flex-center">
+        </section>
+    </main> -->
+    <!-- <div class="top-bar">
+        <div class="inner flex-right">
+            <a href="#">마이페이지</a>
+            <a href="#">로그인</a>
+            <a href="#">회원가입</a>
+        </div>
+    </div>
+    <nav class="nav">
+        <div class="inner flex-between">
+            <h1 class="logo">CLOVER</h1>
+            <ul class="gnb flex">
+                <li><a href="index.html">메인페이지</a></li>
+                <li><a href="#">학원소개</a></li>
+                <li><a href="#">강의실</a></li>
+                <li><a href="#">식단표 열람</a></li>
+                <li><a href="#">To-do</a></li>
+                <li><a href="#">커뮤니티</a></li>
+                <li><a href="#">공지사항</a></li>
+            </ul>
+        </div> -->
+    <header id="header-include" class="hdr"></header>
+
+    <div id="div1">
+        <span id="open-f">카테고리</span>
+        <div id="category-dropdown"
+            style="display:none; position:absolute; top:60px; left:1%; background:white; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+            <div class="category-item" data-type="class" data-url="reservation.html">강의실</div>
+            <div class="category-item" data-type="lab" data-url="reservation_lab.html">랩실</div>
+        </div>
+
+        <span id="open-date">날짜/시간 선택</span>
+        <span id="open-person-btn">예약 인원</span>
+        <img class="search" src="./Img/검색icon.png" />
+    </div>
+
+    <!-- 달력 영역 -->
+    <div id="calendar-box">
+        <div class="calendar-inner">
+
+            <div class="calendar-content">
+                <div class="calendar-left">
+
+                    <!-- 달력 헤더(이전/다음 + 연월 클릭) -->
+                    <div id="calendar-header"
+                        style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+                        <button id="prev-month"
+                            style="border:1px solid #ddd; background:white; border-radius:8px; padding:6px 10px; cursor:pointer;">
+                            ◀
+                        </button>
+
+                        <h3 id="current-month-year" style="margin:0; cursor:pointer;"></h3>
+
+                        <button id="next-month"
+                            style="border:1px solid #ddd; background:white; border-radius:8px; padding:6px 10px; cursor:pointer;">
+                            ▶
+                        </button>
+                    </div>
+
+                    <div id="calendar"></div>
+                    <div id="date-warning" style="color:red; font-size:12px; margin-top:5px; display:none;"></div>
+                </div>
+
+                <div class="calendar-right">
+                    <h3>시간 선택</h3>
+                    <div class="time-buttons">
+                        <button>00:00</button>
+                        <button>01:00</button>
+                        <button>02:00</button>
+                        <button>03:00</button>
+                        <button>04:00</button>
+                        <button>05:00</button>
+                        <button>06:00</button>
+                        <button>07:00</button>
+                        <button>08:00</button>
+                        <button>09:00</button>
+                        <button>10:00</button>
+                        <button>11:00</button>
+                        <button>12:00</button>
+                        <button>13:00</button>
+                        <button>14:00</button>
+                        <button>15:00</button>
+                        <button>16:00</button>
+                        <button>17:00</button>
+                        <button>18:00</button>
+                        <button>19:00</button>
+                        <button>20:00</button>
+                        <button>21:00</button>
+                        <button>22:00</button>
+                        <button>23:00</button>
+                        <button>24:00</button>
+                    </div>
+
+                    <div id="time-warning" style="color:red; font-size:12px; margin-top:5px; display:none;"></div>
+
+                    <!-- 인원 선택 영역 -->
+                    <h3>예약 인원</h3>
+                    <div class="people-selector">
+                        <button id="minus-person">-</button>
+                        <span id="person-count">1</span> 명
+                        <button id="plus-person">+</button>
+                    </div>
+
+                    <!-- 최대 수용 인원 경고 -->
+                    <div id="people-warning" style="color:red; font-size:12px; margin-top:6px; display:none;"></div>
+                </div>
+            </div>
+
+            <!-- 오른쪽 아래 버튼 2개 나란히 -->
+            <div id="calendar-actions">
+                <button id="reset-calendar" class="reserve-btn reserve-btn--ghost">초기화</button>
+                <button id="close-calendar" class="reserve-btn">닫기 ✕</button>
+            </div>
+
+        </div>
+
+        <!-- 연/월 선택 모달 -->
+        <div id="ymModal"
+            style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:2000;">
+            <div style="background:#fff; width:280px; padding:18px; border-radius:14px; border:1px solid #ddd;">
+                <h3 style="margin:0;">연도 / 월 선택</h3>
+
+                <div style="display:flex; gap:10px; margin-top:12px;">
+                    <select id="yearSelect"
+                        style="flex:1; padding:8px 10px; border:1px solid #ccc; border-radius:10px;"></select>
+                    <select id="monthSelect"
+                        style="flex:1; padding:8px 10px; border:1px solid #ccc; border-radius:10px;"></select>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-top:14px;">
+                    <button id="ymApply" class="reserve-btn" style="flex:1;">적용</button>
+                    <button id="ymClose" class="reserve-btn reserve-btn--ghost" style="flex:1;">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="hr1" />
+
+    <div class="class-list">
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2MThhZTMwODE5MTg2ZjgzZWFjMWQ5OWVhYzM6ZmlsZV8wMDAwMDAwMGE1NTA3MjA2YWY0NDU5M2I2YmJhNjg3OCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjI4MGY4ZGIxOTE4MzcxYjIxZTkxZDA3MGU1NTMyOTgxNzY5NTA1ODc3MzU1NGNiYjgzYjA1NGRhZTQzYzUwNTkiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실1" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 801호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2YjBhMjA0ODE5MWFmZmVmYjZiNjRmMTcxZmI6ZmlsZV8wMDAwMDAwMDY1OGM3MjA2ODVhZGIxZTEwNmRjZjE1MCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImQ1YjhkMmExMzU3N2Y0ZWU3MmMxMTI0NjYyZjU1ZWFhZWRhN2U5YjkzNmJmMGNlMDJmNWQyMWZkYzI3MDVhNDciLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실2" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 802호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3MGFhMWIwODE5MTlkYWY3YzhmOGNmN2ZmOWM6ZmlsZV8wMDAwMDAwMDI5MDg3MjA2OTc0MWIwODNkMzBjYTI3OSIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjE5NTQwZjVjNjUzNTE4NjI2Nzc5NzNlODA5ZjI3OTRjY2M1NWE5OGMxYjhmOGIzYmUzMTc2OWIyMTFkZjU4Y2YiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실3" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 803호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3YjkzM2E4ODE5MTlhY2RhMjY2ZWIzNWQzNDI6ZmlsZV8wMDAwMDAwMDgzZjA3MjA2OWEwYWE0YTQ3MjUxZjEyMCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjMxMjljYzU3MzY1OWIwYjRlZjA3MTUyMTNlZTY1NDJiZmZlZGMxMTFiYzQxY2VjZTRkNmU0ZTI5MDcyMDgzM2MiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실4" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 804호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="./Img/6.png" alt="랩실5" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 805호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="./Img/랩실1.png" alt="랩실6" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 806호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2MThhZTMwODE5MTg2ZjgzZWFjMWQ5OWVhYzM6ZmlsZV8wMDAwMDAwMGE1NTA3MjA2YWY0NDU5M2I2YmJhNjg3OCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjI4MGY4ZGIxOTE4MzcxYjIxZTkxZDA3MGU1NTMyOTgxNzY5NTA1ODc3MzU1NGNiYjgzYjA1NGRhZTQzYzUwNTkiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실7" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 807호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2YjBhMjA0ODE5MWFmZmVmYjZiNjRmMTcxZmI6ZmlsZV8wMDAwMDAwMDY1OGM3MjA2ODVhZGIxZTEwNmRjZjE1MCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImQ1YjhkMmExMzU3N2Y0ZWU3MmMxMTI0NjYyZjU1ZWFhZWRhN2U5YjkzNmJmMGNlMDJmNWQyMWZkYzI3MDVhNDciLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실8" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 808호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3MGFhMWIwODE5MTlkYWY3YzhmOGNmN2ZmOWM6ZmlsZV8wMDAwMDAwMDI5MDg3MjA2OTc0MWIwODNkMzBjYTI3OSIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjE5NTQwZjVjNjUzNTE4NjI2Nzc5NzNlODA5ZjI3OTRjY2M1NWE5OGMxYjhmOGIzYmUzMTc2OWIyMTFkZjU4Y2YiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실9" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 809호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div class="class-item">
+            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3YjkzM2E4ODE5MTlhY2RhMjY2ZWIzNWQzNDI6ZmlsZV8wMDAwMDAwMDgzZjA3MjA2OWEwYWE0YTQ3MjUxZjEyMCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjMxMjljYzU3MzY1OWIwYjRlZjA3MTUyMTNlZTY1NDJiZmZlZGMxMTFiYzQxY2VjZTRkNmU0ZTI5MDcyMDgzM2MiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9"
+                alt="랩실10" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 810호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <!-- <div class="class-item">
+            <img src="./Img/랩실6.png" alt="랩실5" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 811호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div> -->
+        <div class="class-item">
+            <img src="./Img/랩실1.png" alt="랩실11" />
+            <div class="class-info">
+                <h2>클로버 허브 교육센터 811호</h2>
+                최대 수용 인원: 20명<br /><br />
+                시설물: 빔 프로젝터, 전동 스크린, 화이트보드, Wi-Fi<br />
+                편의 시설: 냉난방 완비, 공기청정기, 정수기<br /><br />
+                이용 가능: 스터디, 세미나, 회의<br />
+                운영 시간: 24시간 연중무휴<br /><br /><br />
+                예약 상태 <span class="status">예약 가능</span>
+                <button class="reserve-btn">예약하기</button>
+            </div>
+        </div>
+        <div id="pagination" class="pagination"></div>
+    </div>
+    <footer id="footer-include" class="ftr">
+        <!-- <div class="inner">
+                <div class="ftr-top flex-between">
+                    <div class="ftr-logo">CLOVER <span>PREMIUM</span></div>
+                    <div class="ftr-links">
+                        <a href="#">개인정보 처리 방침</a>
+                        <a href="#">이용 약관</a>
+                        <a href="#">오시는 길</a>
+                        <a href="#">고객센터</a>
+                    </div>
+                </div>
+                <div class="ftr-info">
+                    <p>충청남도 천안시 대흥로 123 - 456번지 | 대표: 최민수 | 이메일: clover@clover.com</p>
+                    <p class="copy mt-20">ⓒ 2026 CLOVER EDUCATION. All Rights Reserved.</p>
+                </div>
+            </div> -->
+        <a href="#" class="top-btn">TOP</a>
+    </footer>
+
+
+
+    <script src="./common.js"></script>
+    <!-- <script src="/팀프로젝트/메인페이지/common.js"></script> -->
+    <script src="./reservation.js"></script>
+    <!-- <script src=""></script> -->
+    <!-- <script src="./마이페이지.js"></script> -->
+
+</body>
+
+</html>

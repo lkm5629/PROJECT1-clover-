@@ -1,0 +1,1471 @@
+/* ==========================================================
+   마이페이지 레이아웃 (왼쪽 사이드바 + 오른쪽 콘텐츠)
+========================================================== */
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 300;
+    src: url('./SCDream3.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 400;
+    src: url('./SCDream4.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 500;
+    src: url('./SCDream5.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 600;
+    src: url('./SCDream6.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-weight: 700;
+    src: url('./SCDream7.otf') format('opentype');
+}
+
+.mypage-wrap.inner{
+    margin-top: -35px;
+}
+/* 전체 컨테이너 (Flexbox로 좌우 배치) */
+.mypage-wrap {
+    display: flex;
+    padding: 80px 0px;
+    gap: 50px;
+    /* 왼쪽 사이드바와 오른쪽 콘텐츠 사이의 간격 */
+    min-height: 10%;
+}
+
+.disn {
+    display: none;
+}
+
+.disb {
+    display: block;
+}
+
+/* .gtx{
+    display: none;
+} */
+/* --- 왼쪽 사이드바 --- */
+.mypage-sidebar {
+    width: 200px;
+    /* 사이드바 너비 고정 */
+    flex-shrink: 0;
+    /* 창이 좁아져도 사이드바 너비가 줄어들지 않음 */
+    border-right: 1px solid var(--border, #e2e8f0);
+    /* 오른쪽 구분선 */
+    padding-right: 30px;
+}
+
+/* 사이드바 로고 박스 */
+.sidebar-img {
+    border: 2px solid black;
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 9999px;
+    margin-bottom: 50px;
+}
+
+/* 메뉴 리스트 간격 */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 개별 메뉴 버튼 (스토리보드 스타일) */
+.menu-btn {
+    display: block;
+    padding: 12px 15px;
+    border: 2px solid var(--text, #1a1a1a);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: left;
+    /* 스토리보드처럼 텍스트 왼쪽 정렬 */
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+.menu-btn.ch1{
+    display: block;
+    padding: 12px 15px;
+    border: 2px solid var(--text, #1a1a1a);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: left;
+    /* 스토리보드처럼 텍스트 왼쪽 정렬 */
+    transition: all 0.3s ease;
+    background-color: orangered;
+}
+
+.menu-btn:hover {
+    background-color: var(--gray, #f4f5f7);
+}
+
+/* 활성화된(선택된) 메뉴 스타일 */
+.menu-btn.active {
+    background-color: #e0e0e0;
+    /* 스토리보드의 회색 배경 */
+}
+
+/* --- 오른쪽 콘텐츠 영역 --- */
+.mypage-content {
+    flex-grow: 1;
+    /* 남은 오른쪽 공간을 꽉 채움 */
+    /* 영역이 잘 나뉘었는지 눈으로 확인하기 위한 임시 선 (나중에 지우면 돼!) */
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    padding: 40px;
+    display: none;
+}
+
+.mypage-content.activeM {
+    display: block;
+}
+
+.mypage-content.activeN {
+    display: none;
+}
+
+/* 전체 레이아웃 리셋 & 폰트 설정 */
+/* * { */
+    /* box-sizing: border-box; */
+    /* margin: 0; */
+    /* padding: 0; */
+/* } */
+
+body {
+    width: auto;
+}
+
+/* 메인 컨테이너 (카드 형태) */
+.profile-setting-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+/* 상단 헤더 */
+.setting-header {
+    padding: 30px 40px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.setting-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.setting-header p {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Grid Row 설정 (핵심 구조) */
+.form-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.form-row:last-child {
+    border-bottom: none;
+}
+
+/* 레이블 (왼쪽 칸) */
+.form-label {
+    background-color: #fafafa;
+    padding: 24px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+}
+
+/* 필수 기호 (예쁜 붉은 점) */
+.required::after {
+    content: '*';
+    color: #ef4444;
+    margin-left: 4px;
+    font-size: 16px;
+}
+
+/* 입력 컨텐츠 (오른쪽 칸) */
+.form-content {
+    padding: 24px 30px;
+    display: flex;
+}
+
+/* Flex 정렬 유틸리티 */
+.flex-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.flex-col {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.gap-large {
+    gap: 24px;
+}
+
+/* 프로필 아바타 (원형) */
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #e5e7eb;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 입력창 (Input Box) 디자인 */
+.input-box {
+    width: 100%;
+    max-width: 280px;
+    height: 42px;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #111827;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.input-box2 {
+    width: 100%;
+    max-width: 280px;
+    height: 42px;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #111827;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.input-box:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-box.short {
+    max-width: 140px;
+}
+
+.input-box.mini {
+    max-width: 80px;
+}
+
+/* 읽기 전용 입력창 (부드러운 음영) */
+.input-box.readonly {
+    background-color: #f9fafb;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+    cursor: not-allowed;
+}
+
+.input-box.readonly:focus {
+    box-shadow: none;
+    border-color: #e5e7eb;
+}
+
+/* 작은 입력 래퍼 (아이디, 이름 등) */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.input-prefix {
+    font-size: 13px;
+    color: #6b7280;
+    width: 50px;
+}
+
+/* 안내 텍스트 */
+.guide-text {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+.at-sign {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* 버튼 디자인 (모던 스타일) */
+.btn {
+    height: 42px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-outline {
+    background: #fff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+}
+
+.btn-outline:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.btn-text {
+    background: transparent;
+    border: none;
+    padding: 0 8px;
+}
+
+.text-danger {
+    color: #ef4444;
+}
+
+.text-danger:hover {
+    background: #fef2f2;
+}
+
+.btn-primary {
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 0 32px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 0 32px;
+}
+
+.btn-secondary:hover {
+    background: #f3f4f6;
+}
+
+/* 하단 푸터 (버튼 영역) */
+.setting-footer {
+    padding: 30px 40px;
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* 체크박스 커스텀 (깔끔하게) */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: 16px;
+    height: 16px;
+    accent-color: #3b82f6;
+    cursor: pointer;
+}
+
+/* 휴대폰 번호 전용 입력창 (가운데 정렬 및 너비 축소) */
+.phone-input {
+    width: 80px !important;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* 하이픈(-) 기호 */
+.dash {
+    color: #6b7280;
+    font-weight: 500;
+    margin: 0 2px;
+}
+
+
+/* ==========================================================
+   회원 탈퇴 섹션 전용 스타일
+========================================================== */
+
+.withdrawal-body {
+    padding: 40px;
+    background-color: #fff;
+}
+
+/* 행(Row) 간격 설정 */
+.withdraw-row {
+    margin-bottom: 40px;
+}
+
+/* 파란색 제목 라벨 */
+.withdraw-label {
+    display: inline-block;
+    color: #4b629b;
+    /* 이미지와 유사한 차분한 파란색 */
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+/* 비밀번호 입력 (밑줄 스타일) */
+.withdraw-row.input-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 10px;
+}
+
+.withdraw-row.input-row .withdraw-label {
+    margin-bottom: 0;
+    width: 150px;
+    /* 라벨 너비 고정 */
+}
+
+.withdraw-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #111827;
+    flex-grow: 1;
+    letter-spacing: 3px;
+    /* 비밀번호 동그라미 간격 넓게 */
+}
+
+/* 약관 텍스트 박스 */
+.terms-box {
+    width: 100%;
+    height: 220px;
+    border: 1px solid #6b7280;
+    background-color: #fcfcfc;
+    padding: 20px;
+    overflow-y: auto;
+    /* 내용이 길어지면 스크롤 생성 */
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.8;
+}
+
+/* 약관 동의 체크박스 가운데 정렬 */
+.withdraw-agree-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.flex-center-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+/* 큼지막한 탈퇴 버튼 */
+.btn-withdraw {
+    width: 100%;
+    height: 54px;
+    background-color: #4b629b;
+    /* 라벨 색상과 통일 */
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-withdraw:hover {
+    background-color: #384c7d;
+}
+
+.role-admin {
+    display: none;
+}
+
+/* ==========================================================
+   Dashboard 전용 스타일 (mypage-content 내부에 적용)
+========================================================== */
+
+/* Dashboard를 감싸는 컨테이너 설정 추가 */
+#mypage-content-dashboard {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 0;
+    /* 내부 패딩을 header와 body로 나눔 */
+    overflow: hidden;
+}
+
+/* 위젯들을 그리드로 배치 */
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* 반응형 그리드 */
+    gap: 20px;
+    padding: 30px 40px;
+    /* form-content와 유사한 패딩 */
+}
+
+/* 개별 위젯 카드 */
+.widget-card {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.widget-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 위젯 내부 텍스트 스타일 */
+.widget-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b5563;
+    margin: 0;
+}
+
+.widget-value {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.widget-desc {
+    font-size: 12px;
+    color: #9ca3af;
+    margin: 0;
+}
+
+/* 유틸리티 클래스 (텍스트 색상) */
+.text-primary {
+    color: #3b82f6;
+}
+
+.text-success {
+    color: #10b981;
+}
+
+.text-warning {
+    color: #f59e0b;
+}
+
+.text-danger {
+    color: #ef4444;
+}
+
+.text-gray {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+/* ==========================================================
+   Users 관리 섹션 전용 스타일
+========================================================== */
+
+.users-body {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 상단 컨트롤 (검색, 필터) */
+.users-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+/* 테이블 컨테이너 */
+.users-table-container {
+    overflow-x: auto;
+    /* 내용이 길면 가로 스크롤 */
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px;
+    display: table !important;
+}
+
+.users-table th,
+.users-table td {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    display:  table-cell !important;
+}
+
+.users-table th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.users-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 역할(Role) 뱃지 스타일 */
+.role-badge {
+    padding: 4px 8px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.role-badge.admin {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.role-badge.user {
+    background-color: #d1fae5;
+    color: #10b981;
+}
+
+/* 액션 버튼 (수정, 삭제) */
+.action-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    margin-right: 4px;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.page-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #374151;
+    transition: all 0.2s;
+}
+
+.page-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.page-btn.active {
+    background-color: #3b82f6;
+    color: #fff;
+    border-color: #3b82f6;
+}
+
+/* 유틸 (최대 너비 확장 필요시) */
+.max-w-100 {
+    max-width: 100%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+
+
+
+
+
+/* 따로 제작 */
+li {
+    margin-top: 5px;
+}
+
+#mypage-sec1-all {
+    background-color: #fcefc283;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+/* #mypage-sec1-all input{} */
+.mypage-content1-top {
+    border-bottom: 1px solid gray;
+    margin-bottom: 30px;
+}
+
+.mypage-content1-bottom {
+    /* border: 1px solid blue; */
+}
+
+th {
+    width: 163px; /* 고정 width 대신 적절한 너비 부여 */
+    min-width: 163px;
+    background-color: #FBCB4C;
+    display: flex !important;
+    align-items: center;
+    height: 90px;
+    justify-content: flex-start !important;
+    flex-direction: row;
+    border-radius: 10px;
+    padding-left: 0px;
+    border-radius: 10px;
+}
+
+td {
+    max-width: 650px;
+    min-width: 120px;
+    height: auto;
+    /* padding: 20px; */
+    background-color: #FFF1BF;
+    /* width: 800px; */
+    border-radius: 10px;
+    
+}
+/* tr 역할을 하는 요소가 있다면 flex 배치를 권장합니다 */
+.mypage-content1-bottom table tr {
+    display: flex;
+    gap: 1px;
+    margin-bottom: 10px;
+}
+.tr-star {
+    /* width: 10px; */
+    color: red;
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 10px;
+    display: inline-block !important;
+    /* flex-direction: ; */
+    align-items: center;
+    justify-content: start ;
+    line-height: 1;
+    
+
+
+}
+
+
+/* 항목 글씨 (아이디, 이름, 닉네임 등) */
+.content1-status {
+    margin-left: 20px;
+    display: inline-block;
+}
+
+/* input type = text */
+.mypage-content1-inputT, .phoneChk3-text {
+    width: 230px;
+    height: 24px;
+    border-radius: 5px;
+}
+
+/* password 텍스트 문구 */
+.pw-text {
+    font-size: 13px;
+    margin: 10px;
+}
+
+
+/* 닉네임 중복 체크 버튼 */
+.nickChk {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 80px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* 핸드폰 인증번호 발송 버튼 */
+.phoneChk,
+.phoneChk2 {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* select 이메일 */
+#email-select {
+    border-radius: 5px;
+    height: 25px;
+    border: 2px solid black;
+    width: 120px;
+}
+
+/* select 생년월일 */
+.birth {
+    height: 25px;
+    width: 70px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.newpw-text1{
+    color: red;
+}
+
+
+/* 확인 버튼 */
+.mypage-content1-btn  {
+    width: 100px;
+    height: 40px;
+    font-weight: 700;
+    cursor: pointer;
+    /* margin-left: 350px; */
+    margin: 50px 0px 50px 350px;
+    border-radius: 10px;
+    background-color: #FBCB4C;
+}
+
+/* 보안강도 상중하 span */
+.tier{
+    font-weight: 900;
+}
+
+/* 회원탈퇴 화면 */
+#Delete-Account{
+    /* border: 1px solid black; */
+    width: auto;
+    height: 750px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 40px;
+}
+#delete-text{
+margin-bottom: 10px;
+}
+.delete-span-text{
+    font-size: 15px;
+    
+}
+.delete-gap{
+    margin-top: 30px;
+}
+.delete-pw{
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+.delete-pw-input{
+    width: 550px;
+    height: 40px;
+    background-color:  white;
+    border: none;
+    font-size: 20px;
+    outline: none;
+}
+.delete-Terms{
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 30px 30px 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.delete-Terms-span{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.delete-botom{
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.delete-btn{
+    width: 100px;
+    height: 40px;
+    font-weight: 700;
+    cursor: pointer;
+    /* margin-left: 350px; */
+    /* margin: 50px 0px 50px 350px; */
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #FBCB4C;
+}
+
+/* admin로그인 페이지 */
+#user-search-btn{
+    width: 70px;
+}
+
+.active{
+    background-color: #6b7280;
+    
+}
+
+#사용자예약전체{
+    max-width: 900px;
+     width: 100%;
+    background-color: white;
+    height: 1200px;
+}
+
+
+/* ==========================================================
+   반응형 미디어 쿼리 (1024px, 768px, 480px)
+========================================================== */
+
+@media screen and (max-width: 1024px) {
+    .mypage-wrap {
+        padding: 50px 20px;
+        gap: 30px;
+    }
+
+    .mypage-sidebar {
+        width: 180px;
+        padding-right: 20px;
+    }
+
+    .sidebar-img {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 30px;
+    }
+
+    .form-row {
+        grid-template-columns: 160px 1fr;
+    }
+
+    td {
+        width: auto;
+    }
+
+    .delete-pw-input {
+        width: 100%;
+    }
+}
+
+/* ==========================================================
+   태블릿 & PC (769px 이상) 테이블 강제 결합 (갈라짐 방지)
+========================================================== */
+@media screen and (min-width: 769px) {
+    /* 1. 간격 원천 차단 */
+    .mypage-table,
+    .mypage-content1-bottom table {
+        /* width: 100% !important; */
+        table-layout: fixed !important;
+        border-collapse: separate !important;
+        border-spacing: -1 15px !important; /* 좌우 간격 0, 위아래 간격 15px */
+    }
+
+    /* 2. 문제의 flex와 gap 해제 */
+    .mypage-table tr,
+    .mypage-content1-bottom table tr {
+        /* display: table-row !important; */
+        margin: 0 !important;
+    }
+
+    /* 3. 라벨(th): 왼쪽만 둥글게 */
+    .mypage-table th,
+    .mypage-content1-bottom table th {
+        /* display: table-cell !important; */
+        background-color: #FBCB4C !important;
+        border-radius: 10px 0 0 10px !important; /* 오른쪽 모서리 직각 */
+        width: 160px !important;
+        height: 80px !important;
+        vertical-align: middle !important;
+        text-align: center !important;
+        border: none !important;
+    }
+
+    /* 4. 내용(td): 오른쪽만 둥글게 */
+    .mypage-table td,
+    .mypage-content1-bottom table td {
+        display: table-cell !important;
+        background-color: #FFF1BF !important;
+        border-radius: 0 10px 10px 0 !important; /* 왼쪽 모서리 직각 */
+        width: 800px ;
+        padding: 15px 20px !important;
+        vertical-align: middle !important;
+        border: none !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mypage-wrap {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    .mypage-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border, #e2e8f0);
+        padding-right: 0;
+        padding-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar-menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .menu-btn {
+        text-align: center;
+    }
+
+    .mypage-content {
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-label {
+        padding: 15px 20px;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .form-content {
+        padding: 15px 20px;
+    }
+
+    th {
+        width: 140px;
+        height: auto;
+        padding: 15px;
+    }
+
+    td {
+        padding: 15px;
+        height: auto;
+    }
+
+    .mypage-content1-btn {
+        margin: 30px auto;
+        display: block;
+    }
+
+    .withdraw-row.input-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .withdraw-row.input-row .withdraw-label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #Delete-Account {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .mypage-wrap {
+        padding: 20px 10px;
+    }
+
+    .sidebar-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .menu-btn {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .dashboard-widgets {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .profile-setting-container,
+    .withdrawal-body,
+    #Delete-Account,
+    #mypage-sec1-all {
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .input-box,
+    .input-box2,
+    .mypage-content1-inputT {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .flex-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-withdraw,
+    .mypage-content1-btn {
+        width: 100%;
+    }
+
+    #email-select,
+    .birth {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .setting-footer {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+/* ==========================================================
+   회원정보 변경 섹션 전용 CSS (최종 수정본)
+========================================================== */
+
+/* 1. 기본 레이아웃 가두기 */
+#mypage-sec1-all {
+    width: 100% !important;
+    max-width: 100%;
+    overflow: hidden;
+    background-color: #fcefc283;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+/* 2. PC/모바일 스위칭 (JS 없이 CSS로만 제어) */
+.pc-only { display: block; }
+.mobile-only { display: none; }
+
+@media screen and (max-width: 768px) {
+    .pc-only { display: none !important; }
+    .mobile-only { display: block !important; }
+}
+
+/* 3. PC 버전: 기존 th, td의 800px 고정값을 무시하도록 설정 */
+.pc-only table {
+    width: 100% !important; /* 부모 너비에 맞춤 */
+    table-layout: fixed !important;
+    border-collapse: separate !important;
+    border-spacing: 0 15px !important;
+}
+
+.pc-only th {
+    width: 150px !important; /* 기존 190px 무시 */
+    background-color: #FBCB4C !important;
+    border-radius: 10px 0 0 10px !important;
+    display: table-cell !important; /* flex 해제 */
+    height: 80px !important;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pc-only td {
+    width: auto !important; /* 기존 800px 무시 - 핵심 */
+    background-color: #FFF1BF !important;
+    border-radius: 0 10px 10px 0 !important;
+    display: table-cell !important;
+    padding: 15px 20px !important;
+    vertical-align: middle;
+}
+
+/* 4. 모바일 버전: 위아래 배치 스타일 */
+.m-row {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.m-label {
+    background-color: #FBCB4C;
+    padding: 12px;
+    border-radius: 10px 10px 0 0;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.m-content {
+    background-color: #FFF1BF;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+}
+
+/* 5. 공통 입력창 제어 (영역 이탈 방지) */
+.mypage-content1-inputT, 
+.phoneChk3-text,
+.birth,
+#email-select {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 확인 버튼 위치 조정 */
+.mypage-content1-btn {
+    margin: 40px auto !important; /* 중앙 정렬 */
+    display: block !important;
+}
+/* 768px 이하일 때 기존 테이블 구조를 해체해서 세로로 쌓음 */
+@media screen and (max-width: 768px) {
+    .rhfqoddl{
+        margin : 45%
+    }
+    /* 1. 상단 회원정보 & 하단 비밀번호 테이블 모두 block으로 변환 */
+    .mypage-table, 
+    .mypage-table tbody, 
+    .mypage-table tr, 
+    .mypage-table th, 
+    .mypage-table td,
+    .mypage-content1-bottom table,
+    .mypage-content1-bottom tbody,
+    .mypage-content1-bottom tr,
+    .mypage-content1-bottom th,
+    .mypage-content1-bottom td {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. 각 항목(줄) 사이의 간격 */
+    .mypage-table tr,
+    .mypage-content1-bottom tr {
+        margin-bottom: 25px !important; 
+        border: none !important;
+    }
+
+    /* 3. 윗줄: 항목 라벨 (th) */
+    .mypage-table th,
+    .mypage-content1-bottom th {
+        height: auto !important;
+        padding: 12px 20px !important;
+        background-color: #FBCB4C !important;
+        border-radius: 10px 10px 0 0 !important; /* 위쪽만 둥글게 */
+        text-align: left !important;
+    }
+
+    /* 4. 아랫줄: 입력 내용 (td) */
+    .mypage-table td,
+    .mypage-content1-bottom td {
+        height: auto !important;
+        padding: 15px 20px !important;
+        background-color: #FFF1BF !important;
+        border-radius: 0 0 10px 10px !important; /* 아래쪽만 둥글게 */
+        border: none !important;
+    }
+
+    /* 5. 내부 입력창들 가로 꽉 채우기 (비밀번호 input 포함) */
+    .mypage-content1-inputT, 
+    .phoneChk3-text, 
+    #email-select,
+    .birth {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 40px !important;
+        margin-bottom: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 6. 비밀번호 하단 안내 텍스트들 겹치지 않게 줄바꿈 처리 */
+    .new-pw1-span, 
+    .lock-tier, 
+    .newpw-text1, 
+    .newpw-text2 {
+        display: inline-block ;
+        margin-top: 5px !important;
+        line-height: 1.4 !important;
+        font-size: 11px !important;
+    }
+
+    /* 7. 버튼(중복확인 등) 모바일 조정 */
+    .nickChk, .phoneChk, .phoneChk2 {
+        width: 100% !important;
+        margin-top: 5px !important;
+        margin-left: 0 !important;
+        height: 40px !important;
+    }
+
+    /* 8. 확인 버튼 중앙 정렬 */
+    .mypage-content1-btn {
+        margin: 30px 0 !important;
+        width: 100% !important;
+    }
+    /* 모바일 버전: 비밀번호 관련 안내 문구 초기 상태 숨김 (JS 작동 전) */
+#mypage-sec1-all2 .new-pw1-span,
+#mypage-sec1-all2 .lock-tier,
+#mypage-sec1-all2 .newpw-text1,
+#mypage-sec1-all2 .newpw-text2 {
+    display: none; /* 처음에 무조건 숨김 */
+}
+}
+/* ==========================================================
+   768px 이하 모바일 대응 (비밀번호 JS 로직 정상 작동)
+========================================================== */
+@media screen and (max-width: 768px) {
+    
+    /* 1. 상단 회원정보 & 하단 비밀번호 테이블 모두 block으로 변환 */
+    .mypage-table, 
+    .mypage-table tbody, 
+    .mypage-table tr, 
+    .mypage-table th, 
+    .mypage-table td,
+    .mypage-content1-bottom table,
+    .mypage-content1-bottom tbody,
+    .mypage-content1-bottom tr,
+    .mypage-content1-bottom th,
+    .mypage-content1-bottom td {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. 각 항목(줄) 사이의 간격 */
+    .mypage-table tr,
+    .mypage-content1-bottom tr {
+        margin-bottom: 25px !important; 
+        border: none !important;
+    }
+
+    /* 3. 윗줄: 항목 라벨 (th) */
+    .mypage-table th,
+    .mypage-content1-bottom th {
+        height: auto !important;
+        padding: 12px 20px !important;
+        background-color: #FBCB4C !important;
+        border-radius: 10px 10px 0 0 !important; /* 위쪽만 둥글게 */
+        text-align: left !important;
+    }
+
+    /* 4. 아랫줄: 입력 내용 (td) */
+    .mypage-table td,
+    .mypage-content1-bottom td {
+        height: auto !important;
+        padding: 15px 20px !important;
+        background-color: #FFF1BF !important;
+        border-radius: 0 0 10px 10px !important; /* 아래쪽만 둥글게 */
+        border: none !important;
+    }
+
+    /* 5. 내부 입력창들 가로 꽉 채우기 */
+    .mypage-content1-inputT, 
+    .phoneChk3-text, 
+    #email-select,
+    .birth {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 40px !important;
+        margin-bottom: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 6. [핵심 수정] 비밀번호 하단 안내 텍스트 - JS 간섭 방지 */
+    .new-pw1-span, 
+    .lock-tier, 
+    .newpw-text1, 
+    .newpw-text2 {
+        display: none; /* 처음에 안 보이게 기본값 설정 (!important 제거) */
+        margin-top: 5px !important;
+        line-height: 1.4 !important;
+        font-size: 11px !important;
+    }
+
+    /* 7. 버튼(중복확인 등) 모바일 조정 */
+    .nickChk, .phoneChk, .phoneChk2 {
+        width: 100% !important;
+        margin-top: 5px !important;
+        margin-left: 0 !important;
+        height: 40px !important;
+    }
+
+    /* 8. 확인 버튼 중앙 정렬 */
+    .mypage-content1-btn {
+        margin: 30px 0 !important;
+        width: 100% !important;
+    }
+}
+#al{
+    display: block;
+    margin-left: 0px;
+}

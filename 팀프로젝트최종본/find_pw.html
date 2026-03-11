@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="find_pw.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1 class="main-title">비밀번호 찾기</h1>
+            <p class="sub-desc">가입하신 아이디를 입력하여 비밀번호를 확인하세요.</p>
+        </div>
+
+        <div class="find-box">
+            <div class="tab-menu">
+                <button class="tab-btn" onclick="location.href='find_id.html'">아이디 찾기</button>
+                <button class="tab-btn active">비밀번호 찾기</button>
+            </div>
+
+            <form onsubmit="handleFindPw(event)">
+                <div class="input-group">
+                    <div class="input-container">
+                        <input type="password" id="userId" placeholder="가입하신 아이디 입력" class="input-field" required>
+                        <button type="button" class="input-eye-btn" onclick="toggleInputVisibility()">
+                            <i id="eyeIcon" class="fa-regular fa-eye-slash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="center-btn-wrap">
+                    <button type="button" class="btn-submit-yellow" onclick="showPassword()">비밀번호 찾기</button>
+                </div>
+
+                <div id="resultArea" class="result-box" style="display: none;">
+                    <p class="success-msg-text">가입하신 비밀번호입니다.</p>
+                    <p class="found-pw"><strong>password****</strong></p>
+                </div>
+
+                <div class="center-btn-wrap login-move" id="loginMoveBtn" style="display: none;">
+                    <button type="submit" class="btn-submit-yellow">로그인하러 가기</button>
+                </div>
+            </form>
+
+            <div class="footer-links">
+                <a href="login.html" class="link-item">로그인으로 돌아가기</a>
+                <span class="bar">|</span>
+                <a href="join.html" class="link-item">회원가입</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * [추가] 입력창 비밀번호 보이기/숨기기 토글 기능
+         * 회원가입 페이지와 동일한 로직입니다.
+         */
+        function toggleInputVisibility() {
+            const input = document.getElementById('userId');
+            const icon = document.getElementById('eyeIcon');
+
+            if (input.type === 'password') {
+                input.type = 'text'; // 텍스트로 변경하여 내용 보여줌
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                input.type = 'password'; // 다시 가림
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+
+        function showPassword() {
+            const userId = document.getElementById('userId').value;
+            const resultArea = document.getElementById('resultArea');
+            const loginMoveBtn = document.getElementById('loginMoveBtn');
+
+            if (userId) {
+                resultArea.style.display = "block";
+                loginMoveBtn.style.display = "flex";
+            } else {
+                alert("아이디를 입력해주세요.");
+            }
+        }
+
+        function handleFindPw(e) {
+            e.preventDefault();
+            location.href = "login.html";
+        }
+    </script>
+</body>
+
+</html>

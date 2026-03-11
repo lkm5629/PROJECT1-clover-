@@ -1,0 +1,599 @@
+/* ===============================
+   1. 폰트 설정
+   =============================== */
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff") format("woff");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff") format("woff");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Escoredream";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff") format("woff");
+    font-weight: 700;
+    font-display: swap;
+}
+
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: #FBCB4C;
+}
+
+* {
+     /* box-sizing: border-box;  */
+     font-family: "Escoredream", sans-serif !important;
+    /* font-weight: 400 !important;  */
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #f8f9fa;
+    /* padding: 20px; */
+    margin: 0;
+
+    /* height: 800px; */
+}
+
+.main-container {
+    max-width: 1000px;
+    margin: 0px 0px 0px 0px;
+    margin-left: 0px !important;
+    background: #fff;
+    border-radius: 10px;
+    /* padding: 30px; */
+    /* border-radius: 20px; */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); */
+}
+
+.origin-tag {
+    background: #FFF1BF;
+    border: 1px solid #FBCB4C;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.filter-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.filter-box {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px 25px;
+    flex: 1;
+    max-width: 500px;
+}
+
+.filter-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.filter-options {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.more-btn {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px 10px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.more-btn:hover {
+    background: #FBCB4C;
+    border-color: #FBCB4C;
+}
+
+.more-allergy-grid {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+    font-size: 12px;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.week-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.arrow-btn,
+.calendar-btn {
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.arrow-btn:hover,
+.calendar-btn:hover {
+    background-color: #FBCB4C;
+    border-color: #FBCB4C;
+    color: #fff;
+}
+
+.arrow-btn:active,
+.calendar-btn:active {
+    background-color: #e0b644;
+    transform: scale(0.95);
+}
+
+#weekDisplay {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #FBCB4C;
+    padding: 0 10px;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 0px;
+    gap: 12px;
+    padding: 0px 60px 60px 60px;
+}
+
+.day-card {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+.day-card:hover {
+    border: 2.5px solid #FBCB4C;
+}
+
+.active-focus {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border: 2.5px solid #FBCB4C;
+}
+
+.card-header {
+    padding: 12px;
+    background: #f8f9fa;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+}
+
+.day-card.highlight-red .card-header {
+    background-color: #ffe3e3;
+    color: #d63031;
+}
+
+.day-card.highlight-vegan .card-header {
+    background-color: #FFF1BF;
+    color: #333;
+}
+
+.menu-vegan-highlight {
+    background-color: #C8E6C9;
+    color: #1B5E20;
+    border: 1px solid #81C784;
+    border-radius: 20px;
+    padding: 2px 12px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.day-card.highlight-vegan.active-focus {
+    border: 2.5px solid #FBCB4C;
+}
+
+.meal-section {
+    padding: 15px 5px;
+    border-bottom: 1px solid #fcfcfc;
+}
+
+.type-label {
+    background: #FBCB4C;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.name-only {
+    padding: 0;
+    margin-top: 10px;
+    font-size: 13px;
+    list-style: none;
+    line-height: 2;
+}
+
+.menu-danger-light-red {
+    background-color: #ffcccc;
+    color: #d63031;
+    border: 1px solid #ffb3b3;
+    border-radius: 20px;
+    padding: 2px 12px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.calendar-modal-content {
+    background: #fff;
+    padding: 50px;
+    border-radius: 40px;
+    width: 750px;
+    min-height: 650px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eee;
+}
+
+.alert-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+}
+
+.confirm-btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.symptom-info {
+    background: #fdf2f2;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 13px;
+    border-left: 3px solid #d63031;
+    text-align: left;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cal-item {
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    cursor: pointer;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: #444;
+    transition: all 0.25s ease;
+}
+
+.cal-item:hover {
+    background-color: #FFF1BF;
+    color: #333;
+    transform: translateY(-3px);
+    font-weight: bold;
+}
+
+.cal-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f5f5f5;
+    font-size: 18px;
+}
+
+.sun {
+    color: #d63031;
+}
+
+.sat {
+    color: #0984e3;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+#calMonthDisplay {
+    font-size: 28px;
+    font-weight: 800;
+    color: #333;
+    letter-spacing: -1px;
+}
+
+.close-btn {
+    background: #f5f5f5;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    background: #eee;
+    transform: rotate(90deg);
+}
+
+.cal-nav-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.top-bar1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cal-nav-btn:hover {
+    background: #FBCB4C;
+    border-color: #FBCB4C;
+    color: #fff;
+}
+
+/* 상단바 및 네비게이션 텍스트 수직 중앙 정렬 강제화 */
+/* .top-bar .inner,
+.nav .inner {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+} */
+
+/* 폰트 때문에 위로 쏠리는 현상 보정 */
+.top-bar a,
+.nav .gnb a {
+    /* line-height: 1 !important; */
+    /* padding-top: 4px !important; */
+    /* 위쪽 여백을 수동으로 살짝 추가 */
+}
+
+/* body에 들어간 패딩 제거 (헤더 밀림 방지) */
+body {
+    /* padding: 0 !important; */
+}
+
+/* ==========================================================
+   모바일 반응형 스타일 (기존 코드 하단에 추가)
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    /* 1. 메인 컨테이너 여백 조정 */
+    .main-container {
+        padding: 15px;
+    }
+
+    /* 2. 상단바(로고 및 제목) 세로 정렬 및 크기 조정 */
+    .top-bar1 h1 {
+        flex-direction: column;
+        /* 로고와 제목을 세로로 */
+        gap: 5px;
+        font-size: 20px;
+    }
+
+    .logo-text {
+        font-size: 22px;
+        margin-right: 0;
+    }
+
+    /* 3. 필터 섹션 가로 배치에서 세로 배치로 변경 */
+    .filter-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-box {
+        max-width: 100%;
+        /* 모바일에서 꽉 차게 */
+        padding: 12px 15px;
+    }
+
+    /* 4. 날짜 선택기 크기 조정 */
+    #weekDisplay {
+        font-size: 16px;
+    }
+
+    .arrow-btn,
+    .calendar-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* 5. ⭐ 핵심: 식단 그리드 변경 (7열 -> 1열 또는 2열) */
+    .grid-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        /* 모바일은 2열이 보기 좋습니다 */
+        gap: 8px;
+    }
+
+    /* 만약 한 줄에 하나씩 크게 보고 싶다면 아래 주석을 해제하세요 */
+    /* .grid-wrapper { grid-template-columns: 1fr; } */
+
+    /* 6. 카드 내부 텍스트 크기 조정 */
+    .card-header {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .name-only {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .type-label {
+        font-size: 10px;
+        padding: 1px 6px;
+    }
+
+    /* 7. 모달(달력, 알림창) 너비 조정 */
+    .calendar-modal-content {
+        width: 90%;
+        /* 화면 너비의 90% */
+        min-height: auto;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .alert-content {
+        width: 85%;
+        padding: 20px;
+    }
+
+    #calMonthDisplay {
+        font-size: 20px;
+    }
+
+    .cal-item {
+        height: 50px;
+        font-size: 16px;
+    }
+}
+#logoImg{
+    top: 50px !important;
+}
+/* 초소형 모바일 (아이폰 SE 등) */
+@media (max-width: 480px) {
+    .grid-wrapper {
+        grid-template-columns: 1fr;
+        /* 아주 작은 화면에선 1열로 */
+    }
+}
+
+/* 1. 상단 영역 레이아웃: 제목과 원산지 순서 및 색상 고정 */
+.top-bar1 {
+    display: flex !important;
+    flex-direction: column !important; /* 세로 나열 */
+    align-items: center !important;    /* 중앙 정렬 */
+}
+
+/* CLOVER HUB 식단 안내 (제목) - 위로 이동 */
+.top-bar1 h1 {
+    order: 1 !important;
+    color: #333333 !important;
+    font-size: 26px !important;
+    margin-bottom: 10px !important;
+    margin-top: 20px !important;
+}
+
+/* 원산지 안내 박스 - 아래로 이동 */
+.origin-tag {
+    order: 2 !important;
+    display: inline-block !important;
+    margin: 0 auto !important;
+}
+
+/* 2. 날짜/화살표/달력 영역: 오른쪽 끝으로 바짝 붙이기 */
+.control-panel {
+    display: flex !important;
+    justify-content: flex-end !important; /* 오른쪽 정렬 */
+    padding-right: 0 !important;
+    margin-top: 20px !important;
+}
+
+.week-selector {
+    margin-left: -100px ; /* 오른쪽으로 밀기 강제화 */
+    margin-right: 315px ;
+    /* margin-right: 50px;  */
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 날짜 글자 색상 고정 */
+#weekDisplay {
+    color: #333333 !important;
+}
+
+/* 모바일 대응: 화면이 작아지면 중앙으로 정렬 */
+@media (max-width: 768px) {
+    .control-panel {
+        justify-content: center !important;
+    }
+    .week-selector {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}

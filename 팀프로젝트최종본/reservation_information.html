@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약 정보</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #page-title {
+            margin: 24px 0 10px 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        #hr1 {
+            width: 90%;
+            margin: 0 auto 20px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        /* 드롭다운 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        #open-f {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 999px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        #category-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 5px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 140px;
+            z-index: 100;
+        }
+
+        #category-dropdown .year-item {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #category-dropdown .year-item:hover {
+            background-color: #FBCB4C;
+            color: black;
+        }
+
+        #open-f-img {
+            width: 10px;
+            margin-left: 5px;
+        }
+
+        /* 예약 정보 박스 */
+        #reservation_info {
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 20px;
+            border: 2px solid #949494fc;
+            box-sizing: border-box;
+        }
+
+        /* 공용 버튼 스타일 */
+        .room_info {
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #FBCB4C;
+            color: black;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .label {
+            cursor: default;
+            background-color: white;
+            color: black;
+            border: 1px solid #ddd;
+        }
+
+        .room_info:not(.label):hover {
+            background-color: #ffffff;
+            border: 1px solid #FBCB4C;
+        }
+
+        /* 예약 취소 버튼 */
+        .room_info_cancle {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: black;
+            border: 1px solid #FBCB4C;
+            transition: all 0.2s;
+        }
+
+        .room_info_cancle:hover {
+            background-color: #FBCB4C;
+            border: 1px solid #ffffff;
+        }
+
+        /* 예약 이미지와 텍스트 */
+        .room_detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        #reservation_info_img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        .room_text {
+            font-size: 14px;
+            line-height: 1.8;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        /* 버튼 그룹 */
+        #room_info_btn {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            align-items: center;
+        }
+
+        #room_info_btn>.left-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* 모달 */
+        #edit_modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 260px;
+            text-align: center;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #save_btn,
+        #close_btn {
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+
+        #save_btn:hover,
+        #close_btn:hover {
+            background: #FBCB4C;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 600px) {
+            #reservation_info {
+                padding: 15px;
+            }
+
+            .room_detail {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #reservation_info_img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .room_text {
+                font-size: 13px;
+            }
+
+            #room_info_btn {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            #room_info_btn>.left-btns,
+            .room_info_cancle {
+                width: 60%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            #open-f {
+                width: 80px;
+                height: 28px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p id="page-title">예약 정보</p>
+    </div>
+    <hr id="hr1">
+
+    <!-- 드롭다운 -->
+    <div class="dropdown">
+        <span id="open-f">기간
+            <img id="open-f-img" src="./Img/images1.png" alt="다운아이콘">
+        </span>
+        <div id="category-dropdown">
+            <div class="year-item" id="selected-period">선택된 예약</div>
+        </div>
+    </div>
+
+    <!-- 예약 정보 -->
+    <div id="reservation_info">
+        <span class="room_info label">주문 요약</span>
+        <div class="room_detail">
+            <img id="reservation_info_img" src="./Img/강의실내부4.png" alt="강의실">
+            <span class="room_text" id="room_text_box">
+                <strong>|클로버 허브 교육센터|</strong><br><br>
+                예약자: 김OO<br>
+                호실: 703호<br>
+                이용 일자: 2026-04-02<br>
+                예약 인원: 1명<br>
+                총 이용 시간: 14:00 ~ 17:00 (3시간)<br>
+                총 주문 금액: 60,000원<br>
+                운영 시간: 24시간 연중무휴
+            </span>
+        </div>
+
+        <!-- 버튼들 -->
+        <div id="room_info_btn">
+            <div class="left-btns">
+                <span class="room_info" id="change_room">호실 변경</span>
+                <span class="room_info" id="change_time">시간 변경</span>
+            </div>
+            <span class="room_info_cancle" id="cancel_btn">예약 취소</span>
+        </div>
+    </div>
+
+    <!-- 수정 모달 -->
+    <div id="edit_modal">
+        <div class="modal-box">
+            <h3>예약 수정</h3>
+
+            <!-- 호실 선택 -->
+            <div id="room_select" style="display:none; margin-top:10px;">
+                <select id="room_option">
+                    <option value="701호">701호</option>
+                    <option value="702호">702호</option>
+                    <option value="703호">703호</option>
+                    <option value="704호">704호</option>
+                    <option value="705호">705호</option>
+                    <option value="706호">706호</option>
+                    <option value="707호">707호</option>
+                    <option value="708호">708호</option>
+                    <option value="709호">709호</option>
+                    <option value="710호">710호</option>
+                    <option value="711호">711호</option>
+                    <option value="712호">712호</option>
+
+                    <option value="801호">801호</option>
+                    <option value="802호">802호</option>
+                    <option value="803호">803호</option>
+                    <option value="804호">804호</option>
+                    <option value="805호">805호</option>
+                    <option value="806호">806호</option>
+                    <option value="807호">807호</option>
+                    <option value="808호">808호</option>
+                    <option value="809호">809호</option>
+                    <option value="810호">810호</option>
+                    <option value="811호">811호</option>
+                </select>
+            </div>
+
+            <!-- 시간 선택 -->
+            <div id="time_select" style="display:none; margin-top:10px;">
+                <select id="time_option">
+                    <option value="01:00 ~ 03:00">01:00 ~ 03:00</option>
+                    <option value="03:00 ~ 06:00">03:00 ~ 06:00</option>
+                    <option value="06:00 ~ 09:00">06:00 ~ 09:00</option>
+                    <option value="09:00 ~ 12:00">09:00 ~ 12:00</option>
+                    <option value="12:00 ~ 15:00">12:00 ~ 15:00</option>
+                    <option value="14:00 ~ 17:00">14:00 ~ 17:00</option>
+                    <option value="18:00 ~ 21:00">18:00 ~ 21:00</option>
+                </select>
+            </div>
+
+            <div class="modal-buttons">
+                <button id="save_btn">저장</button>
+                <button id="close_btn">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById("open-f");
+        const dropdown = document.getElementById("category-dropdown");
+
+        openBtn.addEventListener("click", () => {
+            dropdown.style.display =
+                dropdown.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest(".dropdown")) {
+                dropdown.style.display = "none";
+            }
+        });
+
+        const changeRoomBtn = document.getElementById("change_room");
+        const changeTimeBtn = document.getElementById("change_time");
+        const editModal = document.getElementById("edit_modal");
+
+        const roomSelectBox = document.getElementById("room_select");
+        const timeSelectBox = document.getElementById("time_select");
+
+        const roomOption = document.getElementById("room_option");
+        const timeOption = document.getElementById("time_option");
+
+        const saveBtn = document.getElementById("save_btn");
+        const closeBtn = document.getElementById("close_btn");
+
+        const roomTextBox = document.getElementById("room_text_box");
+        const roomImage = document.getElementById("reservation_info_img");
+        const selectedPeriod = document.getElementById("selected-period");
+
+        let editType = "";
+
+        const pricePerHour = 20000;
+
+        const roomImages = {
+            "701호": "./Img/강의실내부1.png",
+            "702호": "./Img/강의실내부2.png",
+            "703호": "./Img/강의실내부4.png",
+            "704호": "./Img/강의실내부3.png",
+            "705호": "./Img/강의실내부2.png",
+            "706호": "./Img/강의실내부3.png",
+            "707호": "./Img/강의실내부1.png",
+            "708호": "./Img/강의실내부4.png",
+            "709호": "./Img/강의실내부3.png",
+            "710호": "./Img/강의실내부2.png",
+            "711호": "./Img/강의실내부1.png",
+            "712호": "./Img/강의실내부4.png",
+
+            "801호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2MThhZTMwODE5MTg2ZjgzZWFjMWQ5OWVhYzM6ZmlsZV8wMDAwMDAwMGE1NTA3MjA2YWY0NDU5M2I2YmJhNjg3OCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjI4MGY4ZGIxOTE4MzcxYjIxZTkxZDA3MGU1NTMyOTgxNzY5NTA1ODc3MzU1NGNiYjgzYjA1NGRhZTQzYzUwNTkiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "802호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2YjBhMjA0ODE5MWFmZmVmYjZiNjRmMTcxZmI6ZmlsZV8wMDAwMDAwMDY1OGM3MjA2ODVhZGIxZTEwNmRjZjE1MCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImQ1YjhkMmExMzU3N2Y0ZWU3MmMxMTI0NjYyZjU1ZWFhZWRhN2U5YjkzNmJmMGNlMDJmNWQyMWZkYzI3MDVhNDciLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "803호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3MGFhMWIwODE5MTlkYWY3YzhmOGNmN2ZmOWM6ZmlsZV8wMDAwMDAwMDI5MDg3MjA2OTc0MWIwODNkMzBjYTI3OSIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjE5NTQwZjVjNjUzNTE4NjI2Nzc5NzNlODA5ZjI3OTRjY2M1NWE5OGMxYjhmOGIzYmUzMTc2OWIyMTFkZjU4Y2YiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "804호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3YjkzM2E4ODE5MTlhY2RhMjY2ZWIzNWQzNDI6ZmlsZV8wMDAwMDAwMDgzZjA3MjA2OWEwYWE0YTQ3MjUxZjEyMCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjMxMjljYzU3MzY1OWIwYjRlZjA3MTUyMTNlZTY1NDJiZmZlZGMxMTFiYzQxY2VjZTRkNmU0ZTI5MDcyMDgzM2MiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "805호": "./Img/랩실6.png",
+            "806호": "./Img/랩실1.png",
+            "807호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2MThhZTMwODE5MTg2ZjgzZWFjMWQ5OWVhYzM6ZmlsZV8wMDAwMDAwMGE1NTA3MjA2YWY0NDU5M2I2YmJhNjg3OCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjI4MGY4ZGIxOTE4MzcxYjIxZTkxZDA3MGU1NTMyOTgxNzY5NTA1ODc3MzU1NGNiYjgzYjA1NGRhZTQzYzUwNTkiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "808호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg2YjBhMjA0ODE5MWFmZmVmYjZiNjRmMTcxZmI6ZmlsZV8wMDAwMDAwMDY1OGM3MjA2ODVhZGIxZTEwNmRjZjE1MCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImQ1YjhkMmExMzU3N2Y0ZWU3MmMxMTI0NjYyZjU1ZWFhZWRhN2U5YjkzNmJmMGNlMDJmNWQyMWZkYzI3MDVhNDciLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "809호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3MGFhMWIwODE5MTlkYWY3YzhmOGNmN2ZmOWM6ZmlsZV8wMDAwMDAwMDI5MDg3MjA2OTc0MWIwODNkMzBjYTI3OSIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjE5NTQwZjVjNjUzNTE4NjI2Nzc5NzNlODA5ZjI3OTRjY2M1NWE5OGMxYjhmOGIzYmUzMTc2OWIyMTFkZjU4Y2YiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "810호": "https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjlhZjg3YjkzM2E4ODE5MTlhY2RhMjY2ZWIzNWQzNDI6ZmlsZV8wMDAwMDAwMDgzZjA3MjA2OWEwYWE0YTQ3MjUxZjEyMCIsInRzIjoiMjA1MjIiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjMxMjljYzU3MzY1OWIwYjRlZjA3MTUyMTNlZTY1NDJiZmZlZGMxMTFiYzQxY2VjZTRkNmU0ZTI5MDcyMDgzM2MiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJjcCI6bnVsbCwibWEiOm51bGx9",
+            "811호": "./Img/랩실1.png"
+        };
+
+        function formatNumber(num) {
+            return Number(num || 0).toLocaleString("ko-KR");
+        }
+
+        function calcHour(start, end) {
+            const s = parseInt(start, 10);
+            const e = parseInt(end, 10);
+            if (isNaN(s) || isNaN(e)) return 0;
+            return Math.max(0, e - s);
+        }
+
+        function parseHoursFromText(timeText) {
+            const match = String(timeText).match(/(\d{1,2}):00\s*~\s*(\d{1,2}):00/);
+            if (!match) return 0;
+            const start = parseInt(match[1], 10);
+            const end = parseInt(match[2], 10);
+            return Math.max(0, end - start);
+        }
+
+        function pad2(n) {
+            return String(n).padStart(2, "0");
+        }
+
+        const params = new URLSearchParams(window.location.search);
+
+        let info = {
+            center: params.get("center") || "클로버 허브 교육센터",
+            reserver: "김OO",
+            room: params.get("room") || "703호",
+            date: params.get("date") || "2026-04-02",
+            person: params.get("person") || "1",
+            start: params.get("start"),
+            end: params.get("end"),
+            hour: params.get("hour"),
+            img: params.get("img") || ""
+        };
+
+        if ((!info.hour || info.hour === "null") && info.start !== null && info.end !== null) {
+            info.hour = String(calcHour(info.start, info.end));
+        }
+
+        if (info.start !== null && info.end !== null) {
+            info.time = `${pad2(info.start)}:00 ~ ${pad2(info.end)}:00`;
+        } else if (info.hour) {
+            info.time = `${info.hour}시간`;
+        } else {
+            info.time = "시간 정보 없음";
+        }
+
+        function render(data) {
+            const hours = data.hour ? parseInt(data.hour, 10) : parseHoursFromText(data.time);
+            const totalPrice = pricePerHour * (isNaN(hours) ? 0 : hours);
+
+            roomTextBox.innerHTML = `
+                <strong>|${data.center}|</strong><br><br>
+                예약자: ${data.reserver}<br>
+                호실: ${data.room}<br>
+                이용 일자: ${data.date}<br>
+                예약 인원: ${data.person}명<br>
+                총 이용 시간: ${data.time} (${hours}시간)<br>
+                총 주문 금액: ${formatNumber(totalPrice)}원<br>
+                운영 시간: 24시간 연중무휴
+            `;
+
+            roomImage.src = data.img || roomImages[data.room] || "./Img/강의실내부4.png";
+
+            const dateParts = String(data.date).split("-");
+            if (dateParts.length >= 2) {
+                selectedPeriod.textContent = `${dateParts[0]}년 ${parseInt(dateParts[1], 10)}월`;
+            }
+        }
+
+        render(info);
+
+        function getInfoFromScreen() {
+            return info;
+        }
+
+        changeRoomBtn.addEventListener("click", function () {
+            editType = "room";
+            editModal.style.display = "flex";
+            roomSelectBox.style.display = "block";
+            timeSelectBox.style.display = "none";
+            roomOption.value = info.room;
+        });
+
+        changeTimeBtn.addEventListener("click", function () {
+            editType = "time";
+            editModal.style.display = "flex";
+            roomSelectBox.style.display = "none";
+            timeSelectBox.style.display = "block";
+            timeOption.value = info.time.includes("~") ? info.time : "09:00 ~ 12:00";
+        });
+
+        saveBtn.addEventListener("click", function () {
+            if (editType === "room") {
+                info.room = roomOption.value;
+            }
+
+            if (editType === "time") {
+                info.time = timeOption.value;
+                const match = info.time.match(/(\d{1,2}):00\s*~\s*(\d{1,2}):00/);
+                if (match) {
+                    info.start = match[1];
+                    info.end = match[2];
+                    info.hour = String(parseInt(match[2], 10) - parseInt(match[1], 10));
+                }
+            }
+
+            render(info);
+            editModal.style.display = "none";
+        });
+
+        closeBtn.addEventListener("click", function () {
+            editModal.style.display = "none";
+        });
+
+        editModal.addEventListener("click", function (e) {
+            if (e.target === editModal) {
+                editModal.style.display = "none";
+            }
+        });
+
+        document.getElementById("cancel_btn").addEventListener("click", function () {
+            if (confirm("예약을 취소하시겠습니까?")) {
+                document.getElementById("reservation_info").style.display = "none";
+                window.history.replaceState({}, document.title, "reservation_information.html");
+                alert("예약이 취소되었습니다.");
+            }
+        });
+    </script>
+</body>
+
+</html>

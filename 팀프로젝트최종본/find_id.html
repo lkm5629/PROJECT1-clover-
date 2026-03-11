@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLOVER HUB 아이디 찾기</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="find_id.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1 class="main-title">아이디 찾기</h1>
+            <p class="sub-desc">가입 시 등록한 이메일로 본인을 확인해 주세요.</p>
+        </div>
+
+        <div class="find-box">
+            <div class="tab-menu">
+                <button type="button" class="tab-btn active">아이디 찾기</button>
+                <button type="button" class="tab-btn" onclick="location.href='find_pw.html'">비밀번호 찾기</button>
+            </div>
+
+            <form id="findIdForm" onsubmit="return false;">
+
+                <div class="input-group">
+                    <div class="input-row">
+                        <input type="email" id="userEmail" placeholder="이메일 주소" class="input-field" required
+                            onkeydown="if(event.keyCode==13) { sendCode(); }" onblur="validateEmailFormat()">
+                        <button type="button" class="side-btn" onclick="sendCode()">코드 전송</button>
+                    </div>
+                    <p id="emailErrorMsg" class="success-msg" style="display: none;"></p>
+                    <p id="sendMsg" class="success-msg"></p>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-row">
+                        <input type="text" id="authCode" placeholder="이메일 인증 코드" class="input-field" required
+                            onkeydown="if(event.keyCode==13) { checkCode(); }">
+                        <button type="button" class="side-btn" onclick="checkCode()">확인</button>
+                    </div>
+
+                    <div id="resultArea" class="result-box" style="display: none;">
+                        <p class="found-id">아이디: <strong id="maskedIdText"></strong></p>
+                    </div>
+                </div>
+
+                <div class="center-btn-wrap">
+                    <button type="button" class="btn-submit-yellow" onclick="location.href='login.html'">로그인하러
+                        가기</button>
+                </div>
+            </form>
+
+            <div class="login-links">
+                <span class="bar">|</span>
+                <a href="join.html" class="link-item">회원가입</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // [수정] 이메일 형식 유효성 검사 함수 (팝업 제거 버전)
+        function validateEmailFormat() {
+            const emailInput = document.getElementById('userEmail');
+            const errorMsg = document.getElementById('emailErrorMsg');
+            const emailValue = emailInput.value.trim();
+            
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (emailValue === "") {
+                errorMsg.style.display = "none";
+            } else if (!emailPattern.test(emailValue)) {
+                // 형식이 틀리면 글씨만 표시
+                errorMsg.textContent = "이메일 형식에 맞게 입력해주세요.";
+                errorMsg.style.display = "block";
+            } else {
+                // 형식이 맞으면 숨김
+                errorMsg.style.display = "none";
+            }
+        }
+
+        // 이메일 코드 전송 함수
+        function sendCode() {
+            const email = document.getElementById('userEmail').value.trim();
+            const errorMsg = document.getElementById('emailErrorMsg');
+            
+            // [수정] 팝업창(alert) 조건을 없애고, 형식이 맞을 때만 발송 메시지 표시
+            if (email && errorMsg.style.display === "none") {
+                document.getElementById('sendMsg').textContent = "인증코드가 발송되었습니다.";
+                document.getElementById('authCode').focus();
+            }
+        }
+
+        // 인증 코드 확인 함수
+        function checkCode() {
+            const code = document.getElementById('authCode').value;
+            if (code) {
+                const realId = "user1212";
+                const maskedId = realId.substring(0, 4) + "****";
+
+                document.getElementById('maskedIdText').textContent = maskedId;
+                document.getElementById('resultArea').style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>

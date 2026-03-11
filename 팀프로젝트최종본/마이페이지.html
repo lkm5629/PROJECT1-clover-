@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./common.css">
+    <link rel="stylesheet" href="./마이페이지.css">
+    <link rel="stylesheet" href="./식단표.css">
+    <link rel="stylesheet" href="./사용자예약.css">
+    <link rel="stylesheet" href="./allergy_list.css">
+    <!-- <script src="./common테스트.js"></script> -->
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="header-include" class="hdr"></header>
+
+    <div class="mypage-wrap inner">
+        <aside class="mypage-sidebar">
+            <img id="main-img" src="https://i.postimg.cc/5yFbtGCB/binpeulopil-imiji1.png" alt="프로필이미지"
+                class="sidebar-img flex-center">
+
+
+            <ul class="sidebar-menu role-all">
+                <li class="role-all"><a href="#" class="menu-btn active">회원정보 변경</a></li>
+                <!-- <li><a href="#" class="menu-btn">계정관리</a></li> -->
+                <!-- <li><a href="#" class="menu-btn">알림설정</a></li> -->
+                <!-- active 추가하면 회색으로 표시 됨 -->
+                <li class="role-user"><a href="#" class="menu-btn">알레르기 정보 등록</a></li>
+                <!-- <li class="role-user"><a href="#" class="menu-btn">내소식</a></li> -->
+                <li class="role-user"><a href="#" class="menu-btn">사용자 예약정보</a></li>
+                <li class="role-user"><a href="#" class="menu-btn ch1">회원탈퇴</a></li>
+
+
+                <!-- 어드민 -->
+                <li class="role-admin"><a href="#" class="menu-btn">Dashboard</a></li>
+                <li class="role-admin"><a href="#" class="menu-btn">Users</a></li>
+                <!-- <li class="role-admin"><a href="#" class="menu-btn">Database</a></li> -->
+                <!-- <li class="role-admin"><a href="#" class="menu-btn">System</a></li> -->
+            </ul>
+        </aside>
+        <!-- <section>을 식별할 수단을 필요로 하고, 보통 <h>태그를 자식으로 포함하는 방법을 사용한다. -->
+        <section id="mypage-content1" class="mypage-content activeM">
+            <div id="mypage-sec1-all">
+                <div class="mypage-content1-top">
+                    <h1 style="margin-bottom: 10px;">회원정보 변경</h1><br>
+                    <table class="mypage-table" width="800">
+                        <tr>
+
+                            <th><span class="tr-star">*</span> <span class="content1-status">아이디</span></th>
+                            <td colspan="4"><span style="font-weight: 700;" class="mypage-id"></span></td>
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status">이름</span></th>
+                            <td colspan="4"><span class="mypage-name" style="font-weight: 700;"></span></td>
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status status-nick">닉네임</span></th>
+                            <td colspan="4"><input type="text" class="mypage-content1-inputT a-1"> <button
+                                    class="nickChk">중복 확인</button><br>
+                                <span style="font-size: 11px;"> - 닉네임은 2 ~ 8글자 내에서 변경이 가능합니다.</span>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status">연락처</span></th>
+                            <td colspan="4"><input type="text" class="mypage-content1-inputT a-2" maxlength="13"><button
+                                    class="phoneChk">인증번호 전송</button>
+                                <br><input type="text" class="phoneChk3-text"><button type="button"
+                                    class="phoneChk2">인증하기</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status">이메일</span></th>
+                            <td colspan="4">
+                                <input type="text" class="mypage-content1-inputT a-3"><span class="rhfqoddl" style="font-weight: 700;">
+                                    @</span> <input type="text" class="mypage-content1-inputT a-4">
+                                <select name="" id="email-select">
+                                    <option value="직접입력">직접입력</option>
+                                    <option value="google.com">google.com</option>
+                                    <option value="naver.com">naver.com</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status">생년월일</span></th>
+                            <td colspan="4" style="font-weight: 700;">
+                                <select name="" id="birth-y" class="birth">
+                                    <!--js로 추가 했음  -->
+                                </select>
+                                <span>년</span>
+                                <select name="" id="birth-m" class="birth">
+                                    <!-- js로 추가 했음 -->
+                                </select>
+                                <span>월</span>
+                                <select name="" id="birth-d" class="birth">
+                                    <!--js로 추가 했음  -->
+                                </select>
+                                <span style="margin-right: 30px;">일</span>
+                                <input type="radio" name="diddma" checked="checked"><span style="margin-right: 15px;">
+                                    양력</span>
+                                <input type="radio" name="diddma"><span> 음력</span>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status">성별</span></th>
+                            <td colspan="4" style="font-weight: 700;">
+                                <input type="radio" name="gender"> <span style="margin-right: 15px;">남성</span>
+                                <input type="radio" name="gender"> <span style="margin-right: 15px;">여성</span>
+                                <input type="radio" name="gender" checked="checked"> <span
+                                    style="margin-right: 15px;">비공개</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="button" class="mypage-content1-btn b1">확인</button>
+                </div>
+
+
+                <div class="mypage-content1-bottom">
+                    <h1>비밀번호 변경</h1>
+                    <div class="pw-text">
+                        <ul style="font-weight: 700;">보안을 위해 아래와 같이 비밀번호를 설정해 주세요.</ul><br>
+                        <li>- 영문+숫자 8자~20자로 사용가능하며, 특수문자 !@#$%^&*()_+|[]{}'";:/?.>,<의 사용이 가능합니다.</li>
+                        <li>- 3자 이상 연속 또는 중복되는 문자, 숫자는 사용할 수 없으며, 공백도 사용할 수 없습니다.</li>
+                        <li>- 영문(대소문자 구분), 특수기호를 혼합하여 비밀번호를 설정하면, 더욱 안전한 비밀번호를 만드실 수 있습니다.</li>
+                        <li>- 전화번호, 생년월일 등 개인정보와 관련된 숫자 등 다른 사람이 알아낼 수 있는 비밀번호는 사용하지마세요.</li>
+                        <li>- 타 사이트의 비밀번호와 같으면 도용되거나 유출 될 위험이 있으니, 주기적으로 변경하여 사용해주세요.</li>
+                    </div><br>
+                    <table width="800">
+                        <tr>
+
+                            <th> <span class="tr-star">*</span><span class="content1-status ">현재 비밀번호</span></th>
+                            <td>
+                                <input type="password" class="mypage-content1-inputT pw0" maxlength="20">
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <th><span class="tr-star">*</span><span class="content1-status">새 비밀번호</span></th>
+                            <td>
+                                <input type="password" class="mypage-content1-inputT new-pw1" maxlength="20"><br>
+                                <span class="new-pw1-span" style="font-size: 12px;">* 비밀번호는 8자 이상부터 사용 가능합니다.</span>
+                                <span class="lock-tier" style="font-weight: bold; margin-right: 5px; ">보안 강도: <span
+                                        class="tier" style="color: red;">상</span><span class="tier"
+                                        style="color: orange;">중</span><span class="tier"
+                                        style="color: greenyellow;">하</span></span>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <th> <span class="tr-star">*</span><span class="content1-status">새 비밀번호 확인</span></th>
+                            <td>
+                                <input type="password" class="mypage-content1-inputT new-pw2" maxlength="20"><br>
+                                <span class="newpw-text1" style="font-size: 12px;">* 새 비밀번호와 일치하지 않습니다.</span>
+                                <span class="newpw-text2" style="font-size: 12px;">새로 입력하신 비밀번호 두 개가 일치합니다.</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="button" class="mypage-content1-btn b2">확인</button>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="mypage-content2" class="mypage-content">
+            <div id="al"></div>
+        </section>
+        <section id="mypage-content4" class="mypage-content">
+            <div id="사용자예약전체">
+            <div id="사용자예약" class="include_wrap"></div>
+            </div>
+        </section>
+
+        <section id="mypage-content6" class="mypage-content">
+            <div id="Delete-Account">
+                <div>
+                    <h2 id="delete-text">회원 탈퇴</h2>
+                    <span class="delete-span-text">현재 비밀번호가 일치하는 경우 탈퇴할 수 있습니다.</span>
+                </div>
+                <div class="delete-gap">
+                    <hr style="color: black;">
+                    <h3 class="delete-pw">비밀번호 확인</h3><input type="password" maxlength="20" class="delete-pw-input"
+                        placeholder="비밀번호를 입력해주세요">
+                    <hr>
+                </div>
+                <div class="delete-gap">
+                    <h3>회원 탈퇴 약관</h3>
+                    <div class="delete-Terms">
+                        <br>
+                        <h3 class="delete-Terms-span">① 약관 내용 1</h3>
+                        <span>제1조 (계정 및 개인정보 처리) <br>
+                            회원탈퇴 시 사용자의 계정 정보 및 서비스 이용 기록은 즉시 삭제되며 복구가 불가능합니다. <br> 단, 관계법령에 따라 보존할 필요가 있는 경우 일정 기간 보관 후
+                            파기됩니다.</span>
+                        <h3 class="delete-Terms-span">② 약관 내용 2</h3>
+                        <span>제2조 (게시물 및 데이터 관리) <br>
+                            작성하신 게시물, 댓글, 그리고 프로젝트 내 공유 데이터는 <br> 탈퇴 후에도 자동으로 삭제되지 않습니다. <br> 삭제를 원하실 경우 반드시 탈퇴 전 직접 삭제해
+                            주시기 바랍니다.<div class="br"></div>
+                            탈퇴 후에는 수정 및 삭제 권한이 상실됩니다.</span>
+                        <h3 class="delete-Terms-span">③ 약관 내용 3</h3>
+                        <span>제3조 (서비스 이용 제한) <br>
+                            탈퇴가 완료되면 본 서비스에서 제공하는 모든 회원 전용 기능 <br> (강의 예약, 식단표 조회, 투두 리스트 등)을 이용하실 수 없습니다. <br> 또한, 동일한
+                            계정으로의 재가입은
+                            탈퇴 후 일정 기간 제한될 수 있습니다.</span>
+                        <h3 class="delete-Terms-span">④ 약관 내용 4</h3>
+                        <span>제4조 (포인트 및 혜택 소멸) <br>
+                            보유 중인 잔여 포인트, 쿠폰 및 기타 혜택은 탈퇴와 동시에 모두 소멸되며, <br> 현금으로 환불되거나 타인에게 양도될 수 없습니다.</span>
+                    </div>
+                </div>
+                <div class="delete-gap delete-botom">
+                    <div><input type="checkbox" class="deleteChk" style="width: 17px; height: 17px;">
+                        <h4 style="display: inline-block; font-size: 18px;">위 약관에 동의합니다.</h4>
+                    </div>
+                    <div>
+                        <button type="button" class="delete-btn">탈퇴</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section id="mypage-content-dashboard" class="mypage-content flex-col">
+            <div class="setting-header w-100">
+                <h2>Dashboard 요약</h2>
+                <p>시스템 전반의 핵심 지표를 확인합니다.</p>
+            </div>
+
+            <div class="dashboard-widgets w-100 mt-20">
+                <div class="widget-card">
+                    <h3 class="widget-title">Total Users</h3>
+                    <div class="widget-value text-primary">224 <span class="text-sm text-gray">명</span></div>
+                    <p class="widget-desc p-1">어제 대비 +12 명</p>
+                </div>
+
+                <div class="widget-card">
+                    <h3 class="widget-title">Active Sessions</h3>
+                    <div class="widget-value text-success">36</div>
+                    <p class="widget-desc">현재 접속 중인 사용자</p>
+                </div>
+
+                <div class="widget-card">
+                    <h3 class="widget-title">DB Transactions</h3>
+                    <div class="widget-value text-warning">1.2k <span class="text-sm text-gray">/ hr</span></div>
+                    <p class="widget-desc">최근 1시간 평균</p>
+                </div>
+
+                <div class="widget-card">
+                    <h3 class="widget-title">System Alerts</h3>
+                    <div class="widget-value text-danger">0</div>
+                    <p class="widget-desc">확인 필요한 경고 메시지</p>
+                </div>
+            </div>
+        </section>
+        <section id="mypage-content-users" class="mypage-content ">
+            <div class="profile-setting-container w-100 max-w-100">
+                <div class="setting-header">
+                    <h2>사용자 관리</h2>
+                    <p>전체 사용자 목록을 확인하고 관리할 수 있습니다.</p>
+                </div>
+
+                <div class="users-body">
+                    <div class="users-controls">
+                        <div class="search-box">
+                            <input type="text" id="user-search-input" class="input-box" placeholder="이름 또는 이메일 검색">
+                            <button type="button" class="btn btn-outline" id="user-search-btn">검색</button>
+                        </div>
+                        <div class="filter-box">
+                            <select id="user-role-filter" class="input-box w-auto">
+                                <option value="all">모든 역할</option>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>이름</th>
+                                    <th>이메일</th>
+                                    <th>역할</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="pagination-container">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- <section id="mypage-content9" class="mypage-content">9
+        </section> -->
+        <!-- <section id="mypage-content10" class="mypage-content">10
+        </section> -->
+    </div>
+
+
+    </div>
+
+
+    <footer id="footer-include" class="ftr"></footer>
+    <script src="./common.js"></script>
+    <script src="./마이페이지.js"></script>
+    <!-- <script src="./식단표.js"></script> -->
+    <script src="./사용자예약.js"></script>
+      <script src="./allergy_list.js"></script>
+</body>
+
+</html>

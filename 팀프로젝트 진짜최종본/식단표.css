@@ -54,7 +54,7 @@ body {
 .main-container {
     max-width: 1000px;
     margin: 0px 0px 0px 0px;
-    margin-left: 0px !important;
+    margin-left: 123px !important;
     background: #fff;
     border-radius: 10px;
     /* padding: 30px; */

@@ -2302,7 +2302,7 @@ img {
     /* [18-1] 모바일도 저장 버튼이 안 잘리도록 높이를 조금 더 줄이고 화면 안쪽 여백을 확보 */
     width: calc(100vw - 16px);
     max-height: calc(100dvh - 32px);
-    padding: 16px;
+    padding: 60px;
   }
 
   .modal-bottom {
@@ -2339,16 +2339,17 @@ img {
 @media (min-width: 761px) {
   .post-modal {
     /* [20-3] PC 모달은 헤더 아래 여백을 두고 표시해서 상단 GNB와 겹치지 않게 유지 */
-    top: 104px;
+    top: 145px;
     transform: translateX(-50%);
     z-index: 3010;
+    
   }
 }
 
 @media (max-width: 760px) {
   .post-modal {
     left: 50%;
-    top: 50%;
+    top: 59%;
     transform: translate(-50%, -50%);
   }
 

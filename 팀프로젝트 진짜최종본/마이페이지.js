@@ -200,7 +200,7 @@ window.addEventListener('load', async () => {
             alert("닉네임은 한글, 영문, 숫자만 사용하실 수 있습니다.");
         } else {
             saveNick = stn;
-            alert("사용 가능하신 닉네임입니다.");
+            alert("사용 가능한 닉네임입니다.");
         }
 
 
@@ -917,7 +917,7 @@ window.addEventListener('load', async () => {
             alert("해당 유저를 탈퇴 처리하였습니다.");
             loadUserList();
         }
-
-
     })
+
+    
 });////////window.addEventListner('load')

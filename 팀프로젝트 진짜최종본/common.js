@@ -25,6 +25,8 @@ const commonLayout = function () {
 };
 
 commonLayout();
+
+
 const setting = loadJs('User');
 const fun = function () {
     if (!setting) {

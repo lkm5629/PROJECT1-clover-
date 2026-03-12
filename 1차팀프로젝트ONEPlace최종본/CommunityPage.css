@@ -1,0 +1,3307 @@
+/* ========================================================================== */
+/* [01] 폰트 선언                                                             */
+/* ========================================================================== */
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ========================================================================== */
+/* [02] 공통 색상 / 그림자 변수                                               */
+/*      메인 컬러 재확인: #FBCB4C / 서브 컬러: #FFF1BF / 활성 텍스트: #8A6A00 */
+/* ========================================================================== */
+:root {
+  --main: #FBCB4C;
+  --text: #333333;
+  --sub: #FFF1BF;
+  --bg: #FFFFFF;
+  --light: #FAFAFA;
+  --border: #EAEAEA;
+  --shadow: 0 12px 24px rgba(51, 51, 51, 0.08);
+}
+
+/* ========================================================================== */
+/* [03] 기본 리셋                                                             */
+/* ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Escoredream', sans-serif;
+  background: #fff;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* ========================================================================== */
+/* [04] 헤더 영역                                                             */
+/* ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.top-bar {
+  background: #FAFAFA;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.inner {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.util-row {
+  min-height: 38px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  color: #777;
+}
+
+.nav-row {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand-logo {
+  height: 52px;
+}
+
+.desktop-gnb {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.desktop-gnb a {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.desktop-gnb a.active {
+  color: #8A6A00;
+  font-weight: 700;
+}
+
+.mobile-menu-btn {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mobile-menu-btn span {
+  width: 18px;
+  height: 2px;
+  background: #333;
+  border-radius: 999px;
+}
+
+.mobile-menu-panel {
+  display: none;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+
+.mobile-menu-panel.open {
+  display: block;
+}
+
+.mobile-menu-inner {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 14px 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-menu-inner a {
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.mobile-menu-inner a.active {
+  background: #FFF1BF;
+  border-color: #FBCB4C;
+}
+
+/* ========================================================================== */
+/* [05] 페이지 메인 레이아웃                                                   */
+/* ========================================================================== */
+.community-main {
+  padding: 24px 0 110px;
+  background: linear-gradient(180deg, #FFFDF7 0%, #FFFFFF 180px);
+}
+
+.community-shell {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+}
+
+.left-nav {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: #fff;
+  align-self: start;
+  position: sticky;
+  top: 122px;
+}
+
+.left-nav-btn {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.left-nav-btn:last-child {
+  margin-bottom: 0;
+}
+
+.left-nav-btn.active {
+  background: var(--main);
+  border-color: var(--main);
+}
+
+.content-area {
+  min-width: 0;
+}
+
+.community-page {
+  display: none;
+}
+
+.community-page.active {
+  display: block;
+}
+
+.page-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.page-sub-text {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: #777;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ========================================================================== */
+/* [06] 공통 블록 / 버튼 / 탭                                                  */
+/* ========================================================================== */
+.board-block {
+  margin-bottom: 18px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.board-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.board-header p {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.text-more-btn {
+  padding: 4px 0;
+  background: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6D5A22;
+}
+
+.hidden-panel {
+  display: none !important;
+}
+
+.section-tab-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.section-tab {
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.section-tab.active {
+  background: #FFF8E5;
+  border-color: #E8BA2F;
+}
+
+.line-btn,
+.main-btn {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.line-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.main-btn {
+  border: 1px solid var(--main);
+  background: var(--main);
+  color: #000;
+}
+
+.small-btn {
+  height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+  margin-left: 0;
+  width: auto;
+  min-width: 70px;
+}
+
+/* ========================================================================== */
+/* [07] 게시글 카드 / 리스트                                                   */
+/* ========================================================================== */
+.preview-hot-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* [07-0] 말줄임 텍스트 툴팁이 카드 밖으로 자연스럽게 보이도록 카드 / 목록 overflow를 열어 둠 */
+.board-block,
+.latest-list,
+.preview-hot-list,
+.post-main-row,
+.post-text-col,
+.hot-card,
+.post-card,
+.activity-card {
+  overflow: visible;
+}
+
+.latest-list {
+  display: grid;
+  gap: 16px;
+}
+
+.hot-card,
+.post-card,
+.activity-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.hot-card:hover,
+.post-card:hover,
+.activity-card:hover {
+  border-color: #DDD3AA;
+  transform: translateY(-1px);
+  z-index: 2;
+}
+
+.hot-card {
+  min-height: 220px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card {
+  padding: 20px;
+  overflow: visible;
+}
+
+.activity-card {
+  padding: 18px;
+  overflow: visible;
+}
+
+.hot-card .post-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* .hot-card .post-excerpt {
+  -webkit-line-clamp: 3;
+} */
+
+.post-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.author-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.author-dot {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #E8C856;
+  border-radius: 50%;
+  background: #F7E4A2;
+  flex: none;
+}
+
+.author-name {
+  max-width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  white-space: nowrap;
+  word-break: keep-all;
+  writing-mode: horizontal-tb;
+}
+
+.post-title {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
+}
+
+.post-excerpt {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #F1F1F1;
+  color: #666;
+  font-size: 13px;
+}
+
+.post-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+.post-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #666;
+  font-size: 13px;
+}
+
+.stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.stat-item svg {
+  width: 15px;
+  height: 15px;
+  stroke: #777;
+  flex-shrink: 0;
+}
+
+.post-right-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 210px;
+  color: #888;
+  font-size: 13px;
+}
+
+.edit-inline-btn,
+.danger-inline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.edit-inline-btn svg,
+.danger-inline-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.danger-inline-btn {
+  color: #7C4B4B;
+}
+
+.post-action-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.truncate-1,
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* .truncate-1 {
+  -webkit-line-clamp: 1;
+}
+
+.truncate-2 {
+  -webkit-line-clamp: 2;
+} */
+
+.post-main-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 6px;
+}
+
+.post-text-col {
+  min-width: 0;
+  flex: 1;
+}
+
+.post-thumb {
+  width: 112px;
+  min-width: 112px;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.post-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+/* [07-3] 인기글도 일반 카드와 동일하게 텍스트 왼쪽 / 이미지 오른쪽 구조 유지 */
+.hot-card .post-main-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+}
+
+.hot-card .post-text-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.hot-card .post-thumb {
+  width: 88px;
+  min-width: 88px;
+  height: 88px;
+  margin-top: 0;
+  border-radius: 16px;
+  align-self: flex-start;
+}
+
+.hot-card .post-bottom-row {
+  margin-top: auto;
+  align-items: flex-end;
+  padding-top: 12px;
+}
+
+.hot-card .post-action-group {
+  align-self: flex-end;
+}
+
+/* ========================================================================== */
+/* [08] 내 소식 / 활동 카드                                                    */
+/* ========================================================================== */
+.my-activity-box {
+  display: grid;
+  gap: 14px;
+}
+
+/* [06-2-1] 내 소식 / 활동 페이지네이션도 전체 목록과 같은 결로 사용 */
+.my-pager-row {
+  margin-top: 18px;
+}
+
+.hide-empty-pager {
+  display: none;
+}
+
+/* [06-2-2] PC hover / 모바일 클릭 공용 툴팁 스타일 */
+.tooltip-target {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.tooltip-target > .post-title,
+.tooltip-target > .post-excerpt {
+  width: 100%;
+}
+
+.smart-tooltip-bubble {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  min-width: 260px;
+  max-width: min(360px, 68vw);
+  padding: 10px 12px;
+  border: 1px solid #E8D9A2;
+  border-radius: 14px;
+  background: #fffef9;
+  box-shadow: 0 14px 28px rgba(51, 51, 51, 0.12);
+  color: #333;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  pointer-events: none;
+  z-index: 40;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .js-smart-tooltip:hover .smart-tooltip-bubble,
+  .js-smart-tooltip:focus-within .smart-tooltip-bubble {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.show-mobile-tooltip .smart-tooltip-bubble {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.activity-label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8A6F16;
+}
+
+.activity-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.activity-title-row .post-title {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.activity-card .post-excerpt {
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.activity-alarm-preview {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.58;
+  color: #6D6557;
+}
+
+.activity-card .post-excerpt {
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* [08-1] 내 소식 알림 문장은 한 단계 작고 연하게 표시 */
+.activity-alarm-text {
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #4F4F4F;
+}
+
+/* ========================================================================== */
+/* [09] 채팅 영역                                                             */
+/* ========================================================================== */
+.chat-block {
+  padding-bottom: 10px;
+}
+
+.chat-thread {
+  display: grid;
+  gap: 14px;
+  padding: 10px 0;
+}
+
+.chat-row {
+  display: flex;
+}
+
+.chat-row.left {
+  justify-content: flex-start;
+}
+
+.chat-row.right {
+  justify-content: flex-end;
+}
+
+.chat-bubble-wrap {
+  max-width: min(78%, 540px);
+}
+
+.chat-meta {
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: #888;
+}
+
+.chat-row.right .chat-meta {
+  text-align: right;
+}
+
+.chat-bubble {
+  display: inline-block;
+  padding: 11px 13px;
+  border-radius: 14px;
+  background: #F0F0F0;
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+.chat-row.right .chat-bubble {
+  background: #CFD3FF;
+}
+
+/* ========================================================================== */
+/* [10] 상세 페이지 / 댓글                                                     */
+/* ========================================================================== */
+.detail-card,
+.comment-section {
+  margin-bottom: 20px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.detail-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.detail-head-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.detail-head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-top-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: #777;
+  font-size: 13px;
+}
+
+.detail-content {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #444;
+}
+
+.detail-action-row {
+  margin-top: 10px;
+}
+
+.detail-action-row .post-action-group {
+  margin-left: 0;
+}
+
+.detail-image-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.detail-image-list img {
+  height: 220px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  object-fit: contain;
+  background: #fff;
+}
+
+.detail-card .tag-chip {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.center-recommend-row {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0 22px;
+}
+
+.recommend-btn {
+  width: 84px;
+  min-width: 84px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.recommend-btn.active {
+  background: var(--main);
+  border-color: var(--main);
+}
+
+.recommend-btn svg {
+  width: 38px;
+  height: 38px;
+}
+
+.icon-button-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.icon-button svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.icon-button .icon-button-label,
+.icon-button .count-badge {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.icon-button .count-badge {
+  color: #666;
+}
+
+.comment-card,
+.reply-card {
+  margin-bottom: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.comment-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+.comment-text {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #444;
+}
+
+.inline-edit-wrap {
+  display: grid;
+  gap: 10px;
+}
+
+.inline-edit-textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.reply-card .inline-edit-textarea {
+  min-height: 80px;
+}
+
+.inline-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reply-wrap {
+  margin-top: 10px;
+  padding-left: 18px;
+  border-left: 2px solid #F0F0F0;
+}
+
+.reply-input,
+.comment-input,
+.textarea-input {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  outline: none;
+}
+
+.reply-input {
+  min-height: 90px;
+}
+
+.comment-form-bottom,
+.reply-form-bottom,
+.modal-bottom,
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.comment-section .board-header h3,
+.comment-section h3 {
+  font-size: 16px;
+}
+
+.comment-section p {
+  font-size: 12px;
+}
+
+.empty-box {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: var(--light);
+  color: #777;
+}
+
+/* ========================================================================== */
+/* [11] 모달 / 토스트                                                         */
+/* ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  /* [11-0] 상단 GNB보다 위에 오도록 z-index를 크게 올려 모달이 헤더 밑에 가려지지 않게 수정 */
+  z-index: 3000 !important;
+  background: rgba(30, 30, 30, 0.38);
+}
+
+.post-modal,
+.confirm-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3010;
+}
+
+.post-modal {
+  width: min(640px, calc(100vw - 72px));
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-y;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  scrollbar-width: none;
+}
+
+.post-modal::-webkit-scrollbar {
+  display: none;
+}
+
+/* [11-1-1] PC에서 모달을 드래그하듯 스크롤할 때 제목/라벨이 선택되지 않도록 정적 텍스트는 선택 방지 */
+.post-modal .modal-top,
+.post-modal .form-label,
+.post-modal .modal-mode-text,
+.post-modal .modal-title,
+.post-modal .image-drop-text {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+/* [11-1-2] 실제 입력이 필요한 영역은 계속 텍스트 입력/선택이 가능하도록 다시 열어 둠 */
+.post-modal input,
+.post-modal textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.confirm-box {
+  width: min(420px, calc(100% - 24px));
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.confirm-text {
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.modal-mode-text {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #7B7053;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.modal-form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.post-form-grid {
+  grid-template-columns: 1fr;
+}
+
+.form-row {
+  display: grid;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.fix-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  outline: none;
+}
+
+.textarea-input {
+  height: 170px;
+  padding: 14px;
+}
+
+.post-modal .textarea-input {
+  min-height: 150px;
+  height: 150px;
+  resize: none;
+}
+
+.image-drop-zone {
+  /* [11-2] 저장 버튼이 가려지지 않도록 이미지 박스 높이를 조금 더 줄임 */
+  min-height: 126px;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 14px;
+  border: 2px dashed #D8D8D8;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.image-drop-zone.dragover {
+  border-color: #E8BA2F;
+  background: #FFF9E8;
+}
+
+.image-drop-text {
+  font-size: 13px;
+  color: #777;
+}
+
+.image-preview-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.preview-card {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.preview-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.preview-remove-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(51, 51, 51, 0.7);
+  color: #fff;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 90;
+  padding: 11px 16px;
+  border-radius: 999px;
+  background: rgba(51, 51, 51, 0.92);
+  color: #fff;
+  font-size: 14px;
+}
+
+/* ========================================================================== */
+/* [12] 플로팅 버튼 / 페이저                                                   */
+/* ========================================================================== */
+.fab-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 99999;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--main);
+  color: #333;
+  font-size: 30px;
+  font-weight: 900;
+  box-shadow: 0 10px 22px rgba(51, 51, 51, 0.18);
+}
+
+.board-desc-text {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #777;
+}
+
+.assistive-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page-number-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.page-number-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: #5B5240;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.page-number-btn.active {
+  border-color: var(--main);
+  background: var(--main);
+  color: #111;
+}
+
+.page-number-btn:hover {
+  border-color: #E8BA2F;
+}
+
+.pager-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.pager-move-btn[disabled],
+.page-number-btn[disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.detail-top-row {
+  align-items: center;
+}
+
+/* ========================================================================== */
+/* [13] 반응형 - 태블릿                                                       */
+/* ========================================================================== */
+/* [15-4] PC에서는 작성/수정 모달이 상단에 걸리지 않도록 위치와 최대 높이를 별도로 보정 */
+@media (min-width: 761px) {
+  .post-modal {
+    width: min(640px, calc(100vw - 96px));
+    max-height: calc(100dvh - 120px);
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-bottom {
+    padding-bottom: 6px;
+  }
+
+  .image-drop-zone {
+    min-height: 96px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* [13-1] TODO와 동일하게 태블릿 이하에서는 상단 메뉴를 1fr 본문 + 가로 버튼 묶음으로 전환 */
+  .desktop-gnb {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  .nav-row {
+    min-height: 72px;
+  }
+
+  .community-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .left-nav {
+    position: static;
+    top: auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .left-nav-btn {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .preview-hot-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .page-title {
+    font-size: 26px;
+  }
+
+  .post-title {
+    font-size: 18px;
+  }
+}
+
+/* ========================================================================== */
+/* [14] 반응형 - 모바일                                                       */
+/* ========================================================================== */
+@media (max-width: 760px) {
+  /* [14-1] TODO 모바일 상단 구조와 동일하게 좌우 거터 / 헤더 높이 / 본문 시작 여백을 그대로 적용 */
+  .inner,
+  .community-shell {
+    width: min(1280px, calc(100% - 32px));
+  }
+
+  .top-bar {
+    /* display: none; */
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-row {
+    min-height: 72px;
+  }
+
+  .brand-logo {
+    height: 46px;
+    width: auto;
+  }
+
+  .mobile-menu-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .community-main {
+    padding: 24px 0 110px;
+  }
+
+  .left-nav {
+    margin-bottom: 0;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .left-nav-btn {
+    width: auto;
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 14px;
+  }
+
+  .content-area {
+    padding: 0;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .page-sub-text {
+    font-size: 11px;
+  }
+
+  .board-block {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .board-header h3 {
+    font-size: 17px;
+  }
+
+  .section-tab {
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .post-card,
+  .hot-card,
+  .activity-card {
+    padding: 16px;
+  }
+
+  /* [14-1-1] 모바일 인기글은 PC처럼 3개가 한 줄에 유지되되 카드 내부는 세로 플렉스로 정리 */
+  .preview-hot-list {
+    align-items: stretch;
+  }
+
+  .hot-card {
+    min-height: 0;
+    height: 100%;
+    padding: 10px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hot-card .post-top {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .hot-card .author-inline {
+    gap: 6px;
+  }
+
+  .hot-card .author-dot {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hot-card .author-name,
+  .hot-card .post-right-meta {
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  /* [14-1-2] 모바일 인기글 제목은 2줄까지만 보이고, 길면 ... 처리 */
+  .hot-card .post-title {
+    font-size: 10px;
+    line-height: 1.32;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    word-break: keep-all;
+    margin-bottom: 4px;
+    min-height: calc(1.32em * 3);
+  }
+
+  /* [14-1-3] 모바일 인기글 본문은 3줄까지만 노출해서 카드 버튼 줄이 맨 아래에 오게 정리 */
+  .hot-card .post-excerpt {
+    font-size: 8px;
+    line-height: 1.38;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    word-break: keep-all;
+    margin-bottom: 4px;
+    min-height: calc(1.38em * 3);
+  }
+
+  .hot-card .tag-row {
+    gap: 4px;
+    margin-bottom: 6px;
+    min-height: 20px;
+  }
+
+  .hot-card .tag-chip {
+    height: 20px;
+    padding: 0 5px;
+    font-size: 8px;
+  }
+
+  .hot-card .stat-item {
+    font-size: 9px;
+    gap: 2px;
+  }
+
+  .hot-card .post-main-row {
+    flex: 1;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .hot-card .post-text-col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .hot-card .post-thumb {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    margin-top: 2px;
+    border-radius: 10px;
+  }
+
+  .hot-card .post-bottom-row {
+    align-items: flex-end;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+
+  .hot-card .post-action-group {
+    gap: 4px;
+    margin-left: 0;
+    flex-wrap: nowrap;
+    align-self: stretch;
+  }
+
+  .hot-card .small-btn {
+    height: 24px;
+    padding: 0 5px;
+    font-size: 9px;
+  }
+
+  .hot-card .small-btn span {
+    font-size: 9px;
+  }
+
+  .post-top,
+  .activity-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .post-right-meta {
+    width: 100%;
+    min-width: 0;
+    justify-content: flex-start;
+    font-size: 12px;
+  }
+
+  .post-title {
+    font-size: 17px;
+  }
+
+  .post-excerpt {
+    font-size: 13px;
+  }
+
+  .detail-title {
+    font-size: 20px;
+  }
+
+  .detail-top-meta {
+    font-size: 12px;
+  }
+
+  .detail-content {
+    font-size: 13px;
+  }
+
+  .detail-head-row {
+    flex-direction: column;
+  }
+
+  .recommend-btn {
+    min-width: 96px;
+    height: 96px;
+    font-size: 14px;
+  }
+
+  .post-modal {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .fab-btn {
+    right: 18px;
+    bottom: 18px;
+  }
+
+  /* [14-1] 모바일 카드 높이가 과하게 늘어나지 않도록 이미지와 텍스트를 가로 배치 */
+  .post-card .post-main-row,
+  .activity-card .post-main-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .post-card .post-thumb,
+  .activity-card .post-thumb {
+    width: 92px;
+    min-width: 92px;
+    height: 92px;
+    border-radius: 16px;
+  }
+
+  .post-card .post-title,
+  .activity-card .post-title {
+    font-size: 16px;
+  }
+
+  .post-card .post-excerpt,
+  .activity-card .post-excerpt {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .post-card .tag-row,
+  .activity-card .tag-row {
+    margin-bottom: 10px;
+  }
+
+  .post-bottom-row {
+    align-items: center;
+  }
+
+  .post-action-group {
+    margin-left: auto;
+  }
+
+  .hot-card .post-thumb {
+    height: 140px;
+  }
+
+  .detail-head-row {
+    gap: 12px;
+  }
+
+  .icon-button-row {
+    gap: 8px;
+  }
+}
+
+
+/* ========================================================================== */
+/* [15] 최종 보정 - 채팅 2분할 / 상세 버튼 / 모달 하단 정리                   */
+/*      이번 블록은 기존 기능은 유지하고, 마지막 요청 사항만 덮어쓰기용으로 보정 */
+/* ========================================================================== */
+
+/* [15-1] 채팅 페이지를 왼쪽 채팅방 / 오른쪽 실제 대화창 구조로 재정리 */
+.chat-live-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.chat-room-panel,
+.chat-conversation-panel {
+  min-width: 0;
+}
+
+.chat-panel-title {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #8A6A00;
+}
+
+.chat-board-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chat-room-list {
+  display: grid;
+  gap: 10px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding-right: 2px;
+  scrollbar-width: none;
+}
+
+.chat-room-list::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-room-item {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.chat-room-item:hover {
+  border-color: #E8BA2F;
+  box-shadow: 0 10px 18px rgba(251, 203, 76, 0.12);
+  transform: translateY(-1px);
+}
+
+.chat-room-item.active {
+  border-color: #E8BA2F;
+  background: #FFF9E8;
+}
+
+.chat-room-item-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.chat-room-main {
+  min-width: 0;
+  width: 100%;
+}
+
+.chat-room-inline-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.chat-room-inline-actions .chat-room-icon-btn {
+  flex: 0 0 auto;
+}
+
+.chat-room-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.chat-room-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.chat-room-muted-label {
+  flex-shrink: 0;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #FFF3C9;
+  color: #8A6A00;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.chat-room-side-bottom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.chat-room-action-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.chat-room-icon-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #E6DFC9;
+  border-radius: 999px;
+  background: #fff;
+  color: #8A6A00;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.chat-room-icon-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.chat-room-icon-btn:hover {
+  border-color: #E8BA2F;
+  background: #FFF8E3;
+  transform: translateY(-1px);
+}
+
+.chat-room-icon-btn.danger {
+  color: #B95C4E;
+}
+
+.chat-room-icon-btn.danger:hover {
+  border-color: #E6B1A8;
+  background: #FFF3F1;
+}
+
+.chat-room-subtitle,
+.chat-room-preview,
+.chat-current-room-meta {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #777;
+}
+
+.chat-room-right {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+}
+
+.chat-room-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.chat-room-badge {
+  /* [15-4] 옆 채팅방 안 읽은 숫자가 올라올 때 조금 더 눈에 띄게 보이도록 배지 강조 */
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--main);
+  box-shadow: 0 4px 10px rgba(251, 203, 76, 0.35);
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+}
+
+.chat-phone-frame {
+  position: relative;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 14px;
+  border: 1px solid #E8D9A2;
+  border-radius: 32px;
+  background: linear-gradient(180deg, #FFF7DA 0%, #FFFDF6 100%);
+  box-shadow: 0 18px 30px rgba(51, 51, 51, 0.08);
+}
+
+.chat-screen {
+  min-height: 620px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+.chat-screen-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F2E7C0;
+}
+
+.chat-current-room-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.chat-toast-stack {
+  width: min(240px, 28vw);
+  min-height: 44px;
+  display: grid;
+  align-content: start;
+  justify-items: end;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* [09-7] 모바일에서는 채팅 폰 프레임 앞에 떠야 하므로 별도 토스트 레이어 사용 */
+.chat-mobile-toast-stack {
+  display: none;
+}
+
+.chat-inline-toast {
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #F2D98A;
+  border-radius: 14px;
+  background: #FFF7DA;
+  box-shadow: 0 10px 18px rgba(251, 203, 76, 0.18);
+  color: #6F5608;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+  opacity: 0;
+  transform: translateY(-6px);
+  animation: chatToastIn 0.22s ease forwards;
+}
+
+.chat-inline-toast.fade-out {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+@keyframes chatToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* [15-5] 입력 중 안내는 내가 보낸 말풍선이 아니라 상대방 말풍선 흐름과 맞게 왼쪽 정렬 */
+.chat-status-row {
+  /* [15-5] 입력 중 안내는 무조건 왼쪽 끝에서 시작하도록 영역 자체를 왼쪽 정렬로 고정 */
+  width: 100%;
+  min-height: 28px;
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+}
+
+.chat-typing-hint {
+  opacity: 0;
+  visibility: hidden;
+  width: fit-content;
+  min-height: 24px;
+  margin-left: 0;
+  margin-right: auto;
+  align-self: flex-start;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #FFF3C4;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7B5E12;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.chat-typing-hint.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+.chat-thread {
+  min-height: 360px;
+  max-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+  overflow-y: auto;
+}
+
+.chat-thread::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-thread::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #E9E1C5;
+}
+
+.chat-row {
+  display: flex;
+}
+
+.chat-row.left {
+  justify-content: flex-start;
+}
+
+.chat-row.right {
+  justify-content: flex-end;
+}
+
+.chat-bubble-wrap {
+  max-width: min(82%, 290px);
+}
+
+.chat-meta {
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: #888;
+}
+
+.chat-row.right .chat-meta {
+  text-align: right;
+}
+
+.chat-bubble {
+  display: inline-block;
+  padding: 11px 13px;
+  border: 1px solid #F0E7C8;
+  border-radius: 18px;
+  background: #FFFCF3;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.chat-row.right .chat-bubble {
+  border-color: #F4CC63;
+  background: #FFF1BF;
+}
+
+.chat-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.chat-input {
+  /* [15-8] 입력창 안쪽 세로 스크롤이 보이지 않도록 숨기고 자동 높이만 사용 */
+  width: 100%;
+  min-height: 48px;
+  max-height: 92px;
+  resize: none;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  outline: none;
+  line-height: 1.55;
+}
+
+.chat-input::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-send-btn {
+  min-width: 74px;
+  height: 48px;
+  border-radius: 16px;
+}
+
+/* [15-2] 게시글 상세 수정/삭제는 PC에서 우측 상단, 모바일에서 액션 줄 옆으로 분리 */
+.detail-head-row {
+  align-items: flex-start;
+}
+
+.detail-head-actions {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.detail-head-actions-desktop {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-mobile-actions {
+  display: none;
+}
+
+.detail-action-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detail-action-row .post-action-group {
+  margin-left: auto;
+}
+
+/* [15-3] 모달 저장 버튼이 PC/모바일 모두에서 잘리지 않도록 하단 여백 재정리 */
+.post-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 18px;
+}
+
+.modal-form-grid {
+  flex: 1 1 auto;
+}
+
+.modal-bottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding-top: 14px;
+  padding-bottom: 2px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 24px);
+}
+
+.image-drop-zone {
+  min-height: 118px;
+  padding: 14px 16px;
+}
+
+.image-drop-text {
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .chat-live-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-phone-frame {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .chat-block {
+    padding: 16px;
+  }
+
+  .chat-live-layout {
+    gap: 14px;
+  }
+
+  .chat-room-item {
+    padding: 13px;
+    border-radius: 16px;
+  }
+
+  .chat-room-side-bottom {
+    gap: 4px;
+  }
+
+  .chat-room-action-row {
+    gap: 3px;
+  }
+
+  .chat-room-icon-btn {
+    width: 22px;
+    height: 22px;
+  }
+
+  .chat-phone-frame {
+    padding: 10px;
+    border-radius: 26px;
+  }
+
+  .chat-screen {
+    min-height: 520px;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .chat-board-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chat-screen-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chat-thread {
+    min-height: 300px;
+    max-height: 360px;
+  }
+
+  .chat-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-send-btn {
+    width: 100%;
+  }
+
+  .detail-head-actions-desktop {
+    display: none;
+  }
+
+  .detail-mobile-actions {
+    display: inline-flex;
+  }
+
+  .detail-action-row .detail-mobile-actions {
+    margin-left: auto;
+  }
+
+  /* @media (max-width: 760px) {
+  .post-modal {
+    /* [18-1] 모바일도 TODO 모달처럼 화면 중앙에서 자연스럽게 보이도록 크기와 여백을 정리 */
+      /* width: calc(100vw - 24px);
+  max-height: calc(100dvh - 120px);
+  padding: 18px 16px;
+  border-radius: 24px;
+  }
+
+  .modal-bottom {
+    padding-top: 12px;
+  }
+
+  .image-drop-zone {
+    min-height: 100px;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+} */ */
+
+
+/* ========================================================================== */
+/* [20] 최종 보정 - 모달 / 채팅 표시                                          */
+/* ========================================================================== */
+.post-modal.hide,
+.modal-overlay.hide,
+.confirm-modal.hide {
+  display: none !important;
+}
+
+/* [20-1] 채팅방 숫자가 더 눈에 띄도록 최소 크기와 정렬을 한 번 더 고정 */
+.chat-room-badge {
+  flex-shrink: 0;
+}
+
+/* [20-2] 입력 중 안내는 입력창 바로 위, 왼쪽 말풍선 흐름처럼 보이도록 추가 보정 */
+.chat-status-row {
+  padding-left: 2px;
+}
+
+@media (min-width: 761px) {
+  .post-modal {
+    /* [20-3] PC 모달은 TODO와 동일하게 화면 정중앙에 표시 */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3010;
+  }
+}
+
+@media (max-width: 760px) {
+  .post-modal {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .chat-status-row {
+    padding-left: 0;
+  }
+}
+
+
+/* [20] 숫자 페이지네이션 / 툴팁 / 채팅 토스트 반응형 보정 */
+@media (max-width: 760px) {
+  .pager-row {
+    gap: 10px;
+  }
+
+  .page-number-list {
+    gap: 6px;
+  }
+
+  .page-number-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  .pager-move-btn {
+    min-width: 72px;
+    height: 36px;
+    padding: 0 10px;
+  }
+
+  .chat-toast-stack {
+    display: none;
+  }
+
+  /* [20-1] 모바일에서는 신고 토스트처럼 채팅 폰 화면 앞에 겹쳐서 표시 */
+  .chat-mobile-toast-stack {
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translateX(-50%);
+    width: calc(100% - 36px);
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    pointer-events: none;
+    z-index: 40;
+  }
+
+  .chat-mobile-toast-stack .chat-inline-toast {
+    max-width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(51, 51, 51, 0.92);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .chat-inline-toast {
+    font-size: 10px;
+    padding: 7px 9px;
+  }
+
+  .smart-tooltip-bubble {
+    min-width: min(220px, 76vw);
+    max-width: min(280px, 80vw);
+  }
+}
+
+
+/* ========================================================================== */
+/* [21] 추가 보정 - 댓글 한 줄 / 이미지 확대 / 모바일 인기글 버튼 정렬        */
+/* ========================================================================== */
+
+/* [21-1] 댓글 작성자와 시간은 기본적으로 한 줄로 유지 */
+.comment-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.comment-author {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* [21-2] 상세 이미지 클릭 확대를 위한 커서와 오버레이 */
+.detail-image-list img {
+  cursor: zoom-in;
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(17, 17, 17, 0.78);
+  z-index: 1400;
+}
+
+.image-lightbox-img {
+  max-width: min(92vw, 1080px);
+  max-height: 88vh;
+  border-radius: 18px;
+  background: #fff;
+  object-fit: contain;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+}
+
+.image-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+}
+
+@media (max-width: 760px) {
+  /* [21-3] 모바일에서도 작성자 + 시간은 한 줄 유지하고 버튼만 다음 줄로 흐르게 정리 */
+  .comment-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+  }
+
+  .comment-author {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .comment-form-bottom {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* [21-4] 모바일 채팅 토스트가 신고 토스트처럼 프레임 앞에 겹쳐 보이도록 조금 더 크게 */
+  .chat-mobile-toast-stack .chat-inline-toast {
+    min-width: 180px;
+    max-width: calc(100% - 8px);
+  }
+}
+
+
+/* ========================================================================== */
+/* [22] 인기글 이미지 위치 / 카드 하단 여백 / 모바일 추가 보정               */
+/* ========================================================================== */
+
+/* [22-1] 인기글 카드에서도 이미지가 있을 때는 텍스트 오른쪽에 고정 */
+.hot-card.has-thumbnail .post-main-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px;
+  align-items: start;
+  gap: 12px;
+}
+
+/* [22-2] 이미지와 하단 수정/삭제 버튼 사이에 시각적 여백 확보 */
+.post-card .post-bottom-row,
+.hot-card .post-bottom-row {
+  padding-top: 14px;
+}
+
+@media (max-width: 760px) {
+  /* [22-3] 모바일 인기글 3개가 유지되더라도 카드 내부 글씨가 깨지지 않도록 간격을 더 줄임 */
+  .preview-hot-list {
+    gap: 10px;
+  }
+
+  .hot-card {
+    min-width: 0;
+  }
+
+  .hot-card .post-right-meta {
+    min-width: 0;
+  }
+
+  .hot-card .post-stats {
+    gap: 8px;
+  }
+
+  .hot-card .post-action-group {
+    gap: 4px;
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+  .hot-card .post-main-row {
+    justify-content: space-between;
+  }
+
+  .hot-card.has-thumbnail .post-main-row {
+    grid-template-columns: minmax(0, 1fr) 42px;
+    gap: 6px;
+  }
+
+  .hot-card .post-thumb img {
+    object-fit: contain;
+  }
+}
+
+
+/* ========================================================================== */
+/* [23] v7 에러 보완 + 인기글 썸네일 정사각형 재정리                         */
+/* 설명:
+   - 인기글 카드에서 이미지가 세로로 길어 보이던 문제를 마지막 규칙으로 덮어쓴다.
+   - PC/모바일 모두 작은 정사각형 썸네일 + 제목/본문 말줄임 결을 통일한다.
+/* ========================================================================== */
+.hot-card {
+  min-height: 0;
+}
+
+.hot-card .post-title {
+  font-size: 15px;
+  line-height: 1.42;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: keep-all;
+  margin-bottom: 6px;
+  min-height: calc(1.42em * 2);
+}
+
+.hot-card .post-excerpt {
+  font-size: 13px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  word-break: keep-all;
+  margin-bottom: 6px;
+  min-height: calc(1.55em * 4);
+}
+
+.hot-card.has-thumbnail .post-main-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  align-items: start;
+  gap: 10px;
+}
+
+.hot-card .post-text-col {
+  min-width: 0;
+}
+
+.hot-card .post-thumb {
+  width: 72px;
+  min-width: 72px;
+  height: 72px;
+  aspect-ratio: 1 / 1;
+  margin-top: 0;
+  border-radius: 14px;
+  align-self: start;
+  justify-self: end;
+}
+
+.hot-card .post-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hot-card .post-bottom-row {
+  margin-top: auto;
+  padding-top: 14px;
+  align-items: flex-end;
+}
+
+@media (max-width: 760px) {
+  .hot-card {
+    padding: 10px 8px;
+  }
+
+  .hot-card .author-name,
+  .hot-card .post-right-meta {
+    font-size: 8px;
+    line-height: 1.3;
+  }
+
+  .hot-card .post-title {
+    font-size: 10px;
+    line-height: 1.34;
+    -webkit-line-clamp: 2;
+    min-height: calc(1.34em * 2);
+    margin-bottom: 4px;
+  }
+
+  .hot-card .post-excerpt {
+    font-size: 8px;
+    line-height: 1.42;
+    -webkit-line-clamp: 3;
+    min-height: calc(1.42em * 3);
+    margin-bottom: 4px;
+  }
+
+  .hot-card.has-thumbnail .post-main-row {
+    grid-template-columns: minmax(0, 1fr) 40px;
+    gap: 6px;
+  }
+
+  .hot-card .post-thumb {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .hot-card .tag-chip {
+    height: 19px;
+    padding: 0 5px;
+    font-size: 8px;
+  }
+
+  .hot-card .stat-item {
+    font-size: 9px;
+  }
+
+  .hot-card .small-btn {
+    height: 22px;
+    padding: 0 5px;
+    font-size: 9px;
+  }
+
+  .hot-card .post-bottom-row {
+    padding-top: 8px;
+    gap: 6px;
+  }
+}
+
+
+/* ========================================================================== */
+/* [24] v8 에러 마무리 + 인기글 썸네일/텍스트 폭 재조정                       */
+/* 설명:                                                                       */
+/* - 로고 404는 HTML에서 data URI 로고로 바꿔서 제거                           */
+/* - 인기글 이미지는 PC/모바일 모두 작은 정사각형으로 유지                     */
+/* - 대신 텍스트가 너무 빨리 잘리지 않도록 텍스트 영역을 조금 더 넓힘            */
+/* - 배경 채팅은 JS에서 10초 간격으로 번갈아 1건씩 오도록 조정                  */
+/* ========================================================================== */
+.hot-card.has-thumbnail .post-main-row {
+  grid-template-columns: minmax(0, 1fr) 60px;
+  gap: 12px;
+}
+
+.hot-card .post-thumb {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+}
+
+.hot-card .post-title {
+  -webkit-line-clamp: 2;
+}
+
+.hot-card .post-excerpt {
+  -webkit-line-clamp: 3;
+}
+
+@media (max-width: 760px) {
+  .hot-card {
+    padding: 10px 8px;
+  }
+
+  .hot-card.has-thumbnail .post-main-row {
+    grid-template-columns: minmax(0, 1fr) 34px;
+    gap: 6px;
+  }
+
+  .hot-card .post-thumb {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .hot-card .post-title {
+    font-size: 9px;
+    line-height: 1.35;
+    -webkit-line-clamp: 2;
+    min-height: calc(1.35em * 2);
+    margin-bottom: 4px;
+  }
+
+  .hot-card .post-excerpt {
+    font-size: 8px;
+    line-height: 1.45;
+    -webkit-line-clamp: 3;
+    min-height: calc(1.45em * 3);
+    margin-bottom: 4px;
+  }
+
+  .hot-card .tag-chip {
+    height: 18px;
+    padding: 0 4px;
+    font-size: 7px;
+  }
+
+  .hot-card .post-bottom-row {
+    padding-top: 8px;
+    gap: 6px;
+  }
+
+  .hot-card .post-stats {
+    gap: 8px;
+  }
+
+  .hot-card .stat-item {
+    font-size: 8px;
+  }
+
+  .hot-card .small-btn {
+    height: 22px;
+    padding: 0 5px;
+    font-size: 8px;
+  }
+}
+
+
+/* ========================================================================== */
+/* [25] v9 모바일 인기글 텍스트 노출량 추가 축소                               */
+/* 설명:                                                                       */
+/* - 모바일 폭에서는 인기글 제목/본문을 한 단계 더 짧게 보이도록 보정            */
+/* - 텍스트가 많아도 카드 높이가 과하게 늘어나지 않게 ... 처리 강화             */
+/* ========================================================================== */
+@media (max-width: 760px) {
+  .hot-card .post-title {
+    font-size: 8.6px;
+    line-height: 1.32;
+    -webkit-line-clamp: 2;
+    min-height: calc(1.32em * 2);
+    margin-bottom: 3px;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .hot-card .post-excerpt {
+    font-size: 7.6px;
+    line-height: 1.38;
+    -webkit-line-clamp: 2;
+    min-height: calc(1.38em * 2);
+    margin-bottom: 3px;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .hot-card .tag-row {
+    gap: 4px;
+  }
+
+  .hot-card .tag-chip {
+    max-width: 44px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+/* ====================================================================== */
+/* [25-1] v10 인기글 반응형 텍스트 재렌더 기준                                 */
+/* 설명: 모바일에서 줄인 텍스트가 웹으로 넓혔을 때도 그대로 남지 않도록,       */
+/*       JS에서 breakpoint 전환 시 인기글을 다시 그리는 버전과 함께 사용       */
+/* ====================================================================== */
+
+
+/* ========================================================================== */
+/* [26] 메인 통합본 로그인/비로그인 안내 영역                                 */
+/*      메모: 팀 공통 로그인 상태에 따라 JS에서 표시/숨김만 제어합니다.        */
+/* ========================================================================== */
+.chat2 {
+  display: none;
+}
+
+.chat2 h3 {
+  margin: 0;
+}
+
+.chat2 p {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 12px;
+}
+
+
+.page-info-text {
+  min-width: 88px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+}
+
+
+/* [chat responsive final] 모바일/좁은 화면에서는 채팅 목록 아래로 폰 프레임이 떨어지도록 보정 */
+.chat-room-panel,
+.chat-conversation-panel,
+.chat-phone-frame {
+  min-width: 0;
+}
+
+.chat-conversation-panel {
+  width: 100%;
+}
+
+.chat-phone-frame {
+  width: min(100%, 420px);
+}
+
+@media (max-width: 1180px) {
+  .chat-live-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .chat-room-panel,
+  .chat-conversation-panel {
+    width: 100%;
+  }
+
+  .chat-phone-frame {
+    width: min(100%, 420px);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .chat-room-list {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .chat-room-item {
+    padding: 12px;
+  }
+
+  .chat-room-item-top {
+    gap: 8px;
+  }
+
+  .chat-room-inline-actions {
+    gap: 4px;
+  }
+
+  .chat-room-icon-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .chat-phone-frame {
+    width: 100%;
+  }
+
+  .chat-screen {
+    min-height: 500px;
+  }
+}
+/* ============================= */
+/* 채팅 가로 폭 조정 - 데스크톱용 */
+/* 왼쪽 목록은 조금 넓히고,
+   오른쪽 실시간 채팅은 살짝 좁힘 */
+/* ============================= */
+@media (min-width: 1181px) {
+  .chat-live-layout {
+    grid-template-columns: minmax(280px, 320px) minmax(380px, 410px);
+    gap: 100px;
+    justify-content: center;
+  }
+
+  .chat-conversation-panel {
+    width: 100%;
+    max-width: 410px;
+    justify-self: end;
+  }
+
+  .chat-phone-frame {
+    width: 100%;
+    max-width: 410px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+
+/* ============================= */
+/* 채팅방 목록 폭 살짝 확장 + 시간/배지 가로 정렬 */
+/* ============================= */
+
+/* 1) 데스크톱에서 왼쪽 채팅방 목록 폭을 살짝 넓힘 */
+@media (min-width: 1181px) {
+  .chat-live-layout {
+    grid-template-columns: minmax(270px, 320px) minmax(0, 1fr);
+  }
+}
+
+/* 2) 하단 미리보기 줄을 좌우 배치로 정리 */
+.chat-room-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* 3) 미리보기 문장은 남는 공간을 쓰고 */
+.chat-room-preview {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 4) 시간 + 노란 숫자는 옆으로 한 줄 정렬 */
+.chat-room-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.chat-room-time {
+  flex-shrink: 0;
+}
+
+.chat-room-badge {
+  flex-shrink: 0;
+}
+/* ============================= */
+/* 모바일 채팅 목록-대화창 간격 축소 */
+/* ============================= */
+@media (max-width: 1024px) {
+  .chat-live-layout {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .chat-room-list {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .chat-conversation-panel {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .chat-phone-frame {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .chat-live-layout {
+    gap: 8px;
+  }
+}
+@media (max-width: 760px) {
+  .fab-btn {
+    display: block !important;
+    position: fixed !important;
+    right: 18px !important;
+    bottom: 18px !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: 99999 !important;
+  }
+}
+}
+body.modal-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+@media (max-width: 760px) {
+  .hot-card .post-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .hot-card .post-action-group {
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .hot-card .small-btn {
+    width: 26px;
+    min-width: 26px;
+    height: 24px;
+    padding: 0;
+    margin-left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hot-card .small-btn span {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .post-modal {
+    width: calc(100vw - 28px);
+    max-height: calc(100dvh - 150px);
+    padding: 16px 14px;
+    border-radius: 22px;
+    top: calc(50% + 40px);
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-top {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .modal-mode-text {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .fix-input {
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .post-modal .textarea-input {
+    min-height: 120px;
+    height: 120px;
+    padding: 12px;
+  }
+
+  .image-drop-zone {
+    min-height: 92px;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .modal-bottom {
+    padding-top: 10px;
+  }
+
+  .comment-section .small-btn,
+  .comment-list .small-btn,
+  .reply-wrap .small-btn,
+  .detail-card .small-btn {
+    height: 30px;
+    min-width: 52px;
+    width: auto;
+    padding: 0 8px;
+    margin-left: 0;
+    font-size: 12px;
+    border-radius: 11px;
+  }
+
+  .comment-section .post-action-group,
+  .comment-list .post-action-group,
+  .reply-wrap .post-action-group {
+    gap: 4px;
+  }
+
+  .hot-card .post-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .hot-card .post-action-group {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .hot-card .small-btn {
+    height: 26px;
+    min-width: 26px;
+    width: 26px;
+    padding: 0;
+    margin-left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 0;
+  }
+
+  .hot-card .small-btn span {
+    display: none;
+  }
+
+  body.modal-open .fab-btn {
+    display: none !important;
+  }
+}
+body.modal-open {
+  overflow: hidden;
+  height: 100dvh;
+}
+
+body.modal-open .fab-btn {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .chat-room-side-bottom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .chat-room-action-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .chat-room-icon-btn {
+    width: 22px;
+    height: 22px;
+  }
+}
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hdr,
+  .community-main,
+  .community-shell,
+  .content-area,
+  .board-block {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .inner,
+  .mobile-menu-inner,
+  .community-shell {
+    width: calc(100% - 24px) !important;
+    max-width: calc(100% - 24px) !important;
+  }
+
+  .gnb {
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+    justify-content: center !important;
+    row-gap: 6px !important;
+    overflow-x: hidden !important;
+  }
+
+  .preview-hot-list {
+    gap: 8px;
+  }
+
+  .post-right-meta {
+    min-width: 0 !important;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .post-action-group {
+    margin-left: 0;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .post-main-row,
+  .hot-card .post-main-row {
+    gap: 8px;
+  }
+
+  .fab-btn {
+    right: 14px !important;
+    bottom: 14px !important;
+  }
+}
+@media (max-width: 760px) {
+  .chat-room-item-top {
+    align-items: flex-start;
+  }
+
+  .chat-room-inline-actions {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .chat-room-inline-actions .chat-room-icon-btn {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    flex: 0 0 22px;
+  }
+}

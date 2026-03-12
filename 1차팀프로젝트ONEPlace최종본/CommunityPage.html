@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="icon" href="Img/logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 | CLOVER HUB</title>
+
+  <!-- [01] 커뮤니티 전용 CSS 연결 -->
+  <!-- [01-1] 메인 컬러는 기존 커뮤니티 기준(#FBCB4C / #FFF1BF) 유지 -->
+  <link rel="stylesheet" href="./CommunityPage.css">
+  
+  <!-- [01-2] 팀 공통 레이아웃 CSS: 메인 헤더/푸터 연결용 -->
+  <link rel="stylesheet" href="./common.css">
+</head>
+<body>
+  <!-- ====================================================================== -->
+  <!-- [03] 팀 공통 헤더 include: 메인 통합본 기준으로 유지 -->
+  <!--      메모: 커뮤니티 전용 헤더는 삭제하고 공통 헤더를 사용합니다. -->
+  <!-- ====================================================================== -->
+  <header id="header-include" class="hdr"></header>
+
+  <!-- ====================================================================== -->
+  <!-- [04] 메인 콘텐츠 영역 시작 -->
+  <!-- ====================================================================== -->
+  <main class="community-main">
+    <div class="community-shell">
+      <!-- [04-1] 왼쪽 사이드 메뉴 -->
+      <aside class="left-nav">
+        <button type="button" id="menuAll" class="left-nav-btn active">전체</button>
+        <button type="button" id="menuMine" class="left-nav-btn">내 소식</button>
+        <button type="button" id="menuChat" class="left-nav-btn">채팅</button>
+      </aside>
+
+      <!-- [04-2] 오른쪽 실제 페이지 내용 영역 -->
+      <section class="content-area">
+        <!-- ================================================================ -->
+        <!-- [05] 전체 페이지 -->
+        <!-- ================================================================ -->
+        <section id="pageAll" class="community-page active">
+          <div class="page-top">
+            <div>
+              <h2 class="page-title">전체</h2>
+            </div>
+          </div>
+
+          <!-- [05-1] 전체 미리보기 영역 -->
+          <section id="allPreviewSection">
+            <!-- [05-1-1] 인기글 미리보기 -->
+            <section class="board-block">
+              <div class="board-header with-more">
+                <div>
+                  <h3>인기글</h3>
+                </div>
+                <button type="button" id="hotMoreBtn" class="text-more-btn">더보기</button>
+              </div>
+              <div id="hotPostList" class="preview-hot-list"></div>
+            </section>
+
+            <!-- [05-1-2] 최신글 미리보기 -->
+            <section class="board-block latest-main-block">
+              <div class="board-header with-more">
+                <div>
+                  <h3>최신글</h3>
+                </div>
+                <button type="button" id="latestMoreBtn" class="text-more-btn">더보기</button>
+              </div>
+              <div id="latestPostList" class="latest-list"></div>
+            </section>
+          </section>
+
+          <!-- [05-2] 더보기 전용 목록 영역 -->
+          <section id="allMoreSection" class="board-block hidden-panel">
+            <div class="board-header with-more">
+              <div>
+                <h3 id="allMoreTitle">인기글 전체</h3>
+                <p id="allMoreDesc" class="board-desc-text">전체 목록을 확인해 주세요</p>
+              </div>
+              <button type="button" id="backPreviewBtn" class="line-btn">전체보기로</button>
+            </div>
+
+            <div id="allMoreList" class="latest-list"></div>
+
+            <!-- [05-2-1] 메인 통합본 기준 페이지네이션 -->
+            <div class="pager-row">
+              <button type="button" id="allPrevPageBtn" class="line-btn pager-move-btn">&lt; 이전</button>
+              <div id="allPageNumberList" class="page-number-list"></div>
+              <div id="allPageInfoText" class="page-info-text assistive-hidden">1 / 1 페이지</div>
+              <button type="button" id="allNextPageBtn" class="line-btn pager-move-btn">다음 &gt;</button>
+            </div>
+          </section>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- [06] 내 소식 페이지 -->
+        <!-- ================================================================ -->
+        <section id="pageMine" class="community-page">
+          <div class="page-top">
+            <div>
+              <h2 class="page-title">내 소식</h2>
+            </div>
+          </div>
+
+          <!-- [06-1] 알림 / 활동 탭 -->
+          <div class="section-tab-row">
+            <button type="button" class="section-tab my-main-tab active" data-my-main="alarm">알림</button>
+            <button type="button" class="section-tab my-main-tab" data-my-main="activity">활동</button>
+          </div>
+          <!-- [06-2] 알림 / 활동 목록 출력 영역 -->
+          <div id="myActivityBox" class="my-activity-box"></div>
+
+          <!-- [06-3] 내 소식 숫자 페이지네이션 -->
+          <div id="myPagerRow" class="pager-row my-pager-row hide-empty-pager">
+            <button type="button" id="myPrevPageBtn" class="line-btn pager-move-btn">&lt; 이전</button>
+            <div id="myPageNumberList" class="page-number-list"></div>
+            <button type="button" id="myNextPageBtn" class="line-btn pager-move-btn">다음 &gt;</button>
+          </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- [07] 채팅 페이지 -->
+        <!-- ================================================================ -->
+        <section id="pageChat" class="community-page">
+          <div class="page-top">
+            <div>
+              <h2 class="page-title">채팅</h2>
+            </div>
+          </div>
+
+          <section class="board-block chat-block">
+            <div class="board-header compact chat-board-header">
+              <div>
+                <div class="chat1">
+                  <h3>실시간 채팅</h3>
+                  <p>왼쪽 채팅방을 누르면 오른쪽 모바일 화면에서 대화를 이어갈 수 있어요</p>
+                </div>
+                <div class="chat2">
+                  <h3>실시간 채팅은 회원만 이용 가능합니다.</h3>
+                  <p>로그인 후 채팅방과 메시지 화면이 열리도록 메인 통합본 기준을 유지합니다.</p>
+                </div>
+              </div>
+
+              <!-- [07-0-1] 채팅 상단 우측 토스트 출력 영역: 채팅방 누적 이벤트와 함께 이 위치에서 표시 -->
+              <div id="chatToastStack" class="chat-toast-stack" aria-live="polite" aria-atomic="true"></div>
+            </div>
+
+            <!-- [07-1] 채팅방 목록 + 실제 채팅창 2분할 영역 -->
+            <div class="chat-live-layout">
+              <aside class="chat-room-panel">
+                <div class="chat-panel-title">채팅방 목록</div>
+                <div id="chatRoomList" class="chat-room-list"></div>
+              </aside>
+
+              <section class="chat-conversation-panel">
+                <div class="chat-phone-frame">
+                  <!-- [07-1-1] 모바일에서는 채팅 화면 앞에 뜨는 전용 토스트 레이어 -->
+                  <div id="chatMobileToastStack" class="chat-mobile-toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+                  <div class="chat-screen">
+                    <div class="chat-screen-top">
+                      <div>
+                        <div id="chatCurrentRoomName" class="chat-current-room-name">실시간 채팅</div>
+                        <div id="chatCurrentRoomMeta" class="chat-current-room-meta">지금 바로 메시지를 주고받을 수 있어요</div>
+                      </div>
+                    </div>
+
+                    <div id="chatThread" class="chat-thread"></div>
+
+                    <!-- [07-2] 입력 중 안내는 상단이 아니라 입력창 바로 위에서 보이도록 배치 -->
+                    <div class="chat-status-row">
+                      <div id="chatTypingHint" class="chat-typing-hint">상대방이 입력 중이에요...</div>
+                    </div>
+
+                    <div class="chat-input-row">
+                      <textarea id="chatInput" class="chat-input" placeholder="메시지를 입력해 주세요."></textarea>
+                      <button type="button" id="chatSendBtn" class="main-btn chat-send-btn">전송</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- [08] 게시글 상세 페이지 -->
+        <!-- ================================================================ -->
+        <section id="pageDetail" class="community-page">
+          <div class="page-top detail-top-row">
+            <div>
+              <p class="page-sub-text">COMMUNITY / 게시글 상세</p>
+              <h2 class="page-title">게시글 보기</h2>
+            </div>
+            <button type="button" id="backToListBtn" class="line-btn">목록으로</button>
+          </div>
+
+          <!-- [08-1] 상세 카드가 JS로 그려지는 영역 -->
+          <article id="detailCard" class="detail-card"></article>
+
+          <!-- [08-2] 댓글 영역 -->
+          <section class="comment-section">
+            <div class="board-header compact">
+              <div>
+                <h3>댓글</h3>
+                <p>댓글과 대댓글을 확인해 주세요</p>
+              </div>
+            </div>
+
+            <div id="commentList" class="comment-list"></div>
+
+            <!-- [08-2-1] 댓글 작성 영역 -->
+            <div class="comment-form-box">
+              <textarea
+                id="commentInput"
+                class="comment-input"
+                placeholder="댓글을 입력해 주세요."
+              ></textarea>
+              <div class="comment-form-bottom">
+                <button type="button" id="addCommentBtn" class="main-btn">댓글 작성</button>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- [09] 플로팅 글쓰기 버튼 -->
+  <!-- ====================================================================== -->
+  <button type="button" id="fabBtn" class="fab-btn" aria-label="게시글 작성">+</button>
+
+  <!-- ====================================================================== -->
+  <!-- [10] 공통 모달 오버레이 -->
+  <!-- ====================================================================== -->
+  <div id="modalOverlay" class="modal-overlay hide"></div>
+
+  <!-- ====================================================================== -->
+  <!-- [11] 게시글 작성 / 수정 모달 -->
+  <!-- ====================================================================== -->
+  <section id="postModal" class="post-modal hide">
+    <div class="modal-top">
+      <div>
+        <div id="postModalModeText" class="modal-mode-text">게시글 작성</div>
+        <div id="postModalTitle" class="modal-title">커뮤니티 게시글을 작성해 주세요</div>
+      </div>
+      <button type="button" id="closeModalBtn" class="line-btn small-btn">닫기</button>
+    </div>
+
+    <div class="modal-form-grid post-form-grid">
+      <!-- [11-1] 제목 입력 -->
+      <div class="form-row full-row">
+        <label for="postTitleInput" class="form-label">제목</label>
+        <input type="text" id="postTitleInput" class="fix-input" placeholder="제목을 입력해 주세요.">
+      </div>
+
+      <!-- [11-2] 내용 입력 -->
+      <div class="form-row full-row">
+        <label for="postContentInput" class="form-label">내용</label>
+        <textarea id="postContentInput" class="textarea-input" placeholder="내용을 입력해 주세요."></textarea>
+      </div>
+
+      <!-- [11-3] 해시태그 입력 및 미리보기 -->
+      <div class="form-row full-row">
+        <label for="hashTagInput" class="form-label">해시태그</label>
+        <input
+          type="text"
+          id="hashTagInput"
+          class="fix-input"
+          placeholder="#학원 #점심추천 처럼 입력해 주세요."
+        >
+        <div id="hashTagPreview" class="tag-row"></div>
+      </div>
+
+      <!-- [11-4] 이미지 업로드 드롭존 -->
+      <div class="form-row full-row">
+        <label class="form-label">이미지</label>
+        <div id="imageDropZone" class="image-drop-zone">
+          <input type="file" id="imageInput" accept="image/*" multiple hidden>
+          <button type="button" id="selectImageBtn" class="line-btn">사진 선택</button>
+          <div class="image-drop-text">클릭 또는 드래그로 이미지를 넣어 주세요.</div>
+          <div id="imagePreviewList" class="image-preview-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- [11-5] 저장 버튼 -->
+    <div class="modal-bottom">
+      <button type="button" id="savePostBtn" class="main-btn">저장</button>
+    </div>
+  </section>
+
+  <!-- ====================================================================== -->
+  <!-- [12] 확인용 공통 모달 -->
+  <!-- ====================================================================== -->
+  <section id="confirmModal" class="confirm-modal hide">
+    <div class="confirm-box">
+      <p id="confirmText" class="confirm-text">확인</p>
+      <div class="confirm-actions">
+        <button type="button" id="confirmNoBtn" class="line-btn">아니오</button>
+        <button type="button" id="confirmYesBtn" class="main-btn">예</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================================== -->
+  <!-- [13] 게시글 이미지 확대 라이트박스 -->
+  <!-- ====================================================================== -->
+  <section id="imageLightbox" class="image-lightbox hide" aria-hidden="true">
+    <button type="button" id="imageLightboxCloseBtn" class="image-lightbox-close" aria-label="이미지 닫기">×</button>
+    <img id="imageLightboxImg" class="image-lightbox-img" src="" alt="확대 이미지">
+  </section>
+  <!-- ====================================================================== -->
+  <!-- [14] 팀 공통 푸터 include: 메인 통합본 기준으로 유지 -->
+  <!-- ====================================================================== -->
+  <footer id="footer-include" class="ftr"></footer>
+
+  <!-- [15] 팀 공통 스크립트 + 커뮤니티 전용 스크립트 -->
+  <script src="./common.js"></script>
+  <script defer src="./CommunityPage.js"></script>
+</body>
+</html>
